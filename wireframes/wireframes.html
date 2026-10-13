@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframes · Iteración 1</title>
+<!-- Wireframes de baja fidelidad. Cada vista se abre con ?v=login|usuarios|usuario|cursos|curso|movil -->
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 14px/1.4 "Comic Sans MS", "Chalkboard SE", "Segoe Print", sans-serif; color: #333; background: #fff; }
+  .frame { border: 2px solid #333; margin: 16px; min-height: calc(100vh - 32px); display: flex; flex-direction: column; }
+  .label { position: absolute; top: 22px; right: 28px; font-size: 12px; background: #333; color: #fff; padding: 2px 8px; }
+  .bar { display: flex; align-items: center; gap: 16px; padding: 12px 16px; border-bottom: 2px solid #333; background: #ddd; }
+  .bar .sp { margin-left: auto; }
+  .box { border: 2px solid #333; padding: 4px 8px; background: #fff; }
+  .x { position: relative; background: #eee; border: 2px solid #333; }
+  .x::before, .x::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top right, transparent calc(50% - 1px), #999 50%, transparent calc(50% + 1px)); }
+  .x::after { background: linear-gradient(to top left, transparent calc(50% - 1px), #999 50%, transparent calc(50% + 1px)); }
+  main { padding: 20px 32px; flex: 1; }
+  .narrow { max-width: 760px; margin: 0 auto; width: 100%; }
+  h1 { font-size: 22px; margin: 4px 0 12px; }
+  h2 { font-size: 15px; margin: 18px 0 8px; border-bottom: 2px dashed #999; padding-bottom: 4px; }
+  .row { display: flex; gap: 16px; align-items: center; justify-content: space-between; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; }
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px 16px; }
+  .full { grid-column: 1 / -1; }
+  .f label { display: block; font-weight: bold; margin-bottom: 3px; }
+  .in { height: 34px; border: 2px solid #333; border-radius: 4px; background: #fff; }
+  .in.sel::after { content: "▾"; float: right; padding: 5px 8px; }
+  .in.area { height: 60px; }
+  .in.err { border-color: #333; border-style: dashed; background: repeating-linear-gradient(45deg, #fff 0 6px, #eee 6px 8px); }
+  .msg { font-size: 12px; font-style: italic; margin-top: 2px; }
+  .cnt { font-size: 12px; text-align: right; }
+  .btn { display: inline-block; border: 2px solid #333; border-radius: 4px; padding: 7px 16px; font-weight: bold; background: #fff; }
+  .btn.pri { background: #555; color: #fff; }
+  .acts { display: flex; gap: 10px; justify-content: flex-end; margin-top: 18px; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { border: 2px solid #333; padding: 8px; text-align: left; }
+  th { background: #ddd; }
+  .line { height: 10px; background: #ccc; border-radius: 4px; }
+  .pill { border: 2px solid #333; border-radius: 99px; padding: 1px 8px; font-size: 12px; }
+  .note { border: 2px dashed #777; padding: 6px 10px; font-size: 12px; background: #fafafa; margin-top: 10px; }
+  .login { flex: 1; display: grid; place-items: center; background: repeating-linear-gradient(-45deg, #f4f4f4 0 10px, #fff 10px 20px); }
+  .card { width: 380px; border: 2px solid #333; padding: 24px; background: #fff; }
+  .card .btn { display: block; text-align: center; margin-top: 10px; }
+  .foot { border-top: 2px solid #333; padding: 8px; text-align: center; font-size: 12px; }
+  .radio::before { content: "○ "; }
+  section { display: none; }
+  section.on { display: contents; }
+</style>
+</head>
+<body>
+<div class="frame" id="frame">
+
+<section data-v="login">
+  <div class="login">
+    <div class="card">
+      <div class="x" style="height:50px;margin-bottom:10px"></div>
+      <h1 style="text-align:center">Gestión de Cursos</h1>
+      <div class="f"><label>Correo institucional *</label><div class="in"></div><div class="msg">↳ mensaje de error junto al campo</div></div><br>
+      <div class="f"><label>Contraseña *</label><div class="in"></div></div>
+      <span class="btn pri">Iniciar sesión</span>
+      <span class="btn">Continuar con Google (entrega final)</span>
+      <div class="note">Aviso general: "Correo o contraseña incorrectos" (no revela qué dato falló)</div>
+    </div>
+  </div>
+</section>
+
+<section data-v="usuarios">
+  <div class="bar"><b>LOGO · Gestión de Cursos</b><span class="box">Usuarios</span><span>Cursos</span><span class="sp">Nombre usuario · Rol</span></div>
+  <main>
+    <div class="row"><h1>Usuarios</h1><span class="btn pri">+ Registrar usuario</span></div>
+    <div class="note" style="margin:0 0 12px">Aviso de confirmación: "Usuario registrado correctamente"</div>
+    <table>
+      <tr><th>Nombre</th><th>Identificación</th><th>Correo institucional</th><th>Rol</th><th>Escuela</th><th>Edad</th><th></th></tr>
+      <tr><td><div class="line"></div></td><td><div class="line"></div></td><td><div class="line"></div></td><td><div class="line"></div></td><td><div class="line"></div></td><td>##</td><td><u>Editar</u></td></tr>
+      <tr><td><div class="line"></div></td><td><div class="line"></div></td><td><div class="line"></div></td><td><div class="line"></div></td><td><div class="line"></div></td><td>##</td><td><u>Editar</u></td></tr>
+      <tr><td><div class="line"></div></td><td><div class="line"></div></td><td><div class="line"></div></td><td><div class="line"></div></td><td><div class="line"></div></td><td>##</td><td><u>Editar</u></td></tr>
+    </table>
+  </main>
+  <div class="foot">Pie de página</div>
+</section>
+
+<section data-v="usuario">
+  <div class="bar"><b>LOGO · Gestión de Cursos</b><span class="box">Usuarios</span><span>Cursos</span><span class="sp">Nombre usuario · Rol</span></div>
+  <main><div class="narrow">
+    <u>← Volver</u>
+    <h1>Registrar / Modificar usuario</h1>
+    <h2>Datos personales</h2>
+    <div class="grid">
+      <div class="f"><label>Nombre *</label><div class="in"></div></div>
+      <div class="f"><label>Apellidos *</label><div class="in"></div></div>
+      <div class="f"><label>Identificación *</label><div class="in err"></div><div class="msg">↳ "La identificación debe tener de 9 a 12 dígitos"</div></div>
+      <div class="f"><label>Celular *</label><div class="in"></div></div>
+      <div class="f"><label>Fecha de nacimiento *</label><div class="in"></div><div class="msg">Edad: ## años (calculada)</div></div>
+      <div class="f"><label>Sexo *</label><span class="radio">F</span> &nbsp; <span class="radio">M</span> &nbsp; <span class="radio">Otro</span></div>
+      <div class="f full"><label>Fotografía (opcional)</label><div class="in" style="width:50%">[ Elegir archivo ]</div></div>
+    </div>
+    <h2>Cuenta y acceso</h2>
+    <div class="grid">
+      <div class="f"><label>Correo institucional *</label><div class="in"></div></div>
+      <div class="f"><label>Correo personal</label><div class="in"></div></div>
+      <div class="f"><label>Rol *</label><div class="in sel"></div></div>
+      <div class="f"><label>Escuela * (solo Director)</label><div class="in sel"></div></div>
+      <div class="f"><label>Contraseña *</label><div class="in"></div><div class="msg">8–15, mayúscula, minúscula, número</div></div>
+      <div class="f"><label>Confirmar contraseña *</label><div class="in"></div></div>
+    </div>
+    <div class="acts"><span class="btn">Cancelar</span><span class="btn pri">Guardar usuario</span></div>
+  </div></main>
+</section>
+
+<section data-v="cursos">
+  <div class="bar"><b>LOGO · Gestión de Cursos</b><span>Usuarios*</span><span class="box">Cursos</span><span class="sp">Nombre usuario · Rol</span></div>
+  <main>
+    <div class="row"><h1>Cursos</h1><span class="btn pri">+ Nuevo curso (solo Director)</span></div>
+    <table>
+      <tr><th>Código</th><th>Nombre</th><th>Escuela</th><th>Estado</th><th>Última modificación</th><th></th></tr>
+      <tr><td>XXX-000</td><td><div class="line"></div></td><td><div class="line"></div></td><td><span class="pill">En desarrollo</span></td><td>dd/mm/aaaa hh:mm</td><td><u>Editar</u></td></tr>
+      <tr><td>XXX-000</td><td><div class="line"></div></td><td><div class="line"></div></td><td><span class="pill">Enviado a revisión</span></td><td>dd/mm/aaaa hh:mm</td><td></td></tr>
+      <tr><td>XXX-000</td><td><div class="line"></div></td><td><div class="line"></div></td><td><span class="pill">En desarrollo</span></td><td>dd/mm/aaaa hh:mm</td><td><u>Editar</u></td></tr>
+    </table>
+    <div class="note">* "Usuarios" solo visible para Administrador. El Director ve únicamente los cursos de su escuela.</div>
+  </main>
+  <div class="foot">Pie de página</div>
+</section>
+
+<section data-v="curso">
+  <div class="bar"><b>LOGO · Gestión de Cursos</b><span class="box">Cursos</span><span class="sp">Nombre usuario · Director</span></div>
+  <main><div class="narrow">
+    <h1>Nuevo / Editar curso</h1>
+    <h2>Identificación</h2>
+    <div class="grid">
+      <div class="f full"><label>Escuela (fija según el Director)</label><div class="in sel" style="background:#eee"></div></div>
+      <div class="f"><label>Código *</label><div class="in"></div></div>
+      <div class="f"><label>Nombre *</label><div class="in"></div></div>
+      <div class="f full"><label>Nombre en Power Campus *</label><div class="in err"></div><div class="cnt"><b>45/40</b></div><div class="msg">↳ "Máximo 40 caracteres"</div></div>
+    </div>
+    <h2>Clasificación</h2>
+    <div class="grid">
+      <div class="f"><label>Área SEFIA *</label><div class="in sel"></div></div>
+      <div class="f"><label>Temática *</label><div class="in sel"></div></div>
+      <div class="f"><label>Metodología *</label><div class="in sel"></div></div>
+      <div class="f"><label>Nivel *</label><div class="in sel"></div></div>
+      <div class="f"><label>Modalidad *</label><span class="radio">Virtual en vivo</span> &nbsp;<span class="radio">Presencial</span> &nbsp;<span class="radio">Híbrida</span></div>
+      <div class="f"><label>Certificación *</label><div class="in sel"></div></div>
+    </div>
+    <h2>Carga académica</h2>
+    <div class="grid4">
+      <div class="f"><label>Créditos *</label><div class="in"></div></div>
+      <div class="f"><label>Horas clase *</label><div class="in"></div></div>
+      <div class="f"><label>Horas extra *</label><div class="in"></div></div>
+      <div class="f"><label>Total (auto)</label><div class="in" style="background:#eee;padding:6px">= suma</div></div>
+    </div>
+    <h2>Descripción</h2>
+    <div class="f"><label>Descripción corta *</label><div class="in area"></div><div class="cnt">0/250</div></div>
+    <div class="f"><label>Meta descripción *</label><div class="in area" style="height:44px"></div><div class="cnt">0/155</div></div>
+    <div class="f"><label>Competencia · Requisitos · Palabras clave *</label><div class="in area"></div></div>
+    <div class="acts"><span class="btn">Cancelar</span><span class="btn">Guardar borrador</span><span class="btn pri">Listo para enviar</span></div>
+  </div></main>
+</section>
+
+<section data-v="movil">
+  <div class="bar" style="flex-wrap:wrap;gap:8px"><b>LOGO</b><span class="box">Cursos</span><span style="width:100%;font-size:12px">Nombre usuario · Director</span></div>
+  <main style="padding:14px">
+    <h1>Nuevo curso</h1>
+    <div class="f"><label>Código *</label><div class="in"></div></div><br>
+    <div class="f"><label>Nombre *</label><div class="in"></div></div><br>
+    <div class="f"><label>Nombre en Power Campus *</label><div class="in"></div><div class="cnt">0/40</div></div>
+    <div class="f"><label>Área SEFIA *</label><div class="in sel"></div></div><br>
+    <div class="f"><label>Créditos *</label><div class="in"></div></div><br>
+    <div class="note">Una columna; campos y botones al 100 % del ancho</div>
+    <div style="display:grid;gap:8px;margin-top:14px"><span class="btn" style="text-align:center">Guardar borrador</span><span class="btn pri" style="text-align:center">Listo para enviar</span></div>
+  </main>
+</section>
+
+</div>
+<script>
+  const v = new URLSearchParams(location.search).get('v') || 'login';
+  document.querySelector(`[data-v="${v}"]`).classList.add('on');
+</script>
+</body>
+</html>

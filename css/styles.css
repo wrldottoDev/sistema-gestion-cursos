@@ -1,0 +1,487 @@
+/* ==========================================================
+   Gestión de Cursos CENFOTEC · Iteración 1
+   Orden: 1. Variables  2. Base  3. Layout  4. Componentes
+          5. Formularios y validación  6. Utilidades  7. Responsive
+   Convención de clases: BEM en español (bloque__elemento--modificador)
+   ========================================================== */
+
+/* 1. Variables (guía de estilo) */
+:root {
+  --color-primario: #003366;
+  --color-primario-hover: #00264d;
+  --color-acento: #f39200;
+  --color-fondo: #f4f6f9;
+  --color-superficie: #ffffff;
+  --color-texto: #1f2933;
+  --color-texto-secundario: #52606d;
+  --color-borde: #cbd2d9;
+  --color-error: #b3261e;
+  --color-error-fondo: #fdecea;
+  --color-exito: #1e7b34;
+  --color-exito-fondo: #e6f4ea;
+  --color-foco: #f39200;
+
+  --fuente: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --texto-base: 1rem;
+  --texto-pequeno: 0.875rem;
+
+  --espacio-1: 0.25rem;
+  --espacio-2: 0.5rem;
+  --espacio-3: 1rem;
+  --espacio-4: 1.5rem;
+  --espacio-5: 2.5rem;
+
+  --radio: 6px;
+  --sombra: 0 1px 3px rgb(0 0 0 / 0.08), 0 4px 12px rgb(0 0 0 / 0.05);
+}
+
+/* 2. Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--fuente);
+  font-size: var(--texto-base);
+  line-height: 1.5;
+  color: var(--color-texto);
+  background: var(--color-fondo);
+}
+
+h1 {
+  margin: 0 0 var(--espacio-2);
+  font-size: 1.75rem;
+  line-height: 1.2;
+  color: var(--color-primario);
+}
+
+a {
+  color: var(--color-primario);
+}
+
+/* RNF-040: foco siempre visible */
+:focus-visible {
+  outline: 3px solid var(--color-foco);
+  outline-offset: 2px;
+}
+
+/* 3. Layout */
+.encabezado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-2) var(--espacio-4);
+  padding: var(--espacio-3) var(--espacio-4);
+  background: var(--color-primario);
+  color: #fff;
+}
+
+.encabezado .marca {
+  color: #fff;
+}
+
+.encabezado__usuario {
+  margin: 0 0 0 auto;
+  font-size: var(--texto-pequeno);
+  opacity: 0.9;
+}
+
+.contenedor {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--espacio-4);
+  flex: 1;
+}
+
+.contenedor--angosto {
+  max-width: 860px;
+}
+
+.pie {
+  padding: var(--espacio-3);
+  text-align: center;
+  font-size: var(--texto-pequeno);
+  color: var(--color-texto-secundario);
+}
+
+.barra-titulo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+  margin-bottom: var(--espacio-3);
+}
+
+/* 4. Componentes */
+.marca {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-primario);
+}
+
+.menu {
+  display: flex;
+  gap: var(--espacio-1);
+}
+
+.menu a {
+  padding: var(--espacio-2) var(--espacio-3);
+  border-radius: var(--radio);
+  color: #fff;
+  text-decoration: none;
+}
+
+.menu a:hover,
+.menu a[aria-current="page"] {
+  background: rgb(255 255 255 / 0.15);
+}
+
+.menu a[aria-current="page"] {
+  box-shadow: inset 0 -3px 0 var(--color-acento);
+}
+
+.tarjeta {
+  background: var(--color-superficie);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: var(--espacio-4);
+}
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: var(--espacio-2) var(--espacio-4);
+  border: 2px solid var(--color-primario);
+  border-radius: var(--radio);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.boton--primario {
+  background: var(--color-primario);
+  color: #fff;
+}
+
+.boton--primario:hover {
+  background: var(--color-primario-hover);
+}
+
+.boton--secundario {
+  background: var(--color-superficie);
+  color: var(--color-primario);
+}
+
+.boton--secundario:hover {
+  background: #e8eef5;
+}
+
+.boton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.boton--bloque {
+  width: 100%;
+}
+
+.tabla-contenedor {
+  overflow-x: auto;
+  background: var(--color-superficie);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--texto-pequeno);
+}
+
+.tabla th,
+.tabla td {
+  padding: var(--espacio-3);
+  text-align: left;
+  border-bottom: 1px solid var(--color-borde);
+  white-space: nowrap;
+}
+
+.tabla th {
+  background: #e8eef5;
+  color: var(--color-primario);
+}
+
+.tabla tbody tr:hover {
+  background: #f7f9fb;
+}
+
+.enlace-accion {
+  font-weight: 600;
+}
+
+.estado {
+  display: inline-block;
+  padding: 2px var(--espacio-2);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.estado--desarrollo {
+  background: #fff4e0;
+  color: #8a4b00;
+}
+
+.estado--enviado {
+  background: #e3ecf7;
+  color: var(--color-primario);
+}
+
+.aviso {
+  margin-bottom: var(--espacio-3);
+  padding: var(--espacio-3);
+  border: 1px solid;
+  border-radius: var(--radio);
+}
+
+.aviso--exito {
+  background: var(--color-exito-fondo);
+  border-color: var(--color-exito);
+  color: var(--color-exito);
+}
+
+.aviso--error {
+  background: var(--color-error-fondo);
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.volver {
+  display: inline-block;
+  margin-bottom: var(--espacio-3);
+  font-size: var(--texto-pequeno);
+}
+
+.texto-secundario,
+.nota {
+  color: var(--color-texto-secundario);
+}
+
+.nota {
+  margin: var(--espacio-4) 0 0;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+/* Login */
+.login {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: var(--espacio-4);
+  background: linear-gradient(160deg, var(--color-primario) 0 40%, var(--color-fondo) 40%);
+}
+
+.login__tarjeta {
+  width: 100%;
+  max-width: 420px;
+}
+
+.login__encabezado {
+  margin-bottom: var(--espacio-4);
+  text-align: center;
+}
+
+/* 5. Formularios y validación */
+.formulario {
+  display: grid;
+  gap: var(--espacio-3);
+}
+
+.grupo {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.grupo > legend {
+  width: 100%;
+  margin-bottom: var(--espacio-3);
+  padding-bottom: var(--espacio-2);
+  border-bottom: 2px solid var(--color-fondo);
+  font-weight: 700;
+  color: var(--color-primario);
+}
+
+.rejilla {
+  display: grid;
+  gap: 0 var(--espacio-4);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+  margin: 0 0 var(--espacio-2);
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.campo label,
+.campo legend {
+  font-weight: 600;
+  padding: 0;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: var(--espacio-2) var(--espacio-3);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  font: inherit;
+  color: inherit;
+  background: var(--color-superficie);
+}
+
+.campo textarea {
+  resize: vertical;
+}
+
+.campo input[type="file"] {
+  padding: var(--espacio-2);
+}
+
+.campo select:disabled {
+  background: var(--color-fondo);
+}
+
+.campo--opciones label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  margin-right: var(--espacio-4);
+  font-weight: 400;
+}
+
+.campo--opciones input {
+  width: auto;
+  min-height: auto;
+  accent-color: var(--color-primario);
+}
+
+.obligatorio {
+  color: var(--color-error);
+}
+
+.campo__ayuda,
+.contador {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--color-texto-secundario);
+}
+
+.contador {
+  text-align: right;
+}
+
+.contador--excedido {
+  color: var(--color-error);
+  font-weight: 700;
+}
+
+.campo__calculado {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: var(--espacio-2) var(--espacio-3);
+  border-radius: var(--radio);
+  background: var(--color-fondo);
+  font-weight: 700;
+}
+
+.campo__error {
+  margin: 0;
+  min-height: 1.2em;
+  font-size: var(--texto-pequeno);
+  color: var(--color-error);
+}
+
+.campo--error input,
+.campo--error select,
+.campo--error textarea {
+  border: 2px solid var(--color-error);
+  background: var(--color-error-fondo);
+}
+
+.campo--valido input,
+.campo--valido select,
+.campo--valido textarea {
+  border-color: var(--color-exito);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--espacio-2);
+}
+
+/* 6. Utilidades */
+.solo-lector {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* 7. Responsive (mobile first): 768px tablet, 1024px escritorio */
+@media (min-width: 768px) {
+  .rejilla {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .rejilla--cuatro {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .campo--ancho {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 767px) {
+  .encabezado__usuario {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .acciones .boton {
+    flex: 1 1 100%;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}

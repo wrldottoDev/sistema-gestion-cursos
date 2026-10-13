@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso · Gestión de Cursos CENFOTEC</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/datos.js" defer></script>
+  <script src="../js/validacion.js" defer></script>
+  <script src="../js/curso.js" defer></script>
+</head>
+<body>
+  <header class="encabezado">
+    <p class="marca">CENFOTEC · Gestión de Cursos</p>
+    <nav class="menu" aria-label="Principal">
+      <a href="usuarios.html" data-rol="Administrador">Usuarios</a>
+      <a href="cursos.html" aria-current="page">Cursos</a>
+    </nav>
+    <p class="encabezado__usuario" id="usuario-actual"></p>
+  </header>
+
+  <main class="contenedor contenedor--angosto">
+    <a class="volver" href="cursos.html">← Volver a cursos</a>
+    <h1 id="titulo-formulario">Nuevo curso</h1>
+    <p class="texto-secundario">
+      Los campos con <span class="obligatorio">*</span> son obligatorios para enviar a revisión.
+      Para guardar un borrador basta con escuela, código y nombre.
+    </p>
+
+    <form id="form-curso" class="formulario tarjeta" novalidate>
+      <fieldset class="grupo">
+        <legend>Identificación</legend>
+        <div class="rejilla">
+          <div class="campo campo--ancho">
+            <label for="escuela">Escuela</label>
+            <select id="escuela" name="escuela" disabled></select>
+          </div>
+          <div class="campo">
+            <label for="codigo">Código del curso <span class="obligatorio" aria-hidden="true">*</span></label>
+            <input id="codigo" name="codigo" type="text" required placeholder="Ej.: SOFT-101"
+                   aria-describedby="ayuda-codigo error-codigo">
+            <p class="campo__ayuda" id="ayuda-codigo">Formato provisional LETRAS-NÚMEROS.</p>
+            <p class="campo__error" id="error-codigo" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="nombre">Nombre del curso <span class="obligatorio" aria-hidden="true">*</span></label>
+            <input id="nombre" name="nombre" type="text" required aria-describedby="error-nombre">
+            <p class="campo__error" id="error-nombre" aria-live="polite"></p>
+          </div>
+          <div class="campo campo--ancho">
+            <label for="nombrePowerCampus">Nombre en Power Campus <span class="obligatorio" aria-hidden="true">*</span></label>
+            <input id="nombrePowerCampus" name="nombrePowerCampus" type="text"
+                   aria-describedby="contador-nombrePowerCampus error-nombrePowerCampus">
+            <p class="contador" id="contador-nombrePowerCampus" data-max="40">0/40</p>
+            <p class="campo__error" id="error-nombrePowerCampus" aria-live="polite"></p>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="grupo">
+        <legend>Clasificación</legend>
+        <div class="rejilla">
+          <div class="campo">
+            <label for="areaSefia">Área SEFIA <span class="obligatorio" aria-hidden="true">*</span></label>
+            <select id="areaSefia" name="areaSefia" aria-describedby="error-areaSefia"></select>
+            <p class="campo__error" id="error-areaSefia" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="tematica">Temática <span class="obligatorio" aria-hidden="true">*</span></label>
+            <select id="tematica" name="tematica" aria-describedby="error-tematica"></select>
+            <p class="campo__error" id="error-tematica" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="metodologia">Metodología de aprendizaje <span class="obligatorio" aria-hidden="true">*</span></label>
+            <select id="metodologia" name="metodologia" aria-describedby="error-metodologia"></select>
+            <p class="campo__error" id="error-metodologia" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="nivel">Nivel de complejidad <span class="obligatorio" aria-hidden="true">*</span></label>
+            <select id="nivel" name="nivel" aria-describedby="error-nivel"></select>
+            <p class="campo__error" id="error-nivel" aria-live="polite"></p>
+          </div>
+          <fieldset class="campo campo--opciones campo--ancho">
+            <legend>Modalidad <span class="obligatorio" aria-hidden="true">*</span></legend>
+            <div id="opciones-modalidad" class="opciones"></div>
+            <p class="campo__error" id="error-modalidad" aria-live="polite"></p>
+          </fieldset>
+          <div class="campo">
+            <label for="certificacion">Certificación <span class="obligatorio" aria-hidden="true">*</span></label>
+            <select id="certificacion" name="certificacion" aria-describedby="error-certificacion"></select>
+            <p class="campo__error" id="error-certificacion" aria-live="polite"></p>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="grupo">
+        <legend>Carga académica</legend>
+        <div class="rejilla rejilla--cuatro">
+          <div class="campo">
+            <label for="creditos">Créditos <span class="obligatorio" aria-hidden="true">*</span></label>
+            <input id="creditos" name="creditos" type="number" min="1" max="12" step="1" inputmode="numeric"
+                   aria-describedby="error-creditos">
+            <p class="campo__error" id="error-creditos" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="horasClase">Horas clase <span class="obligatorio" aria-hidden="true">*</span></label>
+            <input id="horasClase" name="horasClase" type="number" min="0" max="300" step="1" inputmode="numeric"
+                   aria-describedby="error-horasClase">
+            <p class="campo__error" id="error-horasClase" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="horasExtra">Horas extra clase <span class="obligatorio" aria-hidden="true">*</span></label>
+            <input id="horasExtra" name="horasExtra" type="number" min="0" max="300" step="1" inputmode="numeric"
+                   aria-describedby="error-horasExtra">
+            <p class="campo__error" id="error-horasExtra" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="totalHoras">Total de horas</label>
+            <output id="totalHoras" class="campo__calculado" for="horasClase horasExtra">0</output>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="grupo">
+        <legend>Descripción</legend>
+        <div class="campo">
+          <label for="descripcionCorta">Descripción corta <span class="obligatorio" aria-hidden="true">*</span></label>
+          <textarea id="descripcionCorta" name="descripcionCorta" rows="3"
+                    aria-describedby="contador-descripcionCorta error-descripcionCorta"></textarea>
+          <p class="contador" id="contador-descripcionCorta" data-max="250">0/250</p>
+          <p class="campo__error" id="error-descripcionCorta" aria-live="polite"></p>
+        </div>
+        <div class="campo">
+          <label for="metaDescripcion">Meta descripción <span class="obligatorio" aria-hidden="true">*</span></label>
+          <textarea id="metaDescripcion" name="metaDescripcion" rows="2"
+                    aria-describedby="contador-metaDescripcion error-metaDescripcion"></textarea>
+          <p class="contador" id="contador-metaDescripcion" data-max="155">0/155</p>
+          <p class="campo__error" id="error-metaDescripcion" aria-live="polite"></p>
+        </div>
+        <div class="campo">
+          <label for="competencia">Competencia <span class="obligatorio" aria-hidden="true">*</span></label>
+          <textarea id="competencia" name="competencia" rows="3" aria-describedby="error-competencia"></textarea>
+          <p class="campo__error" id="error-competencia" aria-live="polite"></p>
+        </div>
+        <div class="campo">
+          <label for="requisitos">Requisitos indispensables <span class="obligatorio" aria-hidden="true">*</span></label>
+          <textarea id="requisitos" name="requisitos" rows="2" aria-describedby="error-requisitos"></textarea>
+          <p class="campo__error" id="error-requisitos" aria-live="polite"></p>
+        </div>
+        <div class="campo">
+          <label for="palabrasClave">Palabras clave <span class="obligatorio" aria-hidden="true">*</span></label>
+          <input id="palabrasClave" name="palabrasClave" type="text" placeholder="html, css, javascript"
+                 aria-describedby="ayuda-palabrasClave error-palabrasClave">
+          <p class="campo__ayuda" id="ayuda-palabrasClave">Sepárelas con comas.</p>
+          <p class="campo__error" id="error-palabrasClave" aria-live="polite"></p>
+        </div>
+      </fieldset>
+
+      <div class="acciones">
+        <a class="boton boton--secundario" href="cursos.html">Cancelar</a>
+        <button type="submit" class="boton boton--secundario" name="accion" value="borrador">Guardar borrador</button>
+        <button type="submit" class="boton boton--primario" name="accion" value="enviar">Listo para enviar</button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="pie">Universidad CENFOTEC · Proyecto Integrador I · 2026</footer>
+</body>
+</html>

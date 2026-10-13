@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión · Gestión de Cursos CENFOTEC</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/datos.js" defer></script>
+  <script src="js/validacion.js" defer></script>
+  <script src="js/login.js" defer></script>
+</head>
+<body class="pagina-login">
+  <main class="login">
+    <section class="tarjeta login__tarjeta" aria-labelledby="titulo-login">
+      <header class="login__encabezado">
+        <p class="marca">Universidad CENFOTEC</p>
+        <h1 id="titulo-login">Gestión de Cursos</h1>
+        <p class="texto-secundario">Ingrese con su cuenta institucional.</p>
+      </header>
+
+      <div id="aviso" class="aviso" role="alert" hidden></div>
+
+      <form id="form-login" class="formulario" novalidate>
+        <div class="campo">
+          <label for="correo">Correo institucional <span class="obligatorio" aria-hidden="true">*</span></label>
+          <input id="correo" name="correo" type="email" autocomplete="username" required
+                 placeholder="usuario@ucenfotec.ac.cr" aria-describedby="error-correo">
+          <p class="campo__error" id="error-correo" aria-live="polite"></p>
+        </div>
+
+        <div class="campo">
+          <label for="contrasena">Contraseña <span class="obligatorio" aria-hidden="true">*</span></label>
+          <input id="contrasena" name="contrasena" type="password" autocomplete="current-password" required
+                 aria-describedby="error-contrasena">
+          <p class="campo__error" id="error-contrasena" aria-live="polite"></p>
+        </div>
+
+        <button type="submit" class="boton boton--primario boton--bloque">Iniciar sesión</button>
+        <button type="button" class="boton boton--secundario boton--bloque" disabled
+                title="Disponible en la entrega final (RF-001)">Continuar con Google</button>
+      </form>
+
+      <p class="nota">Demo: admin@ucenfotec.ac.cr / Admin1234 · director@ucenfotec.ac.cr / Director1234</p>
+    </section>
+  </main>
+</body>
+</html>

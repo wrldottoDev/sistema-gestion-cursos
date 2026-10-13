@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usuario · Gestión de Cursos CENFOTEC</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/datos.js" defer></script>
+  <script src="../js/validacion.js" defer></script>
+  <script src="../js/usuario.js" defer></script>
+</head>
+<body>
+  <header class="encabezado">
+    <p class="marca">CENFOTEC · Gestión de Cursos</p>
+    <nav class="menu" aria-label="Principal">
+      <a href="usuarios.html" data-rol="Administrador" aria-current="page">Usuarios</a>
+      <a href="cursos.html">Cursos</a>
+    </nav>
+    <p class="encabezado__usuario" id="usuario-actual"></p>
+  </header>
+
+  <main class="contenedor contenedor--angosto">
+    <a class="volver" href="usuarios.html">← Volver a usuarios</a>
+    <h1 id="titulo-formulario">Registrar usuario</h1>
+    <p class="texto-secundario">Los campos con <span class="obligatorio">*</span> son obligatorios.</p>
+
+    <form id="form-usuario" class="formulario tarjeta" novalidate>
+      <fieldset class="grupo">
+        <legend>Datos personales</legend>
+        <div class="rejilla">
+          <div class="campo">
+            <label for="nombre">Nombre <span class="obligatorio" aria-hidden="true">*</span></label>
+            <input id="nombre" name="nombre" type="text" autocomplete="given-name" required aria-describedby="error-nombre">
+            <p class="campo__error" id="error-nombre" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="apellidos">Apellidos <span class="obligatorio" aria-hidden="true">*</span></label>
+            <input id="apellidos" name="apellidos" type="text" autocomplete="family-name" required aria-describedby="error-apellidos">
+            <p class="campo__error" id="error-apellidos" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="identificacion">Identificación <span class="obligatorio" aria-hidden="true">*</span></label>
+            <input id="identificacion" name="identificacion" type="text" inputmode="numeric" required
+                   placeholder="Ej.: 101110111" aria-describedby="ayuda-identificacion error-identificacion">
+            <p class="campo__ayuda" id="ayuda-identificacion">9 a 12 dígitos, sin guiones.</p>
+            <p class="campo__error" id="error-identificacion" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="celular">Celular <span class="obligatorio" aria-hidden="true">*</span></label>
+            <input id="celular" name="celular" type="tel" inputmode="numeric" autocomplete="tel-national" required
+                   placeholder="Ej.: 88887777" aria-describedby="error-celular">
+            <p class="campo__error" id="error-celular" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="fechaNacimiento">Fecha de nacimiento <span class="obligatorio" aria-hidden="true">*</span></label>
+            <input id="fechaNacimiento" name="fechaNacimiento" type="date" autocomplete="bday" required
+                   aria-describedby="edad error-fechaNacimiento">
+            <p class="campo__ayuda" id="edad" aria-live="polite">Edad: —</p>
+            <p class="campo__error" id="error-fechaNacimiento" aria-live="polite"></p>
+          </div>
+          <fieldset class="campo campo--opciones">
+            <legend>Sexo <span class="obligatorio" aria-hidden="true">*</span></legend>
+            <label><input type="radio" name="sexo" value="Femenino" required aria-describedby="error-sexo"> Femenino</label>
+            <label><input type="radio" name="sexo" value="Masculino"> Masculino</label>
+            <label><input type="radio" name="sexo" value="Otro"> Otro</label>
+            <p class="campo__error" id="error-sexo" aria-live="polite"></p>
+          </fieldset>
+          <div class="campo campo--ancho">
+            <label for="foto">Fotografía (opcional)</label>
+            <input id="foto" name="foto" type="file" accept="image/png, image/jpeg, image/webp"
+                   aria-describedby="ayuda-foto error-foto">
+            <p class="campo__ayuda" id="ayuda-foto">PNG, JPG o WEBP, máximo 500 KB.</p>
+            <p class="campo__error" id="error-foto" aria-live="polite"></p>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="grupo">
+        <legend>Cuenta y acceso</legend>
+        <div class="rejilla">
+          <div class="campo">
+            <label for="correoInstitucional">Correo institucional <span class="obligatorio" aria-hidden="true">*</span></label>
+            <input id="correoInstitucional" name="correoInstitucional" type="email" required
+                   placeholder="usuario@ucenfotec.ac.cr" aria-describedby="error-correoInstitucional">
+            <p class="campo__error" id="error-correoInstitucional" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="correoPersonal">Correo personal</label>
+            <input id="correoPersonal" name="correoPersonal" type="email" autocomplete="email" aria-describedby="error-correoPersonal">
+            <p class="campo__error" id="error-correoPersonal" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="rol">Rol <span class="obligatorio" aria-hidden="true">*</span></label>
+            <select id="rol" name="rol" required aria-describedby="error-rol">
+              <option value="">Seleccione un rol</option>
+            </select>
+            <p class="campo__error" id="error-rol" aria-live="polite"></p>
+          </div>
+          <div class="campo" id="campo-escuela" hidden>
+            <label for="escuela">Escuela <span class="obligatorio" aria-hidden="true">*</span></label>
+            <select id="escuela" name="escuela" aria-describedby="error-escuela">
+              <option value="">Seleccione una escuela</option>
+            </select>
+            <p class="campo__error" id="error-escuela" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="contrasena">Contraseña <span class="obligatorio" aria-hidden="true" id="marca-contrasena">*</span></label>
+            <input id="contrasena" name="contrasena" type="password" autocomplete="new-password"
+                   aria-describedby="ayuda-contrasena error-contrasena">
+            <p class="campo__ayuda" id="ayuda-contrasena">8 a 15 caracteres, con mayúscula, minúscula y número.</p>
+            <p class="campo__error" id="error-contrasena" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="confirmacion">Confirmar contraseña <span class="obligatorio" aria-hidden="true" id="marca-confirmacion">*</span></label>
+            <input id="confirmacion" name="confirmacion" type="password" autocomplete="new-password" aria-describedby="error-confirmacion">
+            <p class="campo__error" id="error-confirmacion" aria-live="polite"></p>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="acciones">
+        <a class="boton boton--secundario" href="usuarios.html">Cancelar</a>
+        <button type="submit" class="boton boton--primario">Guardar usuario</button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="pie">Universidad CENFOTEC · Proyecto Integrador I · 2026</footer>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Usuarios · Gestión de Cursos CENFOTEC</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/datos.js" defer></script>
+  <script src="../js/validacion.js" defer></script>
+  <script src="../js/usuarios.js" defer></script>
+</head>
+<body>
+  <header class="encabezado">
+    <p class="marca">CENFOTEC · Gestión de Cursos</p>
+    <nav class="menu" aria-label="Principal">
+      <a href="usuarios.html" data-rol="Administrador" aria-current="page">Usuarios</a>
+      <a href="cursos.html">Cursos</a>
+    </nav>
+    <p class="encabezado__usuario" id="usuario-actual"></p>
+  </header>
+
+  <main class="contenedor">
+    <div class="barra-titulo">
+      <h1>Usuarios</h1>
+      <a class="boton boton--primario" href="usuario.html">Registrar usuario</a>
+    </div>
+
+    <div id="aviso" class="aviso" role="status" hidden></div>
+
+    <div class="tabla-contenedor">
+      <table class="tabla">
+        <caption class="solo-lector">Usuarios registrados</caption>
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Identificación</th>
+            <th scope="col">Correo institucional</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Escuela</th>
+            <th scope="col">Edad</th>
+            <th scope="col"><span class="solo-lector">Acciones</span></th>
+          </tr>
+        </thead>
+        <tbody id="lista-usuarios"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <footer class="pie">Universidad CENFOTEC · Proyecto Integrador I · 2026</footer>
+</body>
+</html>
