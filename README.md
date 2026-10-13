@@ -305,9 +305,9 @@ gantt
 
 | Integrante | Rol |
 |---|---|
-| Otoniel González | Desarrollo |
-| Valentina Cristancho | Desarrollo |
-| Sebastian Fernandez | Desarrollo |
+| Otoniel González | Soporte |
+| Valentina Cristancho | Calidad |
+| Sebastian Fernandez | Administración |
 
 > Los roles específicos de Scrum aún no han sido asignados.
 
