@@ -27,8 +27,22 @@
 
     <div id="aviso" class="aviso" role="status" hidden></div>
 
+    <form id="filtros-usuarios" class="filtros-usuarios" role="search">
+      <div class="campo">
+        <label for="buscar">Buscar por nombre, identificación o correo</label>
+        <input id="buscar" name="buscar" type="search" autocomplete="off">
+      </div>
+      <div class="campo">
+        <label for="filtroRol">Rol</label>
+        <select id="filtroRol" name="filtroRol">
+          <option value="">Todos</option>
+        </select>
+      </div>
+      <button type="button" id="limpiar" class="boton boton--secundario">Limpiar</button>
+    </form>
+
     <div class="tabla-contenedor">
-      <table class="tabla">
+      <table class="tabla tabla--usuarios">
         <caption class="solo-lector">Usuarios registrados</caption>
         <thead>
           <tr>
@@ -44,6 +58,7 @@
         <tbody id="lista-usuarios"></tbody>
       </table>
     </div>
+    <p class="texto-secundario" id="sin-resultados" hidden>No hay usuarios que coincidan.</p>
   </main>
 
   <footer class="pie">Universidad CENFOTEC · Proyecto Integrador I · 2026</footer>

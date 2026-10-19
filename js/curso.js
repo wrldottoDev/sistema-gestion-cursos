@@ -6,9 +6,16 @@ const camposCurso = formCurso.elements;
 const idCurso = new URLSearchParams(location.search).get('id');
 const listaCursos = leer(CLAVES.cursos);
 const cursoExistente = listaCursos.find(c => c.id === idCurso && c.escuela === sesionCurso.escuela);
-const CAMPOS_TEXTO = ['codigo', 'nombre', 'nombrePowerCampus', 'areaSefia', 'tematica', 'metodologia', 'nivel',
+const CAMPOS_TEXTO = ['codigo', 'nombre', 'nombrePowerCampus', 'areaSfia', 'tematica', 'metodologia', 'nivel',
   'certificacion', 'creditos', 'horasClase', 'horasExtra', 'descripcionCorta', 'metaDescripcion',
-  'competencia', 'requisitos', 'palabrasClave'];
+  'competencia', 'requisitos', 'requisitosDeseables', 'palabrasClave'];
+
+// RF-030: un curso enviado (En desarrollo o posterior) ya no lo edita el Director.
+if (cursoExistente && cursoExistente.estado !== 'Borrador') {
+  dejarAviso(`El curso ${cursoExistente.codigo || cursoExistente.nombre} ya fue enviado y no se puede editar.`);
+  location.replace('cursos.html');
+  throw new Error('Curso no editable');
+}
 
 function llenarSelect(select, opciones) {
   select.add(new Option('Seleccione una opción', ''));
@@ -16,7 +23,7 @@ function llenarSelect(select, opciones) {
 }
 
 camposCurso.escuela.add(new Option(nombreEscuela(sesionCurso.escuela), sesionCurso.escuela));
-llenarSelect(camposCurso.areaSefia, AREAS_SEFIA);
+llenarSelect(camposCurso.areaSfia, AREAS_SEFIA);
 llenarSelect(camposCurso.tematica, TEMATICAS);
 llenarSelect(camposCurso.metodologia, METODOLOGIAS);
 llenarSelect(camposCurso.nivel, NIVELES);
@@ -30,13 +37,16 @@ let modoEnvio = false;
 const paraEnvio = (valor, mensaje) => (modoEnvio ? obligatorio(valor, mensaje) : '');
 const siHayValor = (valor, regla) => (String(valor).trim() ? regla(valor) : '');
 
+// RF-018: con "Solicitar código" marcado, el código puede quedar vacío (lo genera Desarrollo Curricular).
+const codigoOpcional = () => camposCurso.solicitarCodigo.checked;
+
 const reglasCurso = {
-  codigo: v => validarCodigoCurso(v) ||
-    (listaCursos.some(c => c.codigo === v.trim().toUpperCase() && c.id !== idCurso) ? 'Ya existe un curso con ese código.' : ''),
+  codigo: v => (codigoOpcional() && !v.trim() ? '' : validarCodigoCurso(v)) ||
+    (v.trim() && listaCursos.some(c => c.codigo === v.trim().toUpperCase() && c.id !== idCurso) ? 'Ya existe un curso con ese código.' : ''),
   nombre: v => obligatorio(v, 'Ingrese el nombre del curso.') ||
     (v.trim().length < 3 ? 'El nombre debe tener al menos 3 caracteres.' : ''),
   nombrePowerCampus: v => paraEnvio(v, 'Ingrese el nombre para Power Campus.') || validarLongitudMax(v, 40),
-  areaSefia: v => paraEnvio(v, 'Seleccione un área SEFIA.'),
+  areaSfia: () => '', // RF-020: el Área SFIA es opcional
   tematica: v => paraEnvio(v, 'Seleccione una temática.'),
   metodologia: v => paraEnvio(v, 'Seleccione una metodología.'),
   nivel: v => paraEnvio(v, 'Seleccione el nivel de complejidad.'),
@@ -49,6 +59,7 @@ const reglasCurso = {
   metaDescripcion: v => paraEnvio(v, 'Ingrese la meta descripción.') || validarLongitudMax(v, 155),
   competencia: v => paraEnvio(v, 'Ingrese la competencia del curso.'),
   requisitos: v => paraEnvio(v, 'Ingrese los requisitos indispensables.'),
+  requisitosDeseables: v => paraEnvio(v, 'Ingrese los requisitos deseables.'),
   palabrasClave: v => paraEnvio(v, 'Ingrese al menos una palabra clave.'),
 };
 
@@ -66,8 +77,10 @@ function actualizarTotal() {
 }
 
 if (cursoExistente) {
-  document.getElementById('titulo-formulario').textContent = `Editar curso ${cursoExistente.codigo}`;
+  document.getElementById('titulo-formulario').textContent = `Editar curso ${cursoExistente.codigo || cursoExistente.nombre}`;
   CAMPOS_TEXTO.forEach(c => (camposCurso[c].value = cursoExistente[c] ?? ''));
+  camposCurso.palabrasClave.value = [].concat(cursoExistente.palabrasClave ?? []).join(', ');
+  camposCurso.solicitarCodigo.checked = Boolean(cursoExistente.solicitarCodigo);
   camposCurso.modalidad.value = cursoExistente.modalidad ?? '';
 }
 
@@ -78,6 +91,7 @@ if (cursoExistente) {
 camposCurso.horasClase.addEventListener('input', actualizarTotal);
 camposCurso.horasExtra.addEventListener('input', actualizarTotal);
 camposCurso.codigo.addEventListener('input', e => (e.target.value = e.target.value.toUpperCase()));
+camposCurso.solicitarCodigo.addEventListener('change', () => validarCampo(formCurso, reglasCurso, 'codigo'));
 actualizarTotal();
 activarValidacionEnVivo(formCurso, reglasCurso);
 
@@ -90,15 +104,18 @@ formCurso.addEventListener('submit', evento => {
   const curso = { ...cursoExistente, id: cursoExistente?.id ?? crypto.randomUUID(), escuela: sesionCurso.escuela };
   CAMPOS_TEXTO.forEach(c => (curso[c] = camposCurso[c].value.trim()));
   curso.codigo = curso.codigo.toUpperCase();
+  curso.solicitarCodigo = camposCurso.solicitarCodigo.checked;
+  curso.palabrasClave = separarPalabrasClave(curso.palabrasClave); // RF-023: etiquetas sin repetir
   curso.modalidad = camposCurso.modalidad.value;
   curso.totalHoras = totalHoras(curso.horasClase, curso.horasExtra);
-  curso.estado = 'En desarrollo';
-  curso.enviado = modoEnvio;
+  curso.estado = modoEnvio ? 'En desarrollo' : 'Borrador'; // RF-030: al enviarse pasa a En desarrollo
+  delete curso.enviado;
   curso.ultimaModificacion = new Date().toISOString(); // RF-035
 
   guardar(CLAVES.cursos, cursoExistente
     ? listaCursos.map(c => (c.id === curso.id ? curso : c))
     : [...listaCursos, curso]);
-  dejarAviso(modoEnvio ? `Curso ${curso.codigo} enviado a Desarrollo Curricular.` : `Borrador de ${curso.codigo} guardado.`);
+  const nombreAviso = curso.codigo || curso.nombre;
+  dejarAviso(modoEnvio ? `Curso ${nombreAviso} enviado a Desarrollo Curricular.` : `Borrador de ${nombreAviso} guardado.`);
   location.href = 'cursos.html';
 });

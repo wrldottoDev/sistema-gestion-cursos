@@ -34,4 +34,9 @@ assert.ok(v.validarEntero('13', 1, 12));
 assert.strictEqual(v.totalHoras('30', '15'), 45);
 assert.strictEqual(v.totalHoras('', '15'), 15);
 
+assert.strictEqual(v.normalizar('  Diseño ÁGIL '), 'diseno agil');
+assert.ok(v.normalizar('Ingeniería del Software').includes(v.normalizar('INGENIERIA')));
+assert.deepStrictEqual(v.separarPalabrasClave(' html, CSS ,, css, JavaScript, Html '), ['html', 'CSS', 'JavaScript']);
+assert.deepStrictEqual(v.separarPalabrasClave(''), []);
+
 console.log('validacion: todas las pruebas pasaron');
