@@ -10,6 +10,10 @@ const TAMANO_MAX_FOTO = 500 * 1024;
 ROLES.forEach(rol => campos.rol.add(new Option(rol, rol)));
 ESCUELAS.forEach(e => campos.escuela.add(new Option(e.nombre, e.codigo)));
 
+// RF-004: solo puede haber un Administrador, un Rector y un Vicerrector (RN-03).
+const ROLES_UNICOS = ['Administrador', 'Rectoría', 'Vicerrectoría'];
+const cargoOcupado = rol => ROLES_UNICOS.includes(rol) && usuarios.some(u => u.rol === rol && u.id !== idUsuario);
+
 const esDirector = () => campos.rol.value === 'Director de Escuela';
 const duplicado = (clave, valor) => usuarios.some(u => u[clave] === valor && u.id !== idUsuario);
 
@@ -44,7 +48,8 @@ const reglasUsuario = {
   correoInstitucional: v => validarCorreo(v, { institucional: true }) ||
     (duplicado('correoInstitucional', v.trim().toLowerCase()) ? 'Ese correo ya está registrado.' : ''),
   correoPersonal: v => validarCorreo(v, { requerido: false }),
-  rol: v => obligatorio(v, 'Seleccione un rol.'),
+  rol: v => obligatorio(v, 'Seleccione un rol.') ||
+    (cargoOcupado(v) ? `Ya existe un usuario con el rol ${v}; solo puede haber uno.` : ''),
   escuela: v => (esDirector() ? obligatorio(v, 'Seleccione la escuela del director.') : ''),
   contrasena: v => (contrasenaOpcional() ? '' : validarContrasena(v)),
   confirmacion: v => (contrasenaOpcional() ? '' : obligatorio(v, 'Confirme la contraseña.') ||
