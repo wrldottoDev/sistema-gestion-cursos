@@ -15,7 +15,7 @@ const AREAS_SEFIA = ['Desarrollo de software', 'Infraestructura y redes', 'Segur
 const TEMATICAS = ['Programación web', 'Bases de datos', 'Computación en la nube', 'Ciberseguridad ofensiva', 'Experiencia de usuario'];
 const METODOLOGIAS = ['Aprendizaje basado en proyectos', 'Aula invertida', 'Aprendizaje basado en problemas', 'Clase magistral participativa'];
 const NIVELES = ['Básico', 'Intermedio', 'Avanzado', 'Certificación', 'Nivel variable'];
-const MODALIDADES = ['Virtual en vivo', 'Presencial', 'Híbrida'];
+const MODALIDADES = ['Presencial', 'Virtual sincrónica', 'Virtual asincrónica', 'Híbrida'];
 const CERTIFICACIONES = ['No tiene', 'AWS Certified Cloud Practitioner', 'Cisco CCNA', 'CompTIA Security+'];
 
 function leer(clave) {
@@ -67,7 +67,7 @@ async function inicializarDatos() {
   ]);
   guardar(CLAVES.cursos, [
     { id: crypto.randomUUID(), escuela: 'ESC-01', codigo: 'SOFT-101', nombre: 'Fundamentos de programación web',
-      estado: 'En desarrollo', enviado: false, ultimaModificacion: new Date().toISOString() },
+      estado: 'Borrador', ultimaModificacion: new Date().toISOString() },
   ]);
 }
 

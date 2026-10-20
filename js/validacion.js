@@ -83,6 +83,19 @@ function totalHoras(horasClase, horasExtra) {
   return (Number(horasClase) || 0) + (Number(horasExtra) || 0);
 }
 
+// RF-016: compara textos sin distinguir mayúsculas ni tildes.
+function normalizar(texto) {
+  return String(texto ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+}
+
+// RF-023: palabras clave separadas por coma, sin vacías ni repetidas (se conserva la primera forma escrita).
+function separarPalabrasClave(texto) {
+  const unicas = new Map();
+  String(texto ?? '').split(',').map(p => p.trim()).filter(Boolean)
+    .forEach(p => { if (!unicas.has(normalizar(p))) unicas.set(normalizar(p), p); });
+  return [...unicas.values()];
+}
+
 // ---------- Presentación de errores en el DOM (RNF-030, RNF-031) ----------
 
 function valorCampo(form, nombre) {
@@ -149,6 +162,6 @@ function mostrarAviso(texto, tipo = 'exito') {
 if (typeof module !== 'undefined') {
   module.exports = {
     obligatorio, validarNombre, validarCorreo, validarContrasena, validarIdentificacion, validarCelular,
-    calcularEdad, validarFechaNacimiento, validarLongitudMax, validarEntero, validarCodigoCurso, totalHoras,
+    calcularEdad, validarFechaNacimiento, validarLongitudMax, validarEntero, validarCodigoCurso, totalHoras, normalizar, separarPalabrasClave,
   };
 }
