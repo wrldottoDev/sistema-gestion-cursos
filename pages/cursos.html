@@ -21,14 +21,50 @@
 
   <main class="contenedor">
     <div class="barra-titulo">
-      <h1>Cursos</h1>
+      <div>
+        <h1>Cursos</h1>
+        <p class="texto-secundario">Consulta y administra el catálogo de cursos.</p>
+      </div>
       <a class="boton boton--primario" href="curso.html" data-rol="Director de Escuela">Nuevo curso</a>
     </div>
 
     <div id="aviso" class="aviso" role="status" hidden></div>
 
+    <section class="filtros-cursos tarjeta" aria-label="Filtros de cursos">
+      <div class="campo">
+        <label for="filtro-busqueda">Buscar por código o nombre</label>
+        <input id="filtro-busqueda" name="busqueda" type="search" placeholder="Ej.: SOFT-101 o Programación">
+        <p class="campo__error" id="error-filtro-busqueda" aria-live="polite"></p>
+      </div>
+      <div class="campo">
+        <label for="filtro-escuela">Escuela</label>
+        <select id="filtro-escuela" name="escuela">
+          <option value="">Todas las escuelas</option>
+        </select>
+        <p class="campo__error" id="error-filtro-escuela" aria-live="polite"></p>
+      </div>
+      <div class="campo">
+        <label for="filtro-estado">Estado</label>
+        <select id="filtro-estado" name="estado">
+          <option value="">Todos</option>
+          <option value="Borrador">Borrador</option>
+          <option value="En desarrollo">En desarrollo</option>
+          <option value="Aprobado">Aprobado</option>
+          <option value="En producción">En producción</option>
+          <option value="Inactivo">Inactivo</option>
+        </select>
+        <p class="campo__error" id="error-filtro-estado" aria-live="polite"></p>
+      </div>
+      <div class="campo filtros-cursos__accion">
+        <label class="solo-lector" for="limpiar-filtros">Limpiar filtros</label>
+        <button class="boton boton--secundario" id="limpiar-filtros" type="button">Limpiar filtros</button>
+        <p class="campo__error" aria-hidden="true"></p>
+      </div>
+    </section>
+
+    <p class="texto-secundario resultados-cursos" id="resumen-cursos" aria-live="polite"></p>
     <div class="tabla-contenedor">
-      <table class="tabla">
+      <table class="tabla tabla--cursos">
         <caption class="solo-lector">Catálogo de cursos</caption>
         <thead>
           <tr>
@@ -37,13 +73,40 @@
             <th scope="col">Escuela</th>
             <th scope="col">Estado</th>
             <th scope="col">Última modificación</th>
-            <th scope="col"><span class="solo-lector">Acciones</span></th>
+            <th scope="col">Acciones</th>
           </tr>
         </thead>
         <tbody id="lista-cursos"></tbody>
       </table>
     </div>
-    <p class="texto-secundario" id="sin-cursos" hidden>No hay cursos registrados todavía.</p>
+    <p class="estado-vacio" id="sin-cursos" hidden>No hay cursos registrados todavía.</p>
+    <p class="estado-vacio" id="sin-coincidencias" hidden>No hay cursos que coincidan</p>
+
+    <template id="plantilla-fila-curso">
+      <tr>
+        <td data-campo="codigo"></td>
+        <td data-campo="nombre"></td>
+        <td data-campo="escuela"></td>
+        <td><span class="estado" data-campo="estado"></span></td>
+        <td data-campo="ultimaModificacion"></td>
+        <td class="acciones-tabla">
+          <a class="enlace-accion" data-accion="ver" href="curso-detalle.html">Ver</a>
+          <a class="enlace-accion" data-accion="editar" href="curso.html">Editar</a>
+          <button class="boton boton--peligro boton--pequeno" data-accion="eliminar" type="button">Eliminar</button>
+        </td>
+      </tr>
+    </template>
+
+    <dialog class="dialogo-confirmacion" id="dialogo-eliminar-curso" aria-labelledby="titulo-dialogo-eliminar">
+      <form method="dialog" class="dialogo-confirmacion__contenido">
+        <h2 id="titulo-dialogo-eliminar">¿Inactivar este curso?</h2>
+        <p id="mensaje-eliminar-curso">El curso pasará al estado Inactivo. No se eliminará del sistema.</p>
+        <div class="acciones">
+          <button class="boton boton--secundario" value="cancelar">Cancelar</button>
+          <button class="boton boton--peligro" id="confirmar-eliminar-curso" value="confirmar">Sí, inactivar curso</button>
+        </div>
+      </form>
+    </dialog>
   </main>
 
   <footer class="pie">Universidad CENFOTEC · Proyecto Integrador I · 2026</footer>
