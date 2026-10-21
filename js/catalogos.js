@@ -1,4 +1,4 @@
-// RF-010 y RF-016: listado y búsqueda de los catálogos maestros.
+// RF-010, RF-015 y RF-016: listado, eliminación y búsqueda de los catálogos maestros.
 exigirSesion(['Administrador']);
 mostrarAviso();
 
@@ -9,10 +9,13 @@ const tipo = tipoPedido in CATALOGOS ? tipoPedido : 'escuelas';
 const catalogo = CATALOGOS[tipo];
 
 // Lista lateral: marca el catálogo abierto y muestra cuántos elementos tiene cada uno.
-document.querySelectorAll('[data-cantidad]').forEach(cantidad => {
-  cantidad.textContent = leerCatalogo(cantidad.dataset.cantidad).length;
-  if (cantidad.dataset.cantidad === tipo) cantidad.parentElement.setAttribute('aria-current', 'page');
-});
+function actualizarCantidades() {
+  document.querySelectorAll('[data-cantidad]').forEach(cantidad => {
+    cantidad.textContent = leerCatalogo(cantidad.dataset.cantidad).length;
+    if (cantidad.dataset.cantidad === tipo) cantidad.parentElement.setAttribute('aria-current', 'page');
+  });
+}
+actualizarCantidades();
 
 document.title = `${catalogo.titulo} · Gestión de Cursos CENFOTEC`;
 document.getElementById('titulo-tabla').textContent = `Elementos de ${catalogo.titulo}`;
@@ -48,6 +51,43 @@ function enlaceEditar(elemento) {
   return enlace;
 }
 
+function botonEliminar(elemento) {
+  const boton = document.createElement('button');
+  boton.type = 'button';
+  boton.className = 'boton-enlace boton-enlace--peligro';
+  boton.dataset.accion = 'eliminar';
+  boton.textContent = 'Eliminar';
+  boton.setAttribute('aria-label', `Eliminar ${elemento.nombre}`);
+  boton.addEventListener('click', () => eliminar(elemento));
+  return boton;
+}
+
+// RF-015: solo se elimina un elemento que nadie usa (RN-27), y siempre con confirmación.
+const dialogoEliminar = document.getElementById('dialogo-eliminar');
+
+function eliminar(elemento) {
+  const usos = usosDe(tipo, elemento);
+  if (usos > 0) {
+    mostrarAviso(`No se puede eliminar "${elemento.nombre}": lo usan ${usos} registro(s).`, 'error');
+    return;
+  }
+  document.getElementById('titulo-dialogo-eliminar').textContent = `¿Eliminar "${elemento.nombre}"?`;
+  document.getElementById('mensaje-eliminar').textContent =
+    `Se quitará de ${catalogo.titulo} y dejará de aparecer en los formularios.`;
+  dialogoEliminar.returnValue = '';
+  dialogoEliminar.addEventListener('close', () => {
+    if (dialogoEliminar.returnValue !== 'confirmar') return;
+    guardarCatalogo(tipo, leerCatalogo(tipo).filter(e => e.codigo !== elemento.codigo));
+    mostrarAviso(`"${elemento.nombre}" se eliminó.`);
+    actualizarCantidades();
+    mostrar();
+  }, { once: true });
+  dialogoEliminar.showModal();
+}
+
+// "No tiene" debe existir siempre en Certificaciones (RF-013 CA3).
+const esFijo = elemento => tipo === 'certificaciones' && elemento.nombre === 'No tiene';
+
 // RF-016: búsqueda por código o nombre, sin distinguir mayúsculas ni tildes.
 function mostrar() {
   const texto = normalizar(filtros.buscar.value);
@@ -62,6 +102,7 @@ function mostrar() {
     const acciones = fila.insertCell();
     acciones.className = 'acciones-tabla';
     acciones.append(enlaceEditar(elemento));
+    if (!esFijo(elemento)) acciones.append(botonEliminar(elemento));
   }
   document.getElementById('sin-resultados').hidden = visibles.length > 0;
   document.getElementById('resumen-catalogo').textContent = visibles.length ? `${visibles.length} elemento(s)` : '';
