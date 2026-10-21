@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio · Gestión de Cursos CENFOTEC</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/datos.js" defer></script>
+  <script src="../js/validacion.js" defer></script>
+</head>
+<body>
+  <header class="encabezado">
+    <p class="marca">CENFOTEC · Gestión de Cursos</p>
+    <nav class="menu" aria-label="Principal">
+      <a href="inicio.html" aria-current="page">Inicio</a>
+      <a href="usuarios.html" data-rol="Administrador">Usuarios</a>
+      <a href="catalogos.html" data-rol="Administrador">Catálogos</a>
+      <a href="cursos.html">Cursos</a>
+    </nav>
+    <p class="encabezado__usuario" id="usuario-actual"></p>
+  </header>
+
+  <main class="contenedor">
+    <p class="inicio__fecha" id="fecha-hoy"></p>
+    <h1 id="saludo">Inicio</h1>
+    <p class="texto-secundario inicio__subtitulo">¿Con qué quiere trabajar hoy?</p>
+    <div id="aviso" class="aviso" role="status" hidden></div>
+
+    <!-- RF-008: cada tarjeta solo la ve el rol indicado en data-rol (sin data-rol la ven todos). -->
+    <ul class="accesos">
+      <li data-rol="Administrador">
+        <a class="acceso" href="usuarios.html">
+          <span class="acceso__icono" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21v-1a7 7 0 0 1 14 0v1M16 4a4 4 0 0 1 0 8M22 21v-1a7 7 0 0 0-4-6.3"/></svg></span>
+          <strong>Usuarios</strong>
+          <span>Registrar, modificar, eliminar y buscar usuarios.</span>
+        </a>
+      </li>
+      <li data-rol="Administrador">
+        <a class="acceso" href="catalogos.html">
+          <span class="acceso__icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg></span>
+          <strong>Catálogos</strong>
+          <span>Escuelas, carreras, áreas SFIA, temáticas y más.</span>
+        </a>
+      </li>
+      <li>
+        <a class="acceso" href="cursos.html">
+          <span class="acceso__icono" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span>
+          <strong>Cursos</strong>
+          <span>Consultar los cursos que su rol puede ver.</span>
+        </a>
+      </li>
+      <li data-rol="Director de Escuela">
+        <a class="acceso" href="curso.html">
+          <span class="acceso__icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M12 12v6M9 15h6"/></svg></span>
+          <strong>Nuevo curso</strong>
+          <span>Crear un curso de su escuela.</span>
+        </a>
+      </li>
+    </ul>
+
+    <!-- RF-037: solo Desarrollo Curricular recibe avisos de escritorio. -->
+    <section class="notificaciones" data-rol="Desarrollo Curricular" aria-labelledby="titulo-notificaciones">
+      <span class="acceso__icono" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span>
+      <div class="notificaciones__texto">
+        <h2 id="titulo-notificaciones">Notificaciones de escritorio</h2>
+        <p id="estado-notificaciones" aria-live="polite">Reciba un aviso cuando un curso se envíe a revisión.</p>
+      </div>
+      <button type="button" class="boton boton--secundario" id="activar-notificaciones" hidden>Activar</button>
+    </section>
+  </main>
+
+  <footer class="pie">Universidad CENFOTEC · Proyecto Integrador I · 2026</footer>
+</body>
+</html>

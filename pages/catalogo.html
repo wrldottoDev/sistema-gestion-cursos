@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elemento de catálogo · Gestión de Cursos CENFOTEC</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/datos.js" defer></script>
+  <script src="../js/validacion.js" defer></script>
+</head>
+<body>
+  <header class="encabezado">
+    <p class="marca">CENFOTEC · Gestión de Cursos</p>
+    <nav class="menu" aria-label="Principal">
+      <a href="inicio.html">Inicio</a>
+      <a href="usuarios.html" data-rol="Administrador">Usuarios</a>
+      <a href="catalogos.html" data-rol="Administrador" aria-current="page">Catálogos</a>
+      <a href="cursos.html">Cursos</a>
+    </nav>
+    <p class="encabezado__usuario" id="usuario-actual"></p>
+  </header>
+
+  <main class="contenedor contenedor--formulario-corto">
+    <a class="volver" id="volver" href="catalogos.html">← Volver a catálogos</a>
+    <h1 id="titulo-formulario">Agregar elemento</h1>
+    <p class="texto-secundario">Los campos con <span class="obligatorio">*</span> son obligatorios.</p>
+
+    <!-- Un solo formulario para todos los catálogos: catalogo.js oculta los campos que el catálogo no usa. -->
+    <form id="form-catalogo" class="formulario tarjeta" novalidate>
+      <div class="campo" id="campo-codigo">
+        <label for="codigo">Código <span class="obligatorio" aria-hidden="true">*</span></label>
+        <input id="codigo" name="codigo" type="text" autocomplete="off" aria-describedby="error-codigo">
+        <p class="campo__error" id="error-codigo" aria-live="polite"></p>
+      </div>
+      <div class="campo" id="campo-nombre">
+        <label for="nombre">Nombre <span class="obligatorio" aria-hidden="true">*</span></label>
+        <input id="nombre" name="nombre" type="text" autocomplete="off" aria-describedby="error-nombre">
+        <p class="campo__error" id="error-nombre" aria-live="polite"></p>
+      </div>
+      <div class="campo" id="campo-director">
+        <label for="director">Director de Escuela <span class="obligatorio" aria-hidden="true">*</span></label>
+        <select id="director" name="director" aria-describedby="ayuda-director error-director"></select>
+        <p class="campo__ayuda" id="ayuda-director">Solo aparecen usuarios con rol Director de Escuela.</p>
+        <p class="campo__error" id="error-director" aria-live="polite"></p>
+      </div>
+      <div class="campo" id="campo-escuela">
+        <label for="escuela">Escuela <span class="obligatorio" aria-hidden="true">*</span></label>
+        <select id="escuela" name="escuela" aria-describedby="error-escuela"></select>
+        <p class="campo__error" id="error-escuela" aria-live="polite"></p>
+      </div>
+      <div class="campo" id="campo-descripcion">
+        <label for="descripcion">Descripción <span class="obligatorio" aria-hidden="true" id="marca-descripcion">*</span></label>
+        <textarea id="descripcion" name="descripcion" rows="3" aria-describedby="error-descripcion"></textarea>
+        <p class="campo__error" id="error-descripcion" aria-live="polite"></p>
+      </div>
+
+      <div class="acciones">
+        <a class="boton boton--fantasma" id="cancelar" href="catalogos.html">Cancelar</a>
+        <button type="submit" class="boton boton--primario">Guardar</button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="pie">Universidad CENFOTEC · Proyecto Integrador I · 2026</footer>
+</body>
+</html>
