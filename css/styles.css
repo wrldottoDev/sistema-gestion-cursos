@@ -588,6 +588,250 @@ a {
   }
 }
 
+/* 8. Catálogos e inicio (Valentina) */
+.contenedor--formulario-corto {
+  max-width: 640px;
+}
+
+.inicio__fecha {
+  margin: 0 0 var(--espacio-1);
+  font-size: var(--texto-pequeno);
+  color: var(--color-texto-terciario);
+}
+
+.inicio__fecha::first-letter {
+  text-transform: uppercase;
+}
+
+.inicio__subtitulo {
+  margin: 0 0 var(--espacio-5);
+}
+
+/* Tarjetas de acceso: tantas columnas como quepan (el rol decide cuántas hay). */
+.accesos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--espacio-3);
+  margin: 0 0 var(--espacio-5);
+  padding: 0;
+  list-style: none;
+}
+
+.acceso {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  height: 100%;
+  padding: 20px;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-grande);
+  background: var(--color-superficie);
+  box-shadow: var(--sombra);
+  color: var(--color-texto-secundario);
+  font-size: var(--texto-pequeno);
+  text-decoration: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.acceso:hover {
+  border-color: #c7d7f0;
+  box-shadow: 0 6px 20px -10px rgb(22 74 152 / 0.35);
+}
+
+.acceso strong {
+  margin-top: var(--espacio-2);
+  font-size: 1rem;
+  color: var(--color-texto);
+}
+
+.acceso__icono {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--color-primario-suave);
+  color: var(--color-primario);
+}
+
+.acceso__icono svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.notificaciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espacio-3);
+  padding: var(--espacio-3) 20px;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-grande);
+  background: var(--color-superficie);
+}
+
+.notificaciones__texto {
+  flex: 1 1 240px;
+}
+
+.notificaciones h2 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--color-texto);
+}
+
+.notificaciones p {
+  margin: 2px 0 0;
+  font-size: var(--texto-pequeno);
+  color: var(--color-texto-secundario);
+}
+
+.notificaciones .notificaciones__estado {
+  font-weight: 600;
+  color: var(--color-texto);
+}
+
+.catalogos {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--espacio-4);
+}
+
+.lista-catalogos {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.lista-catalogos__grupo {
+  margin: var(--espacio-3) 0 6px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-texto-terciario);
+}
+
+.lista-catalogos__grupo:first-child {
+  margin-top: 0;
+}
+
+.lista-catalogos a {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--espacio-2);
+  padding: var(--espacio-2) 12px;
+  border-radius: var(--radio);
+  color: var(--color-texto-secundario);
+  font-size: var(--texto-pequeno);
+  text-decoration: none;
+}
+
+.lista-catalogos a:hover {
+  background: #eceef2;
+  color: var(--color-texto);
+}
+
+.lista-catalogos a[aria-current="page"] {
+  background: var(--color-primario-suave);
+  color: var(--color-primario);
+  font-weight: 600;
+}
+
+.lista-catalogos span {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--color-texto-terciario);
+}
+
+.filtros-catalogo {
+  margin-bottom: var(--espacio-3);
+}
+
+.tabla--catalogo td:first-child {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.8125rem;
+  color: var(--color-texto-secundario);
+}
+
+.tabla--catalogo td:nth-child(3) {
+  white-space: normal;
+  color: var(--color-texto-terciario);
+}
+
+@media (min-width: 1024px) {
+  .catalogos {
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: var(--espacio-5);
+    align-items: start;
+  }
+}
+
+/* Menos de 1024 px: la lista de catálogos es una fila deslizable sobre la tabla. */
+@media (max-width: 1023px) {
+  .lista-catalogos {
+    flex-direction: row;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: var(--espacio-1);
+  }
+
+  .lista-catalogos__grupo {
+    display: none;
+  }
+
+  .lista-catalogos a {
+    flex: none;
+    padding: 6px 12px;
+    border: 1px solid var(--color-borde);
+    border-radius: 999px;
+    background: var(--color-superficie);
+    white-space: nowrap;
+  }
+}
+
+/* Móvil: cada elemento del catálogo es una tarjeta (código y acciones, nombre, detalle). */
+@media (max-width: 767px) {
+  .tabla--catalogo thead {
+    display: none;
+  }
+
+  .tabla--catalogo tbody,
+  .tabla--catalogo td {
+    display: block;
+  }
+
+  .tabla--catalogo tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "codigo acciones" "nombre nombre" "detalle detalle";
+    gap: 4px var(--espacio-3);
+    padding: 14px var(--espacio-3);
+    border-bottom: 1px solid var(--color-borde);
+  }
+
+  .tabla--catalogo tr:last-child {
+    border-bottom: 0;
+  }
+
+  .tabla--catalogo td {
+    padding: 0;
+    border: 0;
+    white-space: normal;
+  }
+
+  .tabla--catalogo td:nth-child(1) { grid-area: codigo; }
+  .tabla--catalogo td:nth-child(2) { grid-area: nombre; font-size: 0.9375rem; font-weight: 500; }
+  .tabla--catalogo td:nth-child(3) { grid-area: detalle; }
+  .tabla--catalogo td:nth-child(4) { grid-area: acciones; }
+}
+
 /* 9. Usuarios (Otoniel) */
 .filtros-usuarios {
   display: grid;
@@ -633,14 +877,16 @@ a {
    Estilos del listado, filtros, detalle y nuevos campos
    ========================================================== */
 
-.filtros-cursos__barra {
+.filtros-cursos__barra,
+.filtros-catalogo {
   display: flex;
   flex-wrap: wrap;
   gap: var(--espacio-2) 12px;
 }
 
 .campo-busqueda,
-.filtros-cursos select {
+.filtros-cursos select,
+.filtros-catalogo select {
   min-height: 40px;
   padding: var(--espacio-2) 12px;
   border: 1px solid var(--color-borde-fuerte);
@@ -658,17 +904,20 @@ a {
 }
 
 .campo-busqueda:focus-visible,
-.filtros-cursos select:focus-visible {
+.filtros-cursos select:focus-visible,
+.filtros-catalogo select:focus-visible {
   outline: none;
   border-color: var(--color-primario);
   box-shadow: var(--anillo-foco);
 }
 
-.filtros-cursos__escuela select {
+.filtros-cursos__escuela select,
+.filtros-catalogo__escuela select {
   width: 100%;
 }
 
-.filtros-cursos__escuela {
+.filtros-cursos__escuela,
+.filtros-catalogo__escuela {
   flex: 0 1 240px;
 }
 
@@ -771,7 +1020,8 @@ a {
   color: var(--color-texto-terciario);
 }
 
-.resultados-cursos {
+.resultados-cursos,
+.resultados-catalogo {
   margin: 12px 0 0;
   font-size: var(--texto-pequeno);
   color: var(--color-texto-terciario);
@@ -1285,7 +1535,8 @@ a {
   .tabla--cursos td:nth-child(5) { grid-area: fecha; font-size: 0.8125rem; }
   .tabla--cursos td:nth-child(6) { grid-area: acciones; }
 
-  .filtros-cursos__escuela {
+  .filtros-cursos__escuela,
+  .filtros-catalogo__escuela {
     flex-basis: 100%;
   }
 

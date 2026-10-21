@@ -9,7 +9,8 @@ const cursoExistente = listaCursos.find(c => c.id === idCurso && c.escuela === s
 const CAMPOS_TEXTO = ['codigo', 'nombre', 'nombrePowerCampus', 'areaSfia', 'tematica', 'metodologia', 'nivel',
   'certificacion', 'creditos', 'horasClase', 'horasExtra', 'descripcionCorta', 'metaDescripcion',
   'competencia', 'requisitos', 'requisitosDeseables', 'palabrasClave', 'casaCertificadora', 'nombrePrograma',
-  'ecommerce', 'fechaInicio', 'fechaFin', 'metadata', 'fechaModificacionMetadata'];
+  'ecommerce', 'fechaInicio', 'fechaFin', 'metadata', 'fechaModificacionMetadata',
+  'capacidadesEspecificas', 'descripcionLarga', 'perfilIngreso', 'perfilSalida'];
 
 // RF-009: un curso de otra escuela (o que no existe) no abre el formulario.
 if (idCurso && !cursoExistente) {
@@ -31,12 +32,13 @@ function llenarSelect(select, opciones) {
 }
 
 camposCurso.escuela.add(new Option(nombreEscuela(sesionCurso.escuela), sesionCurso.escuela));
-llenarSelect(camposCurso.areaSfia, AREAS_SEFIA);
-llenarSelect(camposCurso.tematica, TEMATICAS);
-llenarSelect(camposCurso.metodologia, METODOLOGIAS);
+// RF-020 (SGC-94): las opciones salen de los catálogos administrados.
+llenarSelect(camposCurso.areaSfia, nombresDe('areasSfia'));
+llenarSelect(camposCurso.tematica, nombresDe('tematicas'));
+llenarSelect(camposCurso.metodologia, nombresDe('metodologias'));
 llenarSelect(camposCurso.nivel, NIVELES);
-llenarSelect(camposCurso.certificacion, CERTIFICACIONES);
-llenarSelect(camposCurso.casaCertificadora, CASAS_CERTIFICADORAS);
+llenarSelect(camposCurso.certificacion, nombresDe('certificaciones'));
+llenarSelect(camposCurso.casaCertificadora, nombresDe('casasCertificadoras'));
 document.getElementById('opciones-modalidad').innerHTML = MODALIDADES.map(m =>
   `<label><input type="radio" name="modalidad" value="${m}" aria-describedby="error-modalidad"> ${m}</label>`
 ).join('');
@@ -71,6 +73,11 @@ const reglasCurso = {
   requisitos: v => paraEnvio(v, 'Ingrese los requisitos indispensables.'),
   requisitosDeseables: v => paraEnvio(v, 'Ingrese los requisitos deseables.'),
   palabrasClave: v => paraEnvio(v, 'Ingrese al menos una palabra clave.'),
+  // RF-024 (SGC-114): contenidos y perfiles, obligatorios al enviar.
+  capacidadesEspecificas: v => paraEnvio(v, 'Ingrese las capacidades específicas.'),
+  descripcionLarga: v => paraEnvio(v, 'Ingrese la descripción larga.'),
+  perfilIngreso: v => paraEnvio(v, 'Ingrese el perfil de ingreso.'),
+  perfilSalida: v => paraEnvio(v, 'Ingrese el perfil de salida.'),
   // RF-025 (RN-25): casa certificadora si el curso tiene certificación; nombre del programa si pertenece a uno.
   casaCertificadora: v => (['', 'No tiene'].includes(camposCurso.certificacion.value)
     ? '' : paraEnvio(v, 'Seleccione la casa certificadora.')),
@@ -200,6 +207,7 @@ formCurso.addEventListener('submit', evento => {
   guardar(CLAVES.cursos, cursoExistente
     ? listaCursos.map(c => (c.id === curso.id ? curso : c))
     : [...listaCursos, curso]);
+  if (modoEnvio) avisarCursoEnviado(curso); // RF-037
   const nombreAviso = curso.codigo || curso.nombre;
   dejarAviso(modoEnvio ? `Curso ${nombreAviso} enviado a Desarrollo Curricular.` : `Borrador de ${nombreAviso} guardado.`);
   location.href = 'cursos.html';

@@ -8,7 +8,7 @@ const existente = usuarios.find(u => u.id === idUsuario);
 const TAMANO_MAX_FOTO = 500 * 1024;
 
 ROLES.forEach(rol => campos.rol.add(new Option(rol, rol)));
-ESCUELAS.forEach(e => campos.escuela.add(new Option(e.nombre, e.codigo)));
+leerCatalogo('escuelas').forEach(e => campos.escuela.add(new Option(e.nombre, e.codigo)));
 
 // RF-004: solo puede haber un Administrador, un Rector y un Vicerrector (RN-03).
 const ROLES_UNICOS = ['Administrador', 'Rectoría', 'Vicerrectoría'];

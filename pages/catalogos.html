@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogos · Gestión de Cursos CENFOTEC</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/datos.js" defer></script>
+  <script src="../js/validacion.js" defer></script>
+  <script src="../js/catalogos.js" defer></script>
+</head>
+<body>
+  <header class="encabezado">
+    <p class="marca">CENFOTEC · Gestión de Cursos</p>
+    <nav class="menu" aria-label="Principal">
+      <a href="inicio.html">Inicio</a>
+      <a href="usuarios.html" data-rol="Administrador">Usuarios</a>
+      <a href="catalogos.html" data-rol="Administrador" aria-current="page">Catálogos</a>
+      <a href="cursos.html">Cursos</a>
+    </nav>
+    <p class="encabezado__usuario" id="usuario-actual"></p>
+  </header>
+
+  <main class="contenedor">
+    <div class="barra-titulo">
+      <div>
+        <h1>Catálogos</h1>
+        <p class="texto-secundario">Valores que usan los formularios de curso.</p>
+      </div>
+      <a class="boton boton--primario" id="agregar" href="catalogo.html">Agregar elemento</a>
+    </div>
+
+    <div id="aviso" class="aviso" role="status" hidden></div>
+
+    <div class="catalogos">
+      <!-- Un enlace por catálogo; catalogos.js marca el activo y llena las cantidades. -->
+      <nav class="lista-catalogos" aria-label="Catálogos">
+        <p class="lista-catalogos__grupo">Estructura académica</p>
+        <a href="catalogos.html?tipo=escuelas">Escuelas <span data-cantidad="escuelas"></span></a>
+        <a href="catalogos.html?tipo=carreras">Carreras <span data-cantidad="carreras"></span></a>
+        <p class="lista-catalogos__grupo">Clasificación</p>
+        <a href="catalogos.html?tipo=areasSfia">Áreas SFIA <span data-cantidad="areasSfia"></span></a>
+        <a href="catalogos.html?tipo=tematicas">Temáticas <span data-cantidad="tematicas"></span></a>
+        <a href="catalogos.html?tipo=metodologias">Metodologías <span data-cantidad="metodologias"></span></a>
+        <p class="lista-catalogos__grupo">Certificación</p>
+        <a href="catalogos.html?tipo=casasCertificadoras">Casas certificadoras <span data-cantidad="casasCertificadoras"></span></a>
+        <a href="catalogos.html?tipo=certificaciones">Certificaciones <span data-cantidad="certificaciones"></span></a>
+      </nav>
+
+      <div class="catalogos__contenido">
+        <form id="filtros" class="filtros-catalogo" role="search" aria-label="Buscar en el catálogo">
+          <label class="solo-lector" for="buscar">Buscar por código o nombre</label>
+          <input class="campo-busqueda" id="buscar" name="buscar" type="search" placeholder="Buscar por código o nombre" autocomplete="off">
+          <!-- RF-016 CA2: el filtro de escuela solo aplica a Carreras. -->
+          <div class="filtros-catalogo__escuela" id="campo-filtro-escuela" hidden>
+            <label class="solo-lector" for="filtroEscuela">Escuela</label>
+            <select id="filtroEscuela" name="filtroEscuela"></select>
+          </div>
+          <button type="button" id="limpiar" class="boton boton--fantasma">Limpiar</button>
+        </form>
+
+        <div class="tabla-contenedor">
+          <table class="tabla tabla--catalogo">
+            <caption class="solo-lector" id="titulo-tabla">Elementos del catálogo seleccionado</caption>
+            <thead>
+              <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Nombre</th>
+                <th scope="col" id="columna-detalle">Detalle</th>
+                <th scope="col"><span class="solo-lector">Acciones</span></th>
+              </tr>
+            </thead>
+            <tbody id="lista-catalogo"></tbody>
+          </table>
+        </div>
+        <p class="resultados-catalogo" id="resumen-catalogo" aria-live="polite"></p>
+        <div class="estado-vacio" id="sin-resultados" hidden>
+          <strong>No hay elementos que coincidan</strong>
+          <p>Pruebe con otro código o nombre.</p>
+          <button class="boton boton--secundario boton--pequeno" id="limpiar-sin-resultados" type="button">Limpiar búsqueda</button>
+        </div>
+      </div>
+    </div>
+
+    <dialog class="dialogo-confirmacion" id="dialogo-eliminar" aria-labelledby="titulo-dialogo-eliminar">
+      <form method="dialog" class="dialogo-confirmacion__contenido">
+        <h2 id="titulo-dialogo-eliminar">¿Eliminar este elemento?</h2>
+        <p id="mensaje-eliminar">Se quitará del catálogo y dejará de aparecer en el formulario de curso.</p>
+        <div class="acciones">
+          <button class="boton boton--secundario" value="cancelar">Cancelar</button>
+          <button class="boton boton--peligro" id="confirmar-eliminar" value="confirmar">Eliminar</button>
+        </div>
+      </form>
+    </dialog>
+  </main>
+
+  <footer class="pie">Universidad CENFOTEC · Proyecto Integrador I · 2026</footer>
+</body>
+</html>

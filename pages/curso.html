@@ -7,13 +7,16 @@
   <link rel="stylesheet" href="../css/styles.css">
   <script src="../js/datos.js" defer></script>
   <script src="../js/validacion.js" defer></script>
+  <script src="../js/notificaciones.js" defer></script>
   <script src="../js/curso.js" defer></script>
 </head>
 <body>
   <header class="encabezado">
     <p class="marca">CENFOTEC · Gestión de Cursos</p>
     <nav class="menu" aria-label="Principal">
+      <a href="inicio.html">Inicio</a>
       <a href="usuarios.html" data-rol="Administrador">Usuarios</a>
+      <a href="catalogos.html" data-rol="Administrador">Catálogos</a>
       <a href="cursos.html" aria-current="page">Cursos</a>
     </nav>
     <p class="encabezado__usuario" id="usuario-actual"></p>
@@ -188,22 +191,22 @@
         <legend>Contenidos y perfiles</legend>
         <div class="rejilla">
           <div class="campo campo--ancho">
-            <label for="capacidadesEspecificas">Capacidades específicas</label>
+            <label for="capacidadesEspecificas">Capacidades específicas <span class="obligatorio" aria-hidden="true">*</span></label>
             <textarea id="capacidadesEspecificas" name="capacidadesEspecificas" rows="3" aria-describedby="error-capacidadesEspecificas"></textarea>
             <p class="campo__error" id="error-capacidadesEspecificas" aria-live="polite"></p>
           </div>
           <div class="campo campo--ancho">
-            <label for="descripcionLarga">Descripción larga</label>
+            <label for="descripcionLarga">Descripción larga <span class="obligatorio" aria-hidden="true">*</span></label>
             <textarea id="descripcionLarga" name="descripcionLarga" rows="5" aria-describedby="error-descripcionLarga"></textarea>
             <p class="campo__error" id="error-descripcionLarga" aria-live="polite"></p>
           </div>
           <div class="campo">
-            <label for="perfilIngreso">Perfil de ingreso</label>
+            <label for="perfilIngreso">Perfil de ingreso <span class="obligatorio" aria-hidden="true">*</span></label>
             <textarea id="perfilIngreso" name="perfilIngreso" rows="3" aria-describedby="error-perfilIngreso"></textarea>
             <p class="campo__error" id="error-perfilIngreso" aria-live="polite"></p>
           </div>
           <div class="campo">
-            <label for="perfilSalida">Perfil de salida</label>
+            <label for="perfilSalida">Perfil de salida <span class="obligatorio" aria-hidden="true">*</span></label>
             <textarea id="perfilSalida" name="perfilSalida" rows="3" aria-describedby="error-perfilSalida"></textarea>
             <p class="campo__error" id="error-perfilSalida" aria-live="polite"></p>
           </div>
