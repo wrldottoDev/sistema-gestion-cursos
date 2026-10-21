@@ -599,6 +599,10 @@ a {
   color: var(--color-texto-terciario);
 }
 
+.inicio__fecha::first-letter {
+  text-transform: uppercase;
+}
+
 .inicio__subtitulo {
   margin: 0 0 var(--espacio-5);
 }

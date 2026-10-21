@@ -189,11 +189,12 @@ function confirmarInactivacion(curso, alTerminar) {
   dialogo.showModal();
 }
 
-// Protege las páginas internas (RF-010). Redirige al login si no hay sesión o el rol no aplica.
+// Protege las páginas internas (RF-008). Sin sesión va al login; con sesión pero sin permiso, a su inicio.
 function exigirSesion(rolesPermitidos) {
   const sesion = obtenerSesion();
   if (!sesion || (rolesPermitidos && !rolesPermitidos.includes(sesion.rol))) {
-    location.replace('../index.html');
+    if (sesion) dejarAviso('Su rol no tiene acceso a esa página.', 'error');
+    location.replace(sesion ? 'inicio.html' : '../index.html');
     throw new Error('Sin acceso');
   }
   document.querySelectorAll('[data-rol]').forEach(el => {
