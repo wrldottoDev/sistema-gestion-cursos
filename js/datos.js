@@ -17,6 +17,16 @@ const METODOLOGIAS = ['Aprendizaje basado en proyectos', 'Aula invertida', 'Apre
 const NIVELES = ['Básico', 'Intermedio', 'Avanzado', 'Certificación', 'Nivel variable'];
 const MODALIDADES = ['Presencial', 'Virtual sincrónica', 'Virtual asincrónica', 'Híbrida'];
 const CERTIFICACIONES = ['No tiene', 'AWS Certified Cloud Practitioner', 'Cisco CCNA', 'CompTIA Security+'];
+// RF-025: valores iniciales; con SGC-73 pasan al catálogo de Casas certificadoras.
+const CASAS_CERTIFICADORAS = ['Amazon Web Services', 'Cisco', 'CompTIA'];
+// Clase de color de cada estado (RN-09, RN-11, RN-12).
+const CLASE_ESTADO = { 'Borrador': 'borrador', 'En desarrollo': 'desarrollo', 'Aprobado': 'aprobado', 'En producción': 'produccion', 'Inactivo': 'inactivo' };
+
+// Fecha y hora cortas para listados y detalle: 21/10/2026 · 2:32 p. m.
+function fechaHora(iso) {
+  const fecha = new Date(iso);
+  return `${fecha.toLocaleDateString('es-CR')} · ${fecha.toLocaleTimeString('es-CR', { hour: 'numeric', minute: '2-digit' })}`;
+}
 
 function leer(clave) {
   try {
@@ -82,6 +92,28 @@ function obtenerSesion() {
 function iniciarSesion(usuario) {
   const { id, nombre, apellidos, rol, escuela } = usuario;
   sessionStorage.setItem(CLAVES.sesion, JSON.stringify({ id, nombre, apellidos, rol, escuela }));
+}
+
+// RF-035: eliminación lógica. El curso pasa a Inactivo y conserva todos sus datos.
+function inactivarCurso(id) {
+  const lista = leer(CLAVES.cursos);
+  const curso = lista.find(c => c.id === id);
+  curso.estado = 'Inactivo';
+  curso.ultimaModificacion = new Date().toISOString();
+  guardar(CLAVES.cursos, lista);
+  return curso;
+}
+
+// RF-035: pide confirmación en el <dialog> de la página; si se confirma, inactiva y avisa a alTerminar.
+function confirmarInactivacion(curso, alTerminar) {
+  const dialogo = document.getElementById('dialogo-eliminar-curso');
+  document.getElementById('mensaje-eliminar-curso').textContent =
+    `${curso.codigo || 'El curso'} · ${curso.nombre} pasará a Inactivo. No se borra: sigue disponible con el filtro Inactivo.`;
+  dialogo.returnValue = '';
+  dialogo.addEventListener('close', () => {
+    if (dialogo.returnValue === 'confirmar') alTerminar(inactivarCurso(curso.id));
+  }, { once: true });
+  dialogo.showModal();
 }
 
 // Protege las páginas internas (RF-010). Redirige al login si no hay sesión o el rol no aplica.

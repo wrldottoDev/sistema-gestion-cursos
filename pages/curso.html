@@ -19,21 +19,45 @@
     <p class="encabezado__usuario" id="usuario-actual"></p>
   </header>
 
-  <main class="contenedor contenedor--angosto">
+  <main class="contenedor">
     <a class="volver" href="cursos.html">← Volver a cursos</a>
-    <h1 id="titulo-formulario">Nuevo curso</h1>
+    <div class="titulo-formulario">
+      <h1 id="titulo-formulario">Nuevo curso</h1>
+      <span class="estado estado--borrador">Borrador</span>
+      <p class="guardado" id="guardado" hidden></p>
+    </div>
     <p class="texto-secundario">
       Los campos con <span class="obligatorio">*</span> son obligatorios para enviar a revisión.
-      Para guardar un borrador basta con escuela, código y nombre.
+      Para guardar un borrador basta con código y nombre.
     </p>
 
-    <form id="form-curso" class="formulario tarjeta" novalidate>
-      <fieldset class="grupo">
+    <div class="formulario-curso">
+    <!-- Índice con lo que falta en cada sección (lo llena curso.js). -->
+    <nav class="indice-secciones" aria-label="Secciones del formulario">
+      <p class="indice-secciones__titulo">Secciones</p>
+      <ol>
+        <li><a href="#grupo-identificacion">Identificación <span data-grupo="grupo-identificacion"></span></a></li>
+        <li><a href="#grupo-clasificacion">Clasificación <span data-grupo="grupo-clasificacion"></span></a></li>
+        <li><a href="#grupo-carga-academica">Carga académica <span data-grupo="grupo-carga-academica"></span></a></li>
+        <li><a href="#grupo-descripcion">Descripción <span data-grupo="grupo-descripcion"></span></a></li>
+        <li><a href="#grupo-contenidos">Contenidos y perfiles <span data-grupo="grupo-contenidos"></span></a></li>
+        <li><a href="#grupo-certificacion">Certificación y programa <span data-grupo="grupo-certificacion"></span></a></li>
+        <li><a href="#grupo-comercial">Comercial y metadata <span data-grupo="grupo-comercial"></span></a></li>
+      </ol>
+      <label class="indice-secciones__progreso" for="progreso-curso">
+        <span id="progreso-texto"></span>
+        <progress id="progreso-curso" max="1" value="0"></progress>
+      </label>
+    </nav>
+
+    <form id="form-curso" class="formulario" novalidate>
+      <fieldset class="grupo" id="grupo-identificacion">
         <legend>Identificación</legend>
         <div class="rejilla">
           <div class="campo campo--ancho">
             <label for="escuela">Escuela</label>
-            <select id="escuela" name="escuela" disabled></select>
+            <select id="escuela" name="escuela" disabled aria-describedby="error-escuela"></select>
+            <p class="campo__error" id="error-escuela" aria-live="polite"></p>
           </div>
           <div class="campo">
             <label for="codigo">Código del curso <span class="obligatorio" aria-hidden="true">*</span></label>
@@ -60,7 +84,7 @@
         </div>
       </fieldset>
 
-      <fieldset class="grupo">
+      <fieldset class="grupo" id="grupo-clasificacion">
         <legend>Clasificación</legend>
         <div class="rejilla">
           <div class="campo">
@@ -88,15 +112,10 @@
             <div id="opciones-modalidad" class="opciones"></div>
             <p class="campo__error" id="error-modalidad" aria-live="polite"></p>
           </fieldset>
-          <div class="campo">
-            <label for="certificacion">Certificación <span class="obligatorio" aria-hidden="true">*</span></label>
-            <select id="certificacion" name="certificacion" aria-describedby="error-certificacion"></select>
-            <p class="campo__error" id="error-certificacion" aria-live="polite"></p>
-          </div>
         </div>
       </fieldset>
 
-      <fieldset class="grupo">
+      <fieldset class="grupo" id="grupo-carga-academica">
         <legend>Carga académica</legend>
         <div class="rejilla rejilla--cuatro">
           <div class="campo">
@@ -120,11 +139,12 @@
           <div class="campo">
             <label for="totalHoras">Total de horas</label>
             <output id="totalHoras" class="campo__calculado" for="horasClase horasExtra">0</output>
+            <p class="campo__error" id="error-totalHoras" aria-live="polite"></p>
           </div>
         </div>
       </fieldset>
 
-      <fieldset class="grupo">
+      <fieldset class="grupo" id="grupo-descripcion">
         <legend>Descripción</legend>
         <div class="campo">
           <label for="descripcionCorta">Descripción corta <span class="obligatorio" aria-hidden="true">*</span></label>
@@ -164,12 +184,103 @@
         </div>
       </fieldset>
 
-      <div class="acciones">
-        <a class="boton boton--secundario" href="cursos.html">Cancelar</a>
+      <fieldset class="grupo" id="grupo-contenidos">
+        <legend>Contenidos y perfiles</legend>
+        <div class="rejilla">
+          <div class="campo campo--ancho">
+            <label for="capacidadesEspecificas">Capacidades específicas</label>
+            <textarea id="capacidadesEspecificas" name="capacidadesEspecificas" rows="3" aria-describedby="error-capacidadesEspecificas"></textarea>
+            <p class="campo__error" id="error-capacidadesEspecificas" aria-live="polite"></p>
+          </div>
+          <div class="campo campo--ancho">
+            <label for="descripcionLarga">Descripción larga</label>
+            <textarea id="descripcionLarga" name="descripcionLarga" rows="5" aria-describedby="error-descripcionLarga"></textarea>
+            <p class="campo__error" id="error-descripcionLarga" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="perfilIngreso">Perfil de ingreso</label>
+            <textarea id="perfilIngreso" name="perfilIngreso" rows="3" aria-describedby="error-perfilIngreso"></textarea>
+            <p class="campo__error" id="error-perfilIngreso" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="perfilSalida">Perfil de salida</label>
+            <textarea id="perfilSalida" name="perfilSalida" rows="3" aria-describedby="error-perfilSalida"></textarea>
+            <p class="campo__error" id="error-perfilSalida" aria-live="polite"></p>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="grupo" id="grupo-certificacion">
+        <legend>Certificación y programa</legend>
+        <div class="rejilla">
+          <div class="campo">
+            <label for="certificacion">Certificación <span class="obligatorio" aria-hidden="true">*</span></label>
+            <select id="certificacion" name="certificacion" aria-describedby="error-certificacion"></select>
+            <p class="campo__error" id="error-certificacion" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="casaCertificadora">Casa certificadora</label>
+            <select id="casaCertificadora" name="casaCertificadora" aria-describedby="ayuda-casaCertificadora error-casaCertificadora"></select>
+            <p class="campo__ayuda" id="ayuda-casaCertificadora">Obligatoria si el curso tiene certificación.</p>
+            <p class="campo__error" id="error-casaCertificadora" aria-live="polite"></p>
+          </div>
+          <div class="campo campo--checkbox">
+            <label for="pertenecePrograma">Pertenece a un programa</label>
+            <input id="pertenecePrograma" name="pertenecePrograma" type="checkbox" aria-describedby="error-pertenecePrograma">
+            <p class="campo__error" id="error-pertenecePrograma" aria-live="polite"></p>
+          </div>
+          <div class="campo campo--ancho">
+            <label for="nombrePrograma">Nombre del programa</label>
+            <input id="nombrePrograma" name="nombrePrograma" type="text" disabled aria-describedby="ayuda-nombrePrograma error-nombrePrograma">
+            <p class="campo__ayuda" id="ayuda-nombrePrograma">Se habilita al marcar "Pertenece a un programa".</p>
+            <p class="campo__error" id="error-nombrePrograma" aria-live="polite"></p>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="grupo" id="grupo-comercial">
+        <legend>Comercial y metadata</legend>
+        <div class="rejilla">
+          <div class="campo">
+            <label for="ecommerce">E-commerce</label>
+            <select id="ecommerce" name="ecommerce" aria-describedby="error-ecommerce">
+              <option value="">Seleccione una opción</option>
+              <option value="Sí">Sí</option>
+              <option value="No">No</option>
+            </select>
+            <p class="campo__error" id="error-ecommerce" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="fechaInicio">Fecha de inicio</label>
+            <input id="fechaInicio" name="fechaInicio" type="date" disabled aria-describedby="error-fechaInicio">
+            <p class="campo__error" id="error-fechaInicio" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="fechaFin">Fecha de fin</label>
+            <input id="fechaFin" name="fechaFin" type="date" disabled aria-describedby="error-fechaFin">
+            <p class="campo__error" id="error-fechaFin" aria-live="polite"></p>
+          </div>
+          <div class="campo campo--ancho">
+            <label for="metadata">Metadata</label>
+            <textarea id="metadata" name="metadata" rows="3" aria-describedby="error-metadata"></textarea>
+            <p class="campo__error" id="error-metadata" aria-live="polite"></p>
+          </div>
+          <div class="campo">
+            <label for="fechaModificacionMetadata">Fecha de modificación de la metadata</label>
+            <input id="fechaModificacionMetadata" name="fechaModificacionMetadata" type="date" readonly aria-describedby="ayuda-fechaModificacionMetadata error-fechaModificacionMetadata">
+            <p class="campo__ayuda" id="ayuda-fechaModificacionMetadata">Se actualiza sola al guardar un cambio en la metadata.</p>
+            <p class="campo__error" id="error-fechaModificacionMetadata" aria-live="polite"></p>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="acciones acciones--fija">
+        <a class="boton boton--fantasma" href="cursos.html">Cancelar</a>
         <button type="submit" class="boton boton--secundario" name="accion" value="borrador">Guardar borrador</button>
         <button type="submit" class="boton boton--primario" name="accion" value="enviar">Listo para enviar</button>
       </div>
     </form>
+    </div>
   </main>
 
   <footer class="pie">Universidad CENFOTEC · Proyecto Integrador I · 2026</footer>

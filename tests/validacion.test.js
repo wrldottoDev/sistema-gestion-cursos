@@ -39,4 +39,18 @@ assert.ok(v.normalizar('Ingeniería del Software').includes(v.normalizar('INGENI
 assert.deepStrictEqual(v.separarPalabrasClave(' html, CSS ,, css, JavaScript, Html '), ['html', 'CSS', 'JavaScript']);
 assert.deepStrictEqual(v.separarPalabrasClave(''), []);
 
+// RF-041 / RF-035: búsqueda y filtros de cursos.
+const lista = [
+  { codigo: 'SOFT-101', nombre: 'Fundamentos de Programación', escuela: 'ESC-01', estado: 'Aprobado' },
+  { codigo: '', nombre: 'Analítica de Datos', escuela: 'ESC-03', estado: 'Borrador' },
+  { codigo: 'CIB-110', nombre: 'Introducción a la Ciberseguridad', escuela: 'ESC-02', estado: 'Inactivo' },
+];
+const codigos = r => r.map(c => c.nombre);
+assert.deepStrictEqual(codigos(v.filtrarCursos(lista)), ['Fundamentos de Programación', 'Analítica de Datos']); // sin inactivos
+assert.deepStrictEqual(codigos(v.filtrarCursos(lista, { texto: 'programacion' })), ['Fundamentos de Programación']); // sin tilde
+assert.deepStrictEqual(codigos(v.filtrarCursos(lista, { texto: 'soft-1' })), ['Fundamentos de Programación']); // por código
+assert.deepStrictEqual(codigos(v.filtrarCursos(lista, { escuela: 'ESC-03' })), ['Analítica de Datos']);
+assert.deepStrictEqual(codigos(v.filtrarCursos(lista, { estado: 'Inactivo' })), ['Introducción a la Ciberseguridad']);
+assert.deepStrictEqual(v.filtrarCursos(lista, { texto: 'datos', escuela: 'ESC-01' }), []); // todos los filtros a la vez
+
 console.log('validacion: todas las pruebas pasaron');

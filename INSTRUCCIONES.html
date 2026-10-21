@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Guía de instalación, uso y pruebas del Sistema de Gestión de Cursos CENFOTEC.">
+  <title>Instrucciones | Sistema de Gestión de Cursos CENFOTEC</title>
+  <style>
+    :root{--navy:#102b4e;--blue:#1769aa;--cyan:#eaf5ff;--ink:#243247;--muted:#607086;--line:#dce5ef;--bg:#f4f7fb;--green:#16794b;--amber:#fff5dc;--white:#fff}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+    a{color:var(--blue)}.hero{background:linear-gradient(125deg,#102b4e,#1769aa);color:white;padding:52px 20px 44px}.wrap{max-width:1050px;margin:auto;padding:0 22px}.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;font-weight:800;opacity:.85}.hero h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.12;margin:12px 0}.hero p{max-width:760px;font-size:1.08rem;opacity:.94;margin:0}.hero .tag{display:inline-block;margin-top:22px;padding:5px 12px;border:1px solid #ffffff75;border-radius:99px;font-size:.86rem}
+    .layout{display:grid;grid-template-columns:245px minmax(0,1fr);gap:28px;align-items:start;margin:30px auto 60px}.toc{position:sticky;top:18px;background:white;border:1px solid var(--line);border-radius:14px;padding:18px}.toc strong{display:block;margin-bottom:8px;color:var(--navy)}.toc a{display:block;text-decoration:none;padding:6px 0;font-size:.93rem}.toc a:hover{text-decoration:underline}.content section{background:white;border:1px solid var(--line);border-radius:14px;padding:26px;margin-bottom:18px;scroll-margin-top:20px}.content h2{color:var(--navy);margin:0 0 12px;font-size:1.45rem}.content h3{color:var(--navy);margin:22px 0 6px;font-size:1.08rem}.muted{color:var(--muted)}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{border:1px solid var(--line);border-radius:11px;padding:15px}.card b{display:block;color:var(--navy);margin-bottom:4px}.steps{padding-left:1.35rem}.steps li{padding:0 0 10px 5px}.callout{border-left:4px solid var(--blue);background:var(--cyan);padding:14px 16px;border-radius:7px;margin:14px 0}.warning{border-left-color:#d28b00;background:var(--amber)}code,pre{font-family:Consolas,"Courier New",monospace}code{background:#eef2f7;padding:2px 5px;border-radius:4px}pre{overflow:auto;background:#132238;color:#f2f7ff;padding:16px;border-radius:9px}table{border-collapse:collapse;width:100%;margin:12px 0}th,td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}th{background:#f0f5fa;color:var(--navy)}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.btn{display:inline-block;background:var(--blue);color:white;text-decoration:none;padding:10px 15px;border-radius:8px;font-weight:700}.btn.secondary{background:white;color:var(--blue);border:1px solid var(--blue)}footer{text-align:center;color:var(--muted);padding:25px;font-size:.9rem}
+    @media(max-width:760px){.layout{grid-template-columns:1fr}.toc{position:static}.cards{grid-template-columns:1fr}.content section{padding:20px}.hero{padding-top:38px}table{font-size:.9rem}}
+    @media print{body{background:white}.hero{background:white;color:#102b4e;padding:20px 0}.layout{display:block;margin:10px auto}.toc,.actions{display:none}.content section{break-inside:avoid;box-shadow:none;margin-bottom:12px}.content section,.card{border-color:#bbb}a{color:inherit;text-decoration:none}footer{padding:8px}}
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Guía de uso y puesta en marcha</div>
+      <h1>Sistema de Gestión de Cursos CENFOTEC</h1>
+      <p>Instrucciones para abrir la aplicación, iniciar sesión, administrar usuarios y trabajar con cursos en la versión de demostración incluida en este proyecto.</p>
+      <span class="tag">Versión frontend · HTML, CSS y JavaScript</span>
+      <div class="actions"><a class="btn" href="index.html">Abrir la aplicación</a><a class="btn secondary" href="README.md">Consultar README</a></div>
+    </div>
+  </header>
+  <div class="wrap layout">
+    <nav class="toc" aria-label="Contenido">
+      <strong>Contenido</strong>
+      <a href="#inicio">1. Antes de empezar</a><a href="#ejecutar">2. Cómo ejecutar</a><a href="#sesion">3. Inicio de sesión</a><a href="#usuarios">4. Gestión de usuarios</a><a href="#cursos">5. Gestión de cursos</a><a href="#datos">6. Datos y almacenamiento</a><a href="#pruebas">7. Pruebas</a><a href="#problemas">8. Solución de problemas</a><a href="#limitaciones">9. Límites de la demo</a>
+    </nav>
+    <main class="content">
+      <section id="inicio">
+        <h2>1. Antes de empezar</h2>
+        <p>Esta carpeta contiene una versión inicial del Sistema de Gestión de Cursos. Se recomienda utilizar un navegador moderno y, para desarrollo, Visual Studio Code.</p>
+        <div class="cards">
+          <div class="card"><b>Requisitos básicos</b>Google Chrome, Microsoft Edge o Firefox actualizado.</div>
+          <div class="card"><b>Para ejecutar pruebas</b>Node.js instalado en el equipo.</div>
+          <div class="card"><b>Archivos principales</b><code>index.html</code>, <code>css/</code>, <code>js/</code> y <code>pages/</code>.</div>
+          <div class="card"><b>Datos</b>Se guardan en el almacenamiento del navegador, no en un servidor.</div>
+        </div>
+      </section>
+      <section id="ejecutar">
+        <h2>2. Cómo ejecutar la aplicación</h2>
+        <ol class="steps">
+          <li>Extrae el archivo ZIP en una carpeta de tu computadora.</li>
+          <li>Abre la carpeta <code>sistema-gestion-cursos-main</code> en Visual Studio Code, o localízala en el explorador de archivos.</li>
+          <li><strong>Opción rápida:</strong> abre <code>index.html</code> en el navegador.</li>
+          <li><strong>Opción recomendada:</strong> en Visual Studio Code instala la extensión Live Server, haz clic derecho en <code>index.html</code> y selecciona <em>Open with Live Server</em>.</li>
+          <li>Usa el menú de la aplicación para navegar a las pantallas de cursos y usuarios según el rol de la cuenta.</li>
+        </ol>
+        <div class="callout warning"><strong>Nota:</strong> algunas funciones del navegador, como Web Crypto, pueden requerir un contexto seguro. Si la aplicación falla al abrirse directamente como archivo, ejecútala con Live Server.</div>
+      </section>
+      <section id="sesion">
+        <h2>3. Inicio de sesión</h2>
+        <p>En la pantalla inicial introduce el correo y la contraseña de una cuenta de demostración.</p>
+        <table><thead><tr><th>Rol de demostración</th><th>Correo</th><th>Contraseña</th></tr></thead><tbody>
+          <tr><td>Administrador</td><td><code>admin@ucenfotec.ac.cr</code></td><td><code>Admin1234</code></td></tr>
+          <tr><td>Director de Escuela</td><td><code>director@ucenfotec.ac.cr</code></td><td><code>Director1234</code></td></tr>
+        </tbody></table>
+        <p class="muted">Estas credenciales son exclusivamente para la demostración local. No las uses como cuentas reales ni las publiques en un entorno de producción.</p>
+        <div class="callout">El acceso con Google aparece como opción prevista, pero no está habilitado en esta versión.</div>
+      </section>
+      <section id="usuarios">
+        <h2>4. Gestión de usuarios</h2>
+        <p>La sección de usuarios está destinada principalmente al Administrador.</p>
+        <ol class="steps">
+          <li>Inicia sesión con la cuenta de Administrador.</li>
+          <li>Abre <strong>Usuarios</strong> desde la navegación.</li>
+          <li>Selecciona <strong>Registrar usuario</strong> para abrir el formulario.</li>
+          <li>Completa los campos obligatorios, selecciona el rol y, cuando corresponda, la escuela.</li>
+          <li>Revisa los mensajes de validación y guarda el formulario.</li>
+          <li>Para modificar un registro, utiliza la acción de edición disponible en el listado, si aparece para ese registro.</li>
+        </ol>
+        <p>La validación puede revisar el correo institucional, la contraseña y otros datos personales requeridos por el formulario.</p>
+      </section>
+      <section id="cursos">
+        <h2>5. Gestión de cursos</h2>
+        <h3>Consultar cursos</h3>
+        <ol class="steps"><li>Abre <strong>Cursos</strong> desde la navegación.</li><li>Revisa la información del listado y los filtros disponibles.</li><li>El listado del Director está pensado para mostrar los cursos asociados a su escuela.</li></ol>
+        <h3>Crear o editar un curso</h3>
+        <ol class="steps"><li>Desde el listado, pulsa <strong>Nuevo curso</strong> si la opción está disponible para tu rol.</li><li>Completa primero la escuela, el código y el nombre del curso.</li><li>Rellena los demás campos requeridos y revisa los mensajes de validación.</li><li>Comprueba los cálculos automáticos, como el total de horas de clase y extra clase.</li><li>Guarda los cambios con la acción correspondiente. Para salir sin guardar, usa la opción de cancelar o volver.</li></ol>
+        <div class="callout"><strong>Estados previstos:</strong> <code>En desarrollo</code>, <code>En producción</code> e <code>Inactivo</code>. El flujo institucional completo de envío a revisión y aprobación todavía no está implementado en su totalidad.</div>
+      </section>
+      <section id="datos">
+        <h2>6. Datos y almacenamiento</h2>
+        <p>La aplicación utiliza <code>localStorage</code> para conservar datos en el navegador y <code>sessionStorage</code> para información de sesión. Por eso:</p>
+        <ul><li>Los registros no se sincronizan entre computadoras ni entre distintos navegadores.</li><li>Limpiar los datos del sitio puede eliminar los registros guardados localmente.</li><li>La información de demostración puede variar si ya se usó la aplicación en ese navegador.</li><li>No introduzcas datos personales reales ni información confidencial.</li></ul>
+      </section>
+      <section id="pruebas">
+        <h2>7. Ejecutar las pruebas de validación</h2>
+        <p>Las pruebas incluidas comprueban reglas de validación y algunos cálculos. Abre una terminal en la carpeta raíz del proyecto y ejecuta:</p>
+        <pre><code>node tests/validacion.test.js</code></pre>
+        <p>Si todo funciona correctamente, la terminal mostrará un mensaje indicando que las pruebas de validación pasaron. Si el comando no se reconoce, instala Node.js y abre una terminal nueva.</p>
+      </section>
+      <section id="problemas">
+        <h2>8. Solución de problemas</h2>
+        <h3>La página no carga los estilos</h3><p>Comprueba que no moviste <code>index.html</code> fuera de la carpeta del proyecto y que la carpeta <code>css</code> mantiene su ubicación original.</p>
+        <h3>Los botones o formularios no funcionan</h3><p>Abre las herramientas de desarrollador del navegador con F12 y revisa la pestaña Console. Verifica que la carpeta <code>js</code> esté completa y que los archivos no hayan sido renombrados.</p>
+        <h3>No aparecen los datos que esperaba</h3><p>Comprueba que estás usando el mismo navegador y perfil. Los datos se guardan localmente y no se comparten entre dispositivos.</p>
+        <h3>No puedo entrar con Google</h3><p>El acceso con Google no está habilitado en esta versión. Usa las credenciales de demostración.</p>
+      </section>
+      <section id="limitaciones">
+        <h2>9. Límites de esta versión</h2>
+        <p>Este proyecto es un prototipo frontend para desarrollo y demostración. No incluye todavía un backend conectado a MongoDB Atlas, autenticación institucional real, correo de notificaciones ni integración con Power Campus.</p>
+        <p>Las restricciones de acceso en el navegador no sustituyen permisos verificados en un servidor. Antes de usar el sistema con información institucional, debe implementarse autenticación segura, autorización del lado servidor, almacenamiento centralizado, copias de seguridad y pruebas de seguridad.</p>
+        <div class="actions"><a class="btn" href="index.html">Ir al inicio de la aplicación</a><a class="btn secondary" href="wireframes/wireframes.html">Ver wireframes</a></div>
+      </section>
+    </main>
+  </div>
+  <footer>Guía del proyecto Sistema de Gestión de Cursos CENFOTEC · Documento HTML local · Puede imprimirse o guardarse como PDF desde el navegador.</footer>
+</body>
+</html>

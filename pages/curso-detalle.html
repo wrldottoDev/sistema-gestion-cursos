@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle del curso · Gestión de Cursos CENFOTEC</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="../js/datos.js" defer></script>
+  <script src="../js/validacion.js" defer></script>
+  <script src="../js/curso-detalle.js" defer></script>
+</head>
+<body>
+  <header class="encabezado">
+    <p class="marca">CENFOTEC · Gestión de Cursos</p>
+    <nav class="menu" aria-label="Principal">
+      <a href="usuarios.html" data-rol="Administrador">Usuarios</a>
+      <a href="cursos.html" aria-current="page">Cursos</a>
+    </nav>
+    <p class="encabezado__usuario" id="usuario-actual"></p>
+  </header>
+
+  <main class="contenedor contenedor--detalle">
+    <a class="volver" href="cursos.html">← Volver a cursos</a>
+    <header class="detalle-curso__encabezado">
+      <div>
+        <p class="detalle-curso__codigo">
+          <span id="detalle-codigo">Código del curso</span>
+          <span class="estado estado--borrador" id="detalle-estado">Borrador</span>
+        </p>
+        <h1 id="detalle-nombre">Nombre del curso</h1>
+        <p class="detalle-curso__fecha">
+          <span id="detalle-escuela">—</span> · Última modificación <time id="detalle-ultima-modificacion">—</time>
+        </p>
+      </div>
+      <div class="acciones detalle-curso__acciones">
+        <a class="boton boton--secundario" id="editar-curso" href="curso.html">Editar</a>
+        <button class="boton boton--peligro" id="abrir-dialogo-eliminar" type="button">Eliminar</button>
+      </div>
+    </header>
+
+    <div id="aviso" class="aviso" role="status" hidden></div>
+
+    <!-- Resumen con los datos que más se consultan. -->
+    <dl class="detalle-resumen">
+      <div><dt>Créditos</dt><dd id="detalle-creditos">—</dd></div>
+      <div><dt>Horas totales</dt><dd id="detalle-totalHoras">—</dd><dd class="detalle-resumen__nota" id="desglose-horas"></dd></div>
+      <div><dt>Modalidad</dt><dd id="detalle-modalidad">—</dd></div>
+      <div><dt>Nivel de complejidad</dt><dd id="detalle-nivel">—</dd></div>
+    </dl>
+
+    <div class="detalle-cuerpo tarjeta">
+      <section class="detalle-seccion" id="grupo-identificacion">
+        <h2>Identificación</h2>
+        <dl class="detalle-grid">
+          <div class="detalle-campo"><dt>Nombre en Power Campus</dt><dd id="detalle-nombrePowerCampus">—</dd></div>
+          <div class="detalle-campo"><dt>Código solicitado a Desarrollo Curricular</dt><dd id="detalle-solicitar-codigo">—</dd></div>
+        </dl>
+      </section>
+
+      <section class="detalle-seccion" id="grupo-clasificacion">
+        <h2>Clasificación</h2>
+        <dl class="detalle-grid">
+          <div class="detalle-campo"><dt>Área SFIA</dt><dd id="detalle-areaSfia">—</dd></div>
+          <div class="detalle-campo"><dt>Temática</dt><dd id="detalle-tematica">—</dd></div>
+          <div class="detalle-campo"><dt>Metodología de aprendizaje</dt><dd id="detalle-metodologia">—</dd></div>
+        </dl>
+      </section>
+
+      <section class="detalle-seccion" id="grupo-descripcion">
+        <h2>Descripción</h2>
+        <dl class="detalle-lista">
+          <div class="detalle-campo"><dt>Descripción corta</dt><dd id="detalle-descripcionCorta">—</dd></div>
+          <div class="detalle-campo"><dt>Meta descripción</dt><dd id="detalle-metaDescripcion">—</dd></div>
+          <div class="detalle-campo"><dt>Competencia</dt><dd id="detalle-competencia">—</dd></div>
+          <div class="detalle-campo"><dt>Requisitos indispensables</dt><dd id="detalle-requisitos">—</dd></div>
+          <div class="detalle-campo"><dt>Requisitos deseables</dt><dd id="detalle-requisitosDeseables">—</dd></div>
+          <div class="detalle-campo"><dt>Palabras clave</dt><dd id="detalle-palabrasClave">—</dd></div>
+        </dl>
+      </section>
+
+      <section class="detalle-seccion" id="grupo-contenidos">
+        <h2>Contenidos y perfiles</h2>
+        <dl class="detalle-lista">
+          <div class="detalle-campo"><dt>Capacidades específicas</dt><dd id="detalle-capacidadesEspecificas">—</dd></div>
+          <div class="detalle-campo"><dt>Descripción larga</dt><dd id="detalle-descripcionLarga">—</dd></div>
+          <div class="detalle-campo"><dt>Perfil de ingreso</dt><dd id="detalle-perfilIngreso">—</dd></div>
+          <div class="detalle-campo"><dt>Perfil de salida</dt><dd id="detalle-perfilSalida">—</dd></div>
+        </dl>
+      </section>
+
+      <section class="detalle-seccion" id="grupo-certificacion">
+        <h2>Certificación y programa</h2>
+        <dl class="detalle-grid">
+          <div class="detalle-campo"><dt>Certificación</dt><dd id="detalle-certificacion">—</dd></div>
+          <div class="detalle-campo"><dt>Casa certificadora</dt><dd id="detalle-casaCertificadora">—</dd></div>
+          <div class="detalle-campo"><dt>Pertenece a un programa</dt><dd id="detalle-pertenecePrograma">—</dd></div>
+          <div class="detalle-campo"><dt>Nombre del programa</dt><dd id="detalle-nombrePrograma">—</dd></div>
+        </dl>
+      </section>
+
+      <section class="detalle-seccion" id="grupo-comercial">
+        <h2>Comercial y metadata</h2>
+        <dl class="detalle-grid">
+          <div class="detalle-campo"><dt>E-commerce</dt><dd id="detalle-ecommerce">—</dd></div>
+          <div class="detalle-campo"><dt>Metadata</dt><dd id="detalle-metadata">—</dd></div>
+          <div class="detalle-campo"><dt>Fecha de inicio</dt><dd id="detalle-fechaInicio">—</dd></div>
+          <div class="detalle-campo"><dt>Fecha de fin</dt><dd id="detalle-fechaFin">—</dd></div>
+          <div class="detalle-campo"><dt>Fecha de modificación de la metadata</dt><dd id="detalle-fechaModificacionMetadata">—</dd></div>
+        </dl>
+      </section>
+    </div>
+
+    <dialog class="dialogo-confirmacion" id="dialogo-eliminar-curso" aria-labelledby="titulo-dialogo-eliminar">
+      <form method="dialog" class="dialogo-confirmacion__contenido">
+        <h2 id="titulo-dialogo-eliminar">¿Inactivar este curso?</h2>
+        <p id="mensaje-eliminar-curso">El curso pasará al estado Inactivo. No se eliminará del sistema.</p>
+        <div class="acciones">
+          <button class="boton boton--secundario" value="cancelar">Cancelar</button>
+          <button class="boton boton--peligro" id="confirmar-eliminar-curso" value="confirmar">Sí, inactivar curso</button>
+        </div>
+      </form>
+    </dialog>
+  </main>
+  <footer class="pie">Universidad CENFOTEC · Proyecto Integrador I · 2026</footer>
+</body>
+</html>
