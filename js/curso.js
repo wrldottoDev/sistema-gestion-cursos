@@ -11,10 +11,17 @@ const CAMPOS_TEXTO = ['codigo', 'nombre', 'nombrePowerCampus', 'areaSfia', 'tema
   'competencia', 'requisitos', 'requisitosDeseables', 'palabrasClave', 'casaCertificadora', 'nombrePrograma',
   'ecommerce', 'fechaInicio', 'fechaFin', 'metadata', 'fechaModificacionMetadata'];
 
-// RF-030: un curso enviado (En desarrollo o posterior) ya no lo edita el Director.
-if (cursoExistente && cursoExistente.estado !== 'Borrador') {
-  dejarAviso(`El curso ${cursoExistente.codigo || cursoExistente.nombre} ya fue enviado y no se puede editar.`);
+// RF-009: un curso de otra escuela (o que no existe) no abre el formulario.
+if (idCurso && !cursoExistente) {
+  dejarAviso('No tiene acceso a ese curso o no existe.', 'error');
   location.replace('cursos.html');
+  throw new Error('Curso no disponible');
+}
+
+// RF-019 CA4: un curso En desarrollo o posterior el Director lo ve en solo lectura (detalle).
+if (cursoExistente && cursoExistente.estado !== 'Borrador') {
+  dejarAviso(`El curso ${cursoExistente.codigo || cursoExistente.nombre} está ${cursoExistente.estado} y ya no se puede editar.`);
+  location.replace(`curso-detalle.html?id=${encodeURIComponent(idCurso)}`);
   throw new Error('Curso no editable');
 }
 
