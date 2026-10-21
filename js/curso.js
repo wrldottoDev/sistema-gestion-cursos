@@ -8,7 +8,7 @@ const listaCursos = leer(CLAVES.cursos);
 const cursoExistente = listaCursos.find(c => c.id === idCurso && c.escuela === sesionCurso.escuela);
 const CAMPOS_TEXTO = ['codigo', 'nombre', 'nombrePowerCampus', 'areaSfia', 'tematica', 'metodologia', 'nivel',
   'certificacion', 'creditos', 'horasClase', 'horasExtra', 'descripcionCorta', 'metaDescripcion',
-  'competencia', 'requisitos', 'requisitosDeseables', 'palabrasClave'];
+  'competencia', 'requisitos', 'requisitosDeseables', 'palabrasClave', 'casaCertificadora', 'nombrePrograma'];
 
 // RF-030: un curso enviado (En desarrollo o posterior) ya no lo edita el Director.
 if (cursoExistente && cursoExistente.estado !== 'Borrador') {
@@ -28,6 +28,7 @@ llenarSelect(camposCurso.tematica, TEMATICAS);
 llenarSelect(camposCurso.metodologia, METODOLOGIAS);
 llenarSelect(camposCurso.nivel, NIVELES);
 llenarSelect(camposCurso.certificacion, CERTIFICACIONES);
+llenarSelect(camposCurso.casaCertificadora, CASAS_CERTIFICADORAS);
 document.getElementById('opciones-modalidad').innerHTML = MODALIDADES.map(m =>
   `<label><input type="radio" name="modalidad" value="${m}" aria-describedby="error-modalidad"> ${m}</label>`
 ).join('');
@@ -61,6 +62,10 @@ const reglasCurso = {
   requisitos: v => paraEnvio(v, 'Ingrese los requisitos indispensables.'),
   requisitosDeseables: v => paraEnvio(v, 'Ingrese los requisitos deseables.'),
   palabrasClave: v => paraEnvio(v, 'Ingrese al menos una palabra clave.'),
+  // RF-025 (RN-25): casa certificadora si el curso tiene certificación; nombre del programa si pertenece a uno.
+  casaCertificadora: v => (['', 'No tiene'].includes(camposCurso.certificacion.value)
+    ? '' : paraEnvio(v, 'Seleccione la casa certificadora.')),
+  nombrePrograma: v => (camposCurso.pertenecePrograma.checked ? paraEnvio(v, 'Ingrese el nombre del programa.') : ''),
 };
 
 // RF-040 / RNF-034: contador dinámico de caracteres.
@@ -81,7 +86,13 @@ if (cursoExistente) {
   CAMPOS_TEXTO.forEach(c => (camposCurso[c].value = cursoExistente[c] ?? ''));
   camposCurso.palabrasClave.value = [].concat(cursoExistente.palabrasClave ?? []).join(', ');
   camposCurso.solicitarCodigo.checked = Boolean(cursoExistente.solicitarCodigo);
+  camposCurso.pertenecePrograma.checked = Boolean(cursoExistente.pertenecePrograma);
   camposCurso.modalidad.value = cursoExistente.modalidad ?? '';
+}
+
+// RF-025: el nombre del programa solo se habilita si el curso pertenece a uno.
+function actualizarPrograma() {
+  camposCurso.nombrePrograma.disabled = !camposCurso.pertenecePrograma.checked;
 }
 
 ['nombrePowerCampus', 'descripcionCorta', 'metaDescripcion'].forEach(nombre => {
@@ -92,7 +103,13 @@ camposCurso.horasClase.addEventListener('input', actualizarTotal);
 camposCurso.horasExtra.addEventListener('input', actualizarTotal);
 camposCurso.codigo.addEventListener('input', e => (e.target.value = e.target.value.toUpperCase()));
 camposCurso.solicitarCodigo.addEventListener('change', () => validarCampo(formCurso, reglasCurso, 'codigo'));
+camposCurso.certificacion.addEventListener('change', () => validarCampo(formCurso, reglasCurso, 'casaCertificadora'));
+camposCurso.pertenecePrograma.addEventListener('change', () => {
+  actualizarPrograma();
+  validarCampo(formCurso, reglasCurso, 'nombrePrograma');
+});
 actualizarTotal();
+actualizarPrograma();
 activarValidacionEnVivo(formCurso, reglasCurso);
 
 formCurso.addEventListener('submit', evento => {
@@ -105,6 +122,8 @@ formCurso.addEventListener('submit', evento => {
   CAMPOS_TEXTO.forEach(c => (curso[c] = camposCurso[c].value.trim()));
   curso.codigo = curso.codigo.toUpperCase();
   curso.solicitarCodigo = camposCurso.solicitarCodigo.checked;
+  curso.pertenecePrograma = camposCurso.pertenecePrograma.checked;
+  if (!curso.pertenecePrograma) curso.nombrePrograma = '';
   curso.palabrasClave = separarPalabrasClave(curso.palabrasClave); // RF-023: etiquetas sin repetir
   curso.modalidad = camposCurso.modalidad.value;
   curso.totalHoras = totalHoras(curso.horasClase, curso.horasExtra);

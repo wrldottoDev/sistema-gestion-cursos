@@ -197,7 +197,8 @@
           </div>
           <div class="campo">
             <label for="casaCertificadora">Casa certificadora</label>
-            <input id="casaCertificadora" name="casaCertificadora" type="text" aria-describedby="error-casaCertificadora">
+            <select id="casaCertificadora" name="casaCertificadora" aria-describedby="ayuda-casaCertificadora error-casaCertificadora"></select>
+            <p class="campo__ayuda" id="ayuda-casaCertificadora">Obligatoria si el curso tiene certificación.</p>
             <p class="campo__error" id="error-casaCertificadora" aria-live="polite"></p>
           </div>
           <div class="campo campo--checkbox">
@@ -207,7 +208,8 @@
           </div>
           <div class="campo campo--ancho">
             <label for="nombrePrograma">Nombre del programa</label>
-            <input id="nombrePrograma" name="nombrePrograma" type="text" aria-describedby="error-nombrePrograma">
+            <input id="nombrePrograma" name="nombrePrograma" type="text" disabled aria-describedby="ayuda-nombrePrograma error-nombrePrograma">
+            <p class="campo__ayuda" id="ayuda-nombrePrograma">Se habilita al marcar "Pertenece a un programa".</p>
             <p class="campo__error" id="error-nombrePrograma" aria-live="polite"></p>
           </div>
         </div>
