@@ -103,6 +103,9 @@ if (cursoExistente) {
   camposCurso.solicitarCodigo.checked = Boolean(cursoExistente.solicitarCodigo);
   camposCurso.pertenecePrograma.checked = Boolean(cursoExistente.pertenecePrograma);
   camposCurso.modalidad.value = cursoExistente.modalidad ?? '';
+  const guardado = document.getElementById('guardado');
+  guardado.textContent = `Guardado ${fechaHora(cursoExistente.ultimaModificacion)}`;
+  guardado.hidden = false;
 }
 
 // RF-025: el nombre del programa solo se habilita si el curso pertenece a uno.
@@ -138,11 +141,45 @@ actualizarPrograma();
 actualizarEcommerce();
 activarValidacionEnVivo(formCurso, reglasCurso);
 
+// Índice de secciones: con las mismas reglas del envío cuenta lo que falta en cada sección (RF-019).
+const primerControl = nombre => {
+  const control = camposCurso[nombre];
+  return control instanceof RadioNodeList ? control[0] : control;
+};
+
+function actualizarIndice() {
+  const modoAnterior = modoEnvio;
+  modoEnvio = true;
+  const nombres = Object.keys(reglasCurso);
+  const listo = nombre => !reglasCurso[nombre](valorCampo(formCurso, nombre), formCurso);
+  document.querySelectorAll('[data-grupo]').forEach(marca => {
+    const grupo = document.getElementById(marca.dataset.grupo);
+    const propios = nombres.filter(n => grupo.contains(primerControl(n)));
+    const errores = grupo.querySelectorAll('.campo--error').length;
+    const pendientes = propios.filter(n => !listo(n)).length;
+    marca.className = errores ? 'indice--error' : propios.length && !pendientes ? 'indice--listo' : '';
+    marca.textContent = errores ? `${errores} error(es)`
+      : pendientes ? `${pendientes} pendiente(s)` : propios.length ? 'Listo' : 'Opcional';
+  });
+  const listos = nombres.filter(listo).length;
+  const progreso = document.getElementById('progreso-curso');
+  progreso.max = nombres.length;
+  progreso.value = listos;
+  document.getElementById('progreso-texto').textContent = `${listos} de ${nombres.length} campos listos para enviar`;
+  modoEnvio = modoAnterior;
+}
+
+['input', 'change', 'focusout'].forEach(evento => formCurso.addEventListener(evento, actualizarIndice));
+actualizarIndice();
+
 formCurso.addEventListener('submit', evento => {
   evento.preventDefault();
   modoEnvio = evento.submitter?.value === 'enviar';
   const valido = validarFormulario(formCurso, reglasCurso);
-  if (!valido) return;
+  if (!valido) {
+    actualizarIndice();
+    return;
+  }
 
   const curso = { ...cursoExistente, id: cursoExistente?.id ?? crypto.randomUUID(), escuela: sesionCurso.escuela };
   CAMPOS_TEXTO.forEach(c => (curso[c] = camposCurso[c].value.trim()));
