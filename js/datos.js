@@ -17,7 +17,7 @@ const CLASE_ESTADO = { 'Borrador': 'borrador', 'En desarrollo': 'desarrollo', 'A
 // campos: qué pide el formulario · codigoAuto: el sistema numera el código · usoEnCurso: campo del curso que guarda el nombre.
 const CATALOGOS = {
   escuelas: {
-    titulo: 'Escuelas', singular: 'escuela', grupo: 'Estructura académica', campos: ['codigo', 'nombre', 'director'],
+    titulo: 'Escuelas', singular: 'escuela', campos: ['codigo', 'nombre', 'director'],
     semilla: [
       { codigo: 'ESC-01', nombre: 'Escuela de Ingeniería del Software', director: '' },
       { codigo: 'ESC-02', nombre: 'Escuela de Ciberseguridad', director: '' },
@@ -26,7 +26,7 @@ const CATALOGOS = {
     ],
   },
   carreras: {
-    titulo: 'Carreras', singular: 'carrera', grupo: 'Estructura académica', campos: ['codigo', 'nombre', 'escuela'],
+    titulo: 'Carreras', singular: 'carrera', campos: ['codigo', 'nombre', 'escuela'],
     semilla: [
       { codigo: 'CAR-01', nombre: 'Ingeniería del Software', escuela: 'ESC-01' },
       { codigo: 'CAR-02', nombre: 'Ciberseguridad', escuela: 'ESC-02' },
@@ -35,17 +35,17 @@ const CATALOGOS = {
     ],
   },
   areasSfia: {
-    titulo: 'Áreas SFIA', singular: 'área SFIA', grupo: 'Clasificación', campos: ['nombre', 'descripcion'], codigoAuto: true, usoEnCurso: 'areaSfia',
+    titulo: 'Áreas SFIA', singular: 'área SFIA', campos: ['nombre', 'descripcion'], codigoAuto: true, usoEnCurso: 'areaSfia',
     semilla: ['Desarrollo de software', 'Infraestructura y redes', 'Seguridad informática',
       'Datos e inteligencia artificial', 'Diseño digital'].map((nombre, i) => ({ codigo: String(i + 1), nombre, descripcion: '' })),
   },
   tematicas: {
-    titulo: 'Temáticas', singular: 'temática', grupo: 'Clasificación', campos: ['nombre', 'descripcion'], codigoAuto: true, usoEnCurso: 'tematica',
+    titulo: 'Temáticas', singular: 'temática', campos: ['nombre', 'descripcion'], codigoAuto: true, usoEnCurso: 'tematica',
     semilla: ['Programación web', 'Bases de datos', 'Computación en la nube', 'Ciberseguridad ofensiva',
       'Experiencia de usuario'].map((nombre, i) => ({ codigo: String(i + 1), nombre, descripcion: '' })),
   },
   metodologias: {
-    titulo: 'Metodologías de aprendizaje', singular: 'metodología', grupo: 'Clasificación', campos: ['codigo', 'nombre', 'descripcion'],
+    titulo: 'Metodologías de aprendizaje', singular: 'metodología', campos: ['codigo', 'nombre', 'descripcion'],
     descripcionObligatoria: true, usoEnCurso: 'metodologia',
     semilla: [
       { codigo: 'MET-01', nombre: 'Aprendizaje basado en proyectos', descripcion: 'El estudiante aprende desarrollando un proyecto.' },
@@ -55,7 +55,7 @@ const CATALOGOS = {
     ],
   },
   casasCertificadoras: {
-    titulo: 'Casas certificadoras', singular: 'casa certificadora', grupo: 'Certificación', campos: ['codigo', 'nombre'],
+    titulo: 'Casas certificadoras', singular: 'casa certificadora', campos: ['codigo', 'nombre'],
     usoEnCurso: 'casaCertificadora',
     semilla: [
       { codigo: 'AWS', nombre: 'Amazon Web Services' },
@@ -64,7 +64,7 @@ const CATALOGOS = {
     ],
   },
   certificaciones: {
-    titulo: 'Certificaciones', singular: 'certificación', grupo: 'Certificación', campos: ['nombre'], codigoAuto: true, usoEnCurso: 'certificacion',
+    titulo: 'Certificaciones', singular: 'certificación', campos: ['nombre'], codigoAuto: true, usoEnCurso: 'certificacion',
     semilla: ['No tiene', 'AWS Certified Cloud Practitioner', 'Cisco CCNA', 'CompTIA Security+']
       .map((nombre, i) => ({ codigo: String(i + 1), nombre })),
   },
