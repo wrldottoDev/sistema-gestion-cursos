@@ -5,11 +5,12 @@
    Convención de clases: BEM en español (bloque__elemento--modificador)
    ========================================================== */
 
-/* 1. Variables (guía de estilo) */
+/* 1. Variables (guía de estilo)
+   RNF-055: colores del Libro de marca CENFOTEC (azul primario #164a98, azul #006aea, secundario #ffc63e). */
 :root {
-  --color-primario: #003366;
-  --color-primario-hover: #00264d;
-  --color-acento: #f39200;
+  --color-primario: #164a98;
+  --color-primario-hover: #0f3672;
+  --color-acento: #ffc63e;
   --color-fondo: #f4f6f9;
   --color-superficie: #ffffff;
   --color-texto: #1f2933;
@@ -19,7 +20,7 @@
   --color-error-fondo: #fdecea;
   --color-exito: #1e7b34;
   --color-exito-fondo: #e6f4ea;
-  --color-foco: #f39200;
+  --color-foco: #006aea;
 
   --fuente: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
   --texto-base: 1rem;
@@ -83,7 +84,23 @@ a {
 }
 
 .encabezado .marca {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
   color: #fff;
+}
+
+/* Logo blanco sobre el azul primario, como indica el libro de marca. */
+.encabezado .marca::before {
+  content: "";
+  width: 91px;
+  height: 40px;
+  background: url("../img/logo-horizontal-blanco.png") center / contain no-repeat;
+}
+
+/* Sobre el azul, el foco usa el color secundario para que contraste. */
+.encabezado :focus-visible {
+  outline-color: var(--color-acento);
 }
 
 .encabezado__usuario {
@@ -304,6 +321,13 @@ a {
   text-align: center;
 }
 
+.login__logo {
+  display: block;
+  width: 200px;
+  height: auto;
+  margin: 0 auto var(--espacio-3);
+}
+
 /* 5. Formularios y validación */
 .formulario {
   display: grid;
@@ -483,5 +507,45 @@ a {
 
   h1 {
     font-size: 1.5rem;
+  }
+}
+
+/* 9. Usuarios (Otoniel) */
+.filtros-usuarios {
+  display: grid;
+  gap: 0 var(--espacio-3);
+  align-items: center;
+  margin-bottom: var(--espacio-3);
+}
+
+/* Con la columna de acciones la tabla no cabe: los datos hacen salto de línea, las acciones no. */
+.tabla--usuarios td {
+  white-space: normal;
+}
+
+.tabla--usuarios td:last-child {
+  white-space: nowrap;
+}
+
+/* Botón con aspecto de enlace para acciones dentro de tablas (mismo estilo que Catálogos). */
+.boton-enlace {
+  margin-left: var(--espacio-3);
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  color: var(--color-primario);
+}
+
+.boton-enlace--peligro {
+  color: var(--color-error);
+}
+
+@media (min-width: 768px) {
+  .filtros-usuarios {
+    grid-template-columns: 2fr 1fr auto;
   }
 }

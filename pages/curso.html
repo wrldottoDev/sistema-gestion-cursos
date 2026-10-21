@@ -39,8 +39,11 @@
             <label for="codigo">Código del curso <span class="obligatorio" aria-hidden="true">*</span></label>
             <input id="codigo" name="codigo" type="text" required placeholder="Ej.: SOFT-101"
                    aria-describedby="ayuda-codigo error-codigo">
-            <p class="campo__ayuda" id="ayuda-codigo">Formato provisional LETRAS-NÚMEROS.</p>
+            <p class="campo__ayuda" id="ayuda-codigo">Formato PREFIJO-NÚMERO, por ejemplo SOFT-101.</p>
             <p class="campo__error" id="error-codigo" aria-live="polite"></p>
+          </div>
+          <div class="campo campo--opciones">
+            <label><input type="checkbox" id="solicitarCodigo" name="solicitarCodigo"> Solicitar código a Desarrollo Curricular</label>
           </div>
           <div class="campo">
             <label for="nombre">Nombre del curso <span class="obligatorio" aria-hidden="true">*</span></label>
@@ -61,9 +64,9 @@
         <legend>Clasificación</legend>
         <div class="rejilla">
           <div class="campo">
-            <label for="areaSefia">Área SEFIA <span class="obligatorio" aria-hidden="true">*</span></label>
-            <select id="areaSefia" name="areaSefia" aria-describedby="error-areaSefia"></select>
-            <p class="campo__error" id="error-areaSefia" aria-live="polite"></p>
+            <label for="areaSfia">Área SFIA (opcional)</label>
+            <select id="areaSfia" name="areaSfia" aria-describedby="error-areaSfia"></select>
+            <p class="campo__error" id="error-areaSfia" aria-live="polite"></p>
           </div>
           <div class="campo">
             <label for="tematica">Temática <span class="obligatorio" aria-hidden="true">*</span></label>
@@ -146,6 +149,11 @@
           <label for="requisitos">Requisitos indispensables <span class="obligatorio" aria-hidden="true">*</span></label>
           <textarea id="requisitos" name="requisitos" rows="2" aria-describedby="error-requisitos"></textarea>
           <p class="campo__error" id="error-requisitos" aria-live="polite"></p>
+        </div>
+        <div class="campo">
+          <label for="requisitosDeseables">Requisitos deseables <span class="obligatorio" aria-hidden="true">*</span></label>
+          <textarea id="requisitosDeseables" name="requisitosDeseables" rows="2" aria-describedby="error-requisitosDeseables"></textarea>
+          <p class="campo__error" id="error-requisitosDeseables" aria-live="polite"></p>
         </div>
         <div class="campo">
           <label for="palabrasClave">Palabras clave <span class="obligatorio" aria-hidden="true">*</span></label>
