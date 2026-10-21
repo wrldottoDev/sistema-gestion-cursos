@@ -6,6 +6,8 @@
   <title>Detalle del curso · Gestión de Cursos CENFOTEC</title>
   <link rel="stylesheet" href="../css/styles.css">
   <script src="../js/datos.js" defer></script>
+  <script src="../js/validacion.js" defer></script>
+  <script src="../js/curso-detalle.js" defer></script>
 </head>
 <body>
   <header class="encabezado">
@@ -49,7 +51,7 @@
     <section class="detalle-seccion tarjeta" id="grupo-clasificacion">
       <h2>Clasificación</h2>
       <dl class="detalle-grid">
-        <div class="detalle-campo"><dt>Área SFIA</dt><dd id="detalle-areaSefia">—</dd></div>
+        <div class="detalle-campo"><dt>Área SFIA</dt><dd id="detalle-areaSfia">—</dd></div>
         <div class="detalle-campo"><dt>Temática</dt><dd id="detalle-tematica">—</dd></div>
         <div class="detalle-campo"><dt>Metodología de aprendizaje</dt><dd id="detalle-metodologia">—</dd></div>
         <div class="detalle-campo"><dt>Nivel de complejidad</dt><dd id="detalle-nivel">—</dd></div>
@@ -113,7 +115,7 @@
     <dialog class="dialogo-confirmacion" id="dialogo-eliminar-curso" aria-labelledby="titulo-dialogo-eliminar">
       <form method="dialog" class="dialogo-confirmacion__contenido">
         <h2 id="titulo-dialogo-eliminar">¿Inactivar este curso?</h2>
-        <p>El curso pasará al estado Inactivo. No se eliminará del sistema.</p>
+        <p id="mensaje-eliminar-curso">El curso pasará al estado Inactivo. No se eliminará del sistema.</p>
         <div class="acciones">
           <button class="boton boton--secundario" value="cancelar">Cancelar</button>
           <button class="boton boton--peligro" id="confirmar-eliminar-curso" value="confirmar">Sí, inactivar curso</button>

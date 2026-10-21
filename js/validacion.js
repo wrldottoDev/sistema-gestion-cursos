@@ -155,17 +155,17 @@ function activarValidacionEnVivo(form, reglas) {
 }
 
 // Mensajes de confirmación entre páginas (RNF-032).
-function dejarAviso(texto) {
-  sessionStorage.setItem(CLAVES.aviso, texto);
+function dejarAviso(texto, tipo = 'exito') {
+  sessionStorage.setItem(CLAVES.aviso, JSON.stringify({ texto, tipo }));
 }
 
 function mostrarAviso(texto, tipo = 'exito') {
   const aviso = document.getElementById('aviso');
-  const pendiente = texto ?? sessionStorage.getItem(CLAVES.aviso);
+  const guardado = texto ? { texto, tipo } : JSON.parse(sessionStorage.getItem(CLAVES.aviso) ?? 'null');
   sessionStorage.removeItem(CLAVES.aviso);
-  if (!aviso || !pendiente) return;
-  aviso.textContent = pendiente;
-  aviso.className = `aviso aviso--${tipo}`;
+  if (!aviso || !guardado?.texto) return;
+  aviso.textContent = guardado.texto;
+  aviso.className = `aviso aviso--${guardado.tipo}`;
   aviso.hidden = false;
 }
 
