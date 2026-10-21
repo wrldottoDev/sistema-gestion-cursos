@@ -88,6 +88,16 @@ function normalizar(texto) {
   return String(texto ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
 }
 
+// RF-041: búsqueda por código o nombre y filtros por escuela y estado.
+// RF-035: sin estado elegido se muestran los activos (los Inactivo solo con su filtro).
+function filtrarCursos(cursos, { texto = '', escuela = '', estado = '' } = {}) {
+  const buscado = normalizar(texto);
+  return cursos.filter(c =>
+    normalizar(`${c.codigo ?? ''} ${c.nombre ?? ''}`).includes(buscado) &&
+    (!escuela || c.escuela === escuela) &&
+    (estado ? c.estado === estado : c.estado !== 'Inactivo'));
+}
+
 // RF-023: palabras clave separadas por coma, sin vacías ni repetidas (se conserva la primera forma escrita).
 function separarPalabrasClave(texto) {
   const unicas = new Map();
@@ -163,5 +173,6 @@ if (typeof module !== 'undefined') {
   module.exports = {
     obligatorio, validarNombre, validarCorreo, validarContrasena, validarIdentificacion, validarCelular,
     calcularEdad, validarFechaNacimiento, validarLongitudMax, validarEntero, validarCodigoCurso, totalHoras, normalizar, separarPalabrasClave,
+    filtrarCursos,
   };
 }

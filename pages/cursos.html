@@ -30,13 +30,14 @@
 
     <div id="aviso" class="aviso" role="status" hidden></div>
 
-    <section class="filtros-cursos tarjeta" aria-label="Filtros de cursos">
+    <form id="filtros-cursos" class="filtros-cursos tarjeta" role="search" aria-label="Filtros de cursos">
       <div class="campo">
         <label for="filtro-busqueda">Buscar por código o nombre</label>
         <input id="filtro-busqueda" name="busqueda" type="search" placeholder="Ej.: SOFT-101 o Programación">
         <p class="campo__error" id="error-filtro-busqueda" aria-live="polite"></p>
       </div>
-      <div class="campo">
+      <!-- RF-041 CA3: el Director no filtra por escuela (solo ve la suya). -->
+      <div class="campo" data-rol="Administrador,Desarrollo Curricular,Rectoría,Vicerrectoría">
         <label for="filtro-escuela">Escuela</label>
         <select id="filtro-escuela" name="escuela">
           <option value="">Todas las escuelas</option>
@@ -46,7 +47,7 @@
       <div class="campo">
         <label for="filtro-estado">Estado</label>
         <select id="filtro-estado" name="estado">
-          <option value="">Todos</option>
+          <option value="">Activos</option>
           <option value="Borrador">Borrador</option>
           <option value="En desarrollo">En desarrollo</option>
           <option value="Aprobado">Aprobado</option>
@@ -60,7 +61,7 @@
         <button class="boton boton--secundario" id="limpiar-filtros" type="button">Limpiar filtros</button>
         <p class="campo__error" aria-hidden="true"></p>
       </div>
-    </section>
+    </form>
 
     <p class="texto-secundario resultados-cursos" id="resumen-cursos" aria-live="polite"></p>
     <div class="tabla-contenedor">
