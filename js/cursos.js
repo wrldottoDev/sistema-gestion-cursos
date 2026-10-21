@@ -7,7 +7,7 @@ const cursos = leer(CLAVES.cursos).filter(c => !esDirectorCursos || c.escuela ==
 const cuerpoCursos = document.getElementById('lista-cursos');
 const filtrosCursos = document.getElementById('filtros-cursos');
 
-ESCUELAS.forEach(e => filtrosCursos.escuela.add(new Option(e.nombre, e.codigo)));
+leerCatalogo('escuelas').forEach(e => filtrosCursos.escuela.add(new Option(e.nombre, e.codigo)));
 const puedeEliminar = ['Administrador', 'Desarrollo Curricular'].includes(sesionCursos.rol); // RF-035 CA4
 const plantillaFila = document.getElementById('plantilla-fila-curso');
 

@@ -31,12 +31,13 @@ function llenarSelect(select, opciones) {
 }
 
 camposCurso.escuela.add(new Option(nombreEscuela(sesionCurso.escuela), sesionCurso.escuela));
-llenarSelect(camposCurso.areaSfia, AREAS_SEFIA);
-llenarSelect(camposCurso.tematica, TEMATICAS);
-llenarSelect(camposCurso.metodologia, METODOLOGIAS);
+// RF-020 (SGC-94): las opciones salen de los catálogos administrados.
+llenarSelect(camposCurso.areaSfia, nombresDe('areasSfia'));
+llenarSelect(camposCurso.tematica, nombresDe('tematicas'));
+llenarSelect(camposCurso.metodologia, nombresDe('metodologias'));
 llenarSelect(camposCurso.nivel, NIVELES);
-llenarSelect(camposCurso.certificacion, CERTIFICACIONES);
-llenarSelect(camposCurso.casaCertificadora, CASAS_CERTIFICADORAS);
+llenarSelect(camposCurso.certificacion, nombresDe('certificaciones'));
+llenarSelect(camposCurso.casaCertificadora, nombresDe('casasCertificadoras'));
 document.getElementById('opciones-modalidad').innerHTML = MODALIDADES.map(m =>
   `<label><input type="radio" name="modalidad" value="${m}" aria-describedby="error-modalidad"> ${m}</label>`
 ).join('');
