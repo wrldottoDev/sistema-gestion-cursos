@@ -23,5 +23,5 @@ formLogin.addEventListener('submit', async evento => {
     return;
   }
   iniciarSesion(usuario);
-  location.href = usuario.rol === 'Administrador' ? 'pages/usuarios.html' : 'pages/cursos.html';
+  location.href = 'pages/inicio.html'; // RF-008: todos los roles empiezan en su inicio
 });
