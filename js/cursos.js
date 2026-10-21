@@ -1,5 +1,6 @@
 const sesionCursos = exigirSesion();
 mostrarAviso();
+escucharNotificaciones(sesionCursos); // RF-037: Desarrollo Curricular recibe los envíos también aquí
 
 const esDirectorCursos = sesionCursos.rol === 'Director de Escuela';
 // RF-011: el Director solo ve los cursos de su escuela.

@@ -201,6 +201,7 @@ formCurso.addEventListener('submit', evento => {
   guardar(CLAVES.cursos, cursoExistente
     ? listaCursos.map(c => (c.id === curso.id ? curso : c))
     : [...listaCursos, curso]);
+  if (modoEnvio) avisarCursoEnviado(curso); // RF-037
   const nombreAviso = curso.codigo || curso.nombre;
   dejarAviso(modoEnvio ? `Curso ${nombreAviso} enviado a Desarrollo Curricular.` : `Borrador de ${nombreAviso} guardado.`);
   location.href = 'cursos.html';

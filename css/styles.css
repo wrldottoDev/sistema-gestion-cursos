@@ -692,6 +692,11 @@ a {
   color: var(--color-texto-secundario);
 }
 
+.notificaciones .notificaciones__estado {
+  font-weight: 600;
+  color: var(--color-texto);
+}
+
 .catalogos {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
