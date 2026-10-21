@@ -231,7 +231,9 @@ a {
   width: 100%;
 }
 
+/* position: relative recorta también los .solo-lector (absolutos) de la tabla al hacer scroll. */
 .tabla-contenedor {
+  position: relative;
   overflow-x: auto;
   background: var(--color-superficie);
   border: 1px solid var(--color-borde);
@@ -682,6 +684,7 @@ a {
 
 /* Pestañas de estado: radios con aspecto de pestaña (el JS lee form.elements.estado.value). */
 .pestanas-estado {
+  min-width: 0; /* un fieldset no se encoge por defecto */
   display: flex;
   gap: var(--espacio-4);
   margin: var(--espacio-3) 0;
