@@ -19,6 +19,8 @@ const MODALIDADES = ['Presencial', 'Virtual sincrónica', 'Virtual asincrónica'
 const CERTIFICACIONES = ['No tiene', 'AWS Certified Cloud Practitioner', 'Cisco CCNA', 'CompTIA Security+'];
 // RF-025: valores iniciales; con SGC-73 pasan al catálogo de Casas certificadoras.
 const CASAS_CERTIFICADORAS = ['Amazon Web Services', 'Cisco', 'CompTIA'];
+// Clase de color de cada estado (RN-09, RN-11, RN-12).
+const CLASE_ESTADO = { 'Borrador': 'borrador', 'En desarrollo': 'desarrollo', 'Aprobado': 'aprobado', 'En producción': 'produccion', 'Inactivo': 'inactivo' };
 
 function leer(clave) {
   try {

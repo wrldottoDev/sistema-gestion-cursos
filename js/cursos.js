@@ -6,8 +6,6 @@ const esDirectorCursos = sesionCursos.rol === 'Director de Escuela';
 const cursos = leer(CLAVES.cursos).filter(c => !esDirectorCursos || c.escuela === sesionCursos.escuela);
 const cuerpoCursos = document.getElementById('lista-cursos');
 const filtrosCursos = document.getElementById('filtros-cursos');
-// Clase de color de cada estado (RN-09, RN-11, RN-12).
-const CLASE_ESTADO = { 'Borrador': 'borrador', 'En desarrollo': 'desarrollo', 'Aprobado': 'aprobado', 'En producción': 'produccion', 'Inactivo': 'inactivo' };
 
 ESCUELAS.forEach(e => filtrosCursos.escuela.add(new Option(e.nombre, e.codigo)));
 const puedeEliminar = ['Administrador', 'Desarrollo Curricular'].includes(sesionCursos.rol); // RF-035 CA4
