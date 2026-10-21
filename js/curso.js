@@ -9,7 +9,8 @@ const cursoExistente = listaCursos.find(c => c.id === idCurso && c.escuela === s
 const CAMPOS_TEXTO = ['codigo', 'nombre', 'nombrePowerCampus', 'areaSfia', 'tematica', 'metodologia', 'nivel',
   'certificacion', 'creditos', 'horasClase', 'horasExtra', 'descripcionCorta', 'metaDescripcion',
   'competencia', 'requisitos', 'requisitosDeseables', 'palabrasClave', 'casaCertificadora', 'nombrePrograma',
-  'ecommerce', 'fechaInicio', 'fechaFin', 'metadata', 'fechaModificacionMetadata'];
+  'ecommerce', 'fechaInicio', 'fechaFin', 'metadata', 'fechaModificacionMetadata',
+  'capacidadesEspecificas', 'descripcionLarga', 'perfilIngreso', 'perfilSalida'];
 
 // RF-009: un curso de otra escuela (o que no existe) no abre el formulario.
 if (idCurso && !cursoExistente) {
@@ -72,6 +73,11 @@ const reglasCurso = {
   requisitos: v => paraEnvio(v, 'Ingrese los requisitos indispensables.'),
   requisitosDeseables: v => paraEnvio(v, 'Ingrese los requisitos deseables.'),
   palabrasClave: v => paraEnvio(v, 'Ingrese al menos una palabra clave.'),
+  // RF-024 (SGC-114): contenidos y perfiles, obligatorios al enviar.
+  capacidadesEspecificas: v => paraEnvio(v, 'Ingrese las capacidades específicas.'),
+  descripcionLarga: v => paraEnvio(v, 'Ingrese la descripción larga.'),
+  perfilIngreso: v => paraEnvio(v, 'Ingrese el perfil de ingreso.'),
+  perfilSalida: v => paraEnvio(v, 'Ingrese el perfil de salida.'),
   // RF-025 (RN-25): casa certificadora si el curso tiene certificación; nombre del programa si pertenece a uno.
   casaCertificadora: v => (['', 'No tiene'].includes(camposCurso.certificacion.value)
     ? '' : paraEnvio(v, 'Seleccione la casa certificadora.')),
