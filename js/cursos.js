@@ -15,13 +15,14 @@ function filaCurso(c) {
   const fila = plantillaFila.content.firstElementChild.cloneNode(true);
   const campo = nombre => fila.querySelector(`[data-campo="${nombre}"]`);
   campo('codigo').textContent = c.codigo || 'Por asignar';
+  campo('codigo').classList.toggle('codigo--pendiente', !c.codigo);
   const enlace = campo('nombre').firstElementChild;
   enlace.textContent = c.nombre;
   enlace.href = `curso-detalle.html?id=${encodeURIComponent(c.id)}`;
   campo('escuela').textContent = nombreEscuela(c.escuela);
   campo('estado').textContent = c.estado;
   campo('estado').classList.add(`estado--${CLASE_ESTADO[c.estado] ?? 'borrador'}`);
-  campo('ultimaModificacion').textContent = new Date(c.ultimaModificacion).toLocaleString('es-CR');
+  campo('ultimaModificacion').textContent = fechaHora(c.ultimaModificacion);
 
   // Solo los borradores se editan, y solo el Director (RF-019).
   const editar = fila.querySelector('[data-accion="editar"]');
@@ -42,23 +43,26 @@ function filaCurso(c) {
 
 // RF-041: búsqueda y filtros; del más reciente al más antiguo.
 function mostrarCursos() {
-  const visibles = filtrarCursos(cursos, {
-    texto: filtrosCursos.busqueda.value,
-    escuela: filtrosCursos.escuela.value,
-    estado: filtrosCursos.estado.value,
-  }).sort((a, b) => b.ultimaModificacion.localeCompare(a.ultimaModificacion));
+  const texto = filtrosCursos.busqueda.value;
+  const escuela = filtrosCursos.escuela.value;
+  const visibles = filtrarCursos(cursos, { texto, escuela, estado: filtrosCursos.estado.value })
+    .sort((a, b) => b.ultimaModificacion.localeCompare(a.ultimaModificacion));
+  // Cantidad de cada pestaña de estado con la búsqueda y la escuela actuales.
+  filtrosCursos.querySelectorAll('[data-cantidad]').forEach(span => {
+    span.textContent = filtrarCursos(cursos, { texto, escuela, estado: span.dataset.cantidad }).length;
+  });
 
   cuerpoCursos.replaceChildren(...visibles.map(filaCurso));
 
   document.getElementById('sin-cursos').hidden = cursos.length > 0;
   document.getElementById('sin-coincidencias').hidden = !cursos.length || visibles.length > 0;
-  document.getElementById('resumen-cursos').textContent = cursos.length ? `${visibles.length} curso(s)` : '';
+  document.getElementById('resumen-cursos').textContent = visibles.length ? `${visibles.length} curso(s)` : '';
 }
 
 filtrosCursos.addEventListener('input', mostrarCursos);
 filtrosCursos.addEventListener('submit', e => e.preventDefault()); // Enter en el buscador no recarga la página
-document.getElementById('limpiar-filtros').addEventListener('click', () => {
+['limpiar-filtros', 'limpiar-sin-coincidencias'].forEach(id => document.getElementById(id).addEventListener('click', () => {
   filtrosCursos.reset();
   mostrarCursos();
-});
+}));
 mostrarCursos();

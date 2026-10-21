@@ -22,6 +22,12 @@ const CASAS_CERTIFICADORAS = ['Amazon Web Services', 'Cisco', 'CompTIA'];
 // Clase de color de cada estado (RN-09, RN-11, RN-12).
 const CLASE_ESTADO = { 'Borrador': 'borrador', 'En desarrollo': 'desarrollo', 'Aprobado': 'aprobado', 'En producción': 'produccion', 'Inactivo': 'inactivo' };
 
+// Fecha y hora cortas para listados y detalle: 21/10/2026 · 2:32 p. m.
+function fechaHora(iso) {
+  const fecha = new Date(iso);
+  return `${fecha.toLocaleDateString('es-CR')} · ${fecha.toLocaleTimeString('es-CR', { hour: 'numeric', minute: '2-digit' })}`;
+}
+
 function leer(clave) {
   try {
     return JSON.parse(localStorage.getItem(clave)) || [];

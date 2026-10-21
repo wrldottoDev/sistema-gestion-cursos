@@ -23,47 +23,38 @@
     <div class="barra-titulo">
       <div>
         <h1>Cursos</h1>
-        <p class="texto-secundario">Consulta y administra el catálogo de cursos.</p>
+        <p class="texto-secundario">Ordenados del más reciente al más antiguo.</p>
       </div>
       <a class="boton boton--primario" href="curso.html" data-rol="Director de Escuela">Nuevo curso</a>
     </div>
 
     <div id="aviso" class="aviso" role="status" hidden></div>
 
-    <form id="filtros-cursos" class="filtros-cursos tarjeta" role="search" aria-label="Filtros de cursos">
-      <div class="campo">
-        <label for="filtro-busqueda">Buscar por código o nombre</label>
-        <input id="filtro-busqueda" name="busqueda" type="search" placeholder="Ej.: SOFT-101 o Programación">
-        <p class="campo__error" id="error-filtro-busqueda" aria-live="polite"></p>
+    <form id="filtros-cursos" class="filtros-cursos" role="search" aria-label="Filtros de cursos">
+      <div class="filtros-cursos__barra">
+        <label class="solo-lector" for="filtro-busqueda">Buscar por código o nombre</label>
+        <input class="campo-busqueda" id="filtro-busqueda" name="busqueda" type="search" placeholder="Buscar por código o nombre" autocomplete="off">
+        <!-- RF-041 CA3: el Director no filtra por escuela (solo ve la suya). -->
+        <div class="filtros-cursos__escuela" data-rol="Administrador,Desarrollo Curricular,Rectoría,Vicerrectoría">
+          <label class="solo-lector" for="filtro-escuela">Escuela</label>
+          <select id="filtro-escuela" name="escuela">
+            <option value="">Todas las escuelas</option>
+          </select>
+        </div>
+        <button class="boton boton--fantasma" id="limpiar-filtros" type="button">Limpiar filtros</button>
       </div>
-      <!-- RF-041 CA3: el Director no filtra por escuela (solo ve la suya). -->
-      <div class="campo" data-rol="Administrador,Desarrollo Curricular,Rectoría,Vicerrectoría">
-        <label for="filtro-escuela">Escuela</label>
-        <select id="filtro-escuela" name="escuela">
-          <option value="">Todas las escuelas</option>
-        </select>
-        <p class="campo__error" id="error-filtro-escuela" aria-live="polite"></p>
-      </div>
-      <div class="campo">
-        <label for="filtro-estado">Estado</label>
-        <select id="filtro-estado" name="estado">
-          <option value="">Activos</option>
-          <option value="Borrador">Borrador</option>
-          <option value="En desarrollo">En desarrollo</option>
-          <option value="Aprobado">Aprobado</option>
-          <option value="En producción">En producción</option>
-          <option value="Inactivo">Inactivo</option>
-        </select>
-        <p class="campo__error" id="error-filtro-estado" aria-live="polite"></p>
-      </div>
-      <div class="campo filtros-cursos__accion">
-        <label class="solo-lector" for="limpiar-filtros">Limpiar filtros</label>
-        <button class="boton boton--secundario" id="limpiar-filtros" type="button">Limpiar filtros</button>
-        <p class="campo__error" aria-hidden="true"></p>
-      </div>
+      <!-- RF-035: "Activos" deja fuera los Inactivo; la pestaña Inactivo los muestra. -->
+      <fieldset class="pestanas-estado">
+        <legend class="solo-lector">Estado</legend>
+        <label><input type="radio" name="estado" value="" checked> Activos <span class="pestanas-estado__cantidad" data-cantidad=""></span></label>
+        <label><input type="radio" name="estado" value="Borrador"> Borrador <span class="pestanas-estado__cantidad" data-cantidad="Borrador"></span></label>
+        <label><input type="radio" name="estado" value="En desarrollo"> En desarrollo <span class="pestanas-estado__cantidad" data-cantidad="En desarrollo"></span></label>
+        <label><input type="radio" name="estado" value="Aprobado"> Aprobado <span class="pestanas-estado__cantidad" data-cantidad="Aprobado"></span></label>
+        <label><input type="radio" name="estado" value="En producción"> En producción <span class="pestanas-estado__cantidad" data-cantidad="En producción"></span></label>
+        <label><input type="radio" name="estado" value="Inactivo"> Inactivo <span class="pestanas-estado__cantidad" data-cantidad="Inactivo"></span></label>
+      </fieldset>
     </form>
 
-    <p class="texto-secundario resultados-cursos" id="resumen-cursos" aria-live="polite"></p>
     <div class="tabla-contenedor">
       <table class="tabla tabla--cursos">
         <caption class="solo-lector">Catálogo de cursos</caption>
@@ -74,14 +65,19 @@
             <th scope="col">Escuela</th>
             <th scope="col">Estado</th>
             <th scope="col">Última modificación</th>
-            <th scope="col">Acciones</th>
+            <th scope="col"><span class="solo-lector">Acciones</span></th>
           </tr>
         </thead>
         <tbody id="lista-cursos"></tbody>
       </table>
     </div>
-    <p class="estado-vacio" id="sin-cursos" hidden>No hay cursos registrados todavía.</p>
-    <p class="estado-vacio" id="sin-coincidencias" hidden>No hay cursos que coincidan</p>
+    <p class="resultados-cursos" id="resumen-cursos" aria-live="polite"></p>
+    <p class="estado-vacio" id="sin-cursos" hidden>Todavía no hay cursos registrados.</p>
+    <div class="estado-vacio" id="sin-coincidencias" hidden>
+      <strong>No hay cursos que coincidan</strong>
+      <p>Pruebe con otro código, nombre o filtro.</p>
+      <button class="boton boton--secundario boton--pequeno" id="limpiar-sin-coincidencias" type="button">Limpiar filtros</button>
+    </div>
 
     <template id="plantilla-fila-curso">
       <tr>
@@ -92,7 +88,7 @@
         <td data-campo="ultimaModificacion"></td>
         <td class="acciones-tabla">
           <a class="enlace-accion" data-accion="editar" href="curso.html">Editar</a>
-          <button class="boton boton--peligro boton--pequeno" data-accion="eliminar" type="button">Eliminar</button>
+          <button class="boton-enlace boton-enlace--peligro" data-accion="eliminar" type="button">Eliminar</button>
         </td>
       </tr>
     </template>
