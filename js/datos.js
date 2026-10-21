@@ -139,13 +139,13 @@ async function hashContrasena(contrasena, salHex) {
 // Datos de demostración para poder probar el login la primera vez.
 async function inicializarDatos() {
   if (leer(CLAVES.usuarios).length) return;
-  const base = { correoPersonal: '', celular: '88888888', fechaNacimiento: '1985-04-12', sexo: 'Femenino', foto: '' };
+  const base = { correoPersonal: '', celular: '88888888', fechaNacimiento: '1985-04-12', sexo: 'Masculino', foto: '' };
   const admin = await hashContrasena('Admin1234');
   const director = await hashContrasena('Director1234');
   guardar(CLAVES.usuarios, [
-    { ...base, id: crypto.randomUUID(), nombre: 'Ana', apellidos: 'Mora Solís', identificacion: '101110111',
+    { ...base, id: crypto.randomUUID(), nombre: 'Otto', apellidos: 'González G', identificacion: '119920110',
       correoInstitucional: 'admin@ucenfotec.ac.cr', rol: 'Administrador', escuela: '', ...admin },
-    { ...base, id: crypto.randomUUID(), nombre: 'Carlos', apellidos: 'Vargas Rojas', identificacion: '202220222',
+    { ...base, id: crypto.randomUUID(), nombre: 'Sergio', apellidos: 'Oviedas Seas', identificacion: '202220222',
       correoInstitucional: 'director@ucenfotec.ac.cr', rol: 'Director de Escuela', escuela: 'ESC-01', sexo: 'Masculino', ...director },
   ]);
   guardar(CLAVES.cursos, [
