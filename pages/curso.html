@@ -229,12 +229,12 @@
           </div>
           <div class="campo">
             <label for="fechaInicio">Fecha de inicio</label>
-            <input id="fechaInicio" name="fechaInicio" type="date" aria-describedby="error-fechaInicio">
+            <input id="fechaInicio" name="fechaInicio" type="date" disabled aria-describedby="error-fechaInicio">
             <p class="campo__error" id="error-fechaInicio" aria-live="polite"></p>
           </div>
           <div class="campo">
             <label for="fechaFin">Fecha de fin</label>
-            <input id="fechaFin" name="fechaFin" type="date" aria-describedby="error-fechaFin">
+            <input id="fechaFin" name="fechaFin" type="date" disabled aria-describedby="error-fechaFin">
             <p class="campo__error" id="error-fechaFin" aria-live="polite"></p>
           </div>
           <div class="campo campo--ancho">
@@ -244,7 +244,8 @@
           </div>
           <div class="campo">
             <label for="fechaModificacionMetadata">Fecha de modificación de la metadata</label>
-            <input id="fechaModificacionMetadata" name="fechaModificacionMetadata" type="date" aria-describedby="error-fechaModificacionMetadata">
+            <input id="fechaModificacionMetadata" name="fechaModificacionMetadata" type="date" readonly aria-describedby="ayuda-fechaModificacionMetadata error-fechaModificacionMetadata">
+            <p class="campo__ayuda" id="ayuda-fechaModificacionMetadata">Se actualiza sola al guardar un cambio en la metadata.</p>
             <p class="campo__error" id="error-fechaModificacionMetadata" aria-live="polite"></p>
           </div>
         </div>
