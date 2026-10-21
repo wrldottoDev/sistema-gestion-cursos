@@ -17,6 +17,8 @@ const METODOLOGIAS = ['Aprendizaje basado en proyectos', 'Aula invertida', 'Apre
 const NIVELES = ['Básico', 'Intermedio', 'Avanzado', 'Certificación', 'Nivel variable'];
 const MODALIDADES = ['Presencial', 'Virtual sincrónica', 'Virtual asincrónica', 'Híbrida'];
 const CERTIFICACIONES = ['No tiene', 'AWS Certified Cloud Practitioner', 'Cisco CCNA', 'CompTIA Security+'];
+// RF-025: valores iniciales; con SGC-73 pasan al catálogo de Casas certificadoras.
+const CASAS_CERTIFICADORAS = ['Amazon Web Services', 'Cisco', 'CompTIA'];
 
 function leer(clave) {
   try {
