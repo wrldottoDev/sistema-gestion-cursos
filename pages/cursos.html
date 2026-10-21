@@ -86,12 +86,11 @@
     <template id="plantilla-fila-curso">
       <tr>
         <td data-campo="codigo"></td>
-        <td data-campo="nombre"></td>
+        <td data-campo="nombre"><a class="enlace-nombre" href="curso-detalle.html"></a></td>
         <td data-campo="escuela"></td>
         <td><span class="estado" data-campo="estado"></span></td>
         <td data-campo="ultimaModificacion"></td>
         <td class="acciones-tabla">
-          <a class="enlace-accion" data-accion="ver" href="curso-detalle.html">Ver</a>
           <a class="enlace-accion" data-accion="editar" href="curso.html">Editar</a>
           <button class="boton boton--peligro boton--pequeno" data-accion="eliminar" type="button">Eliminar</button>
         </td>
