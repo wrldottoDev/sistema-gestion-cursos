@@ -14,10 +14,9 @@ if (!cursoDetalle || (esDirectorDetalle && cursoDetalle.escuela !== sesionDetall
 }
 
 // Ids de la página que no se llaman igual que el campo del curso.
-const CAMPO_DE_ID = { 'codigo-valor': 'codigo', 'nombre-valor': 'nombre', 'solicitar-codigo': 'solicitarCodigo' };
+const CAMPO_DE_ID = { 'solicitar-codigo': 'solicitarCodigo' };
 
-function textoDetalle(valor, campo) {
-  if (campo === 'escuela') return nombreEscuela(valor);
+function textoDetalle(valor) {
   if (typeof valor === 'boolean') return valor ? 'Sí' : 'No';
   if (Array.isArray(valor)) return valor.join(', ') || '—';
   if (/^\d{4}-\d{2}-\d{2}$/.test(valor)) return new Date(`${valor}T00:00`).toLocaleDateString('es-CR');
@@ -27,17 +26,20 @@ function textoDetalle(valor, campo) {
 document.title = `${cursoDetalle.nombre} · Gestión de Cursos CENFOTEC`;
 document.getElementById('detalle-nombre').textContent = cursoDetalle.nombre;
 document.getElementById('detalle-codigo').textContent = cursoDetalle.codigo || 'Código por asignar';
+document.getElementById('detalle-escuela').textContent = nombreEscuela(cursoDetalle.escuela);
+document.getElementById('desglose-horas').textContent =
+  `${cursoDetalle.horasClase || 0} clase + ${cursoDetalle.horasExtra || 0} extra`;
 const estadoDetalle = document.getElementById('detalle-estado');
 estadoDetalle.textContent = cursoDetalle.estado;
 estadoDetalle.className = `estado estado--${CLASE_ESTADO[cursoDetalle.estado] ?? 'borrador'}`;
 const fechaDetalle = document.getElementById('detalle-ultima-modificacion');
 fechaDetalle.dateTime = cursoDetalle.ultimaModificacion;
-fechaDetalle.textContent = new Date(cursoDetalle.ultimaModificacion).toLocaleString('es-CR');
+fechaDetalle.textContent = fechaHora(cursoDetalle.ultimaModificacion);
 
 document.querySelectorAll('dd[id^="detalle-"]').forEach(dd => {
   const id = dd.id.slice('detalle-'.length);
   const campo = CAMPO_DE_ID[id] ?? id;
-  dd.textContent = textoDetalle(cursoDetalle[campo], campo);
+  dd.textContent = textoDetalle(cursoDetalle[campo]);
 });
 
 // RF-019 CA4: el Director solo edita sus borradores. RF-035 CA4: solo Administrador y Desarrollo Curricular eliminan.
