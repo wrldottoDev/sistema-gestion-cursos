@@ -8,7 +8,8 @@ const listaCursos = leer(CLAVES.cursos);
 const cursoExistente = listaCursos.find(c => c.id === idCurso && c.escuela === sesionCurso.escuela);
 const CAMPOS_TEXTO = ['codigo', 'nombre', 'nombrePowerCampus', 'areaSfia', 'tematica', 'metodologia', 'nivel',
   'certificacion', 'creditos', 'horasClase', 'horasExtra', 'descripcionCorta', 'metaDescripcion',
-  'competencia', 'requisitos', 'requisitosDeseables', 'palabrasClave', 'casaCertificadora', 'nombrePrograma'];
+  'competencia', 'requisitos', 'requisitosDeseables', 'palabrasClave', 'casaCertificadora', 'nombrePrograma',
+  'ecommerce', 'fechaInicio', 'fechaFin', 'metadata', 'fechaModificacionMetadata'];
 
 // RF-030: un curso enviado (En desarrollo o posterior) ya no lo edita el Director.
 if (cursoExistente && cursoExistente.estado !== 'Borrador') {
@@ -40,6 +41,7 @@ const siHayValor = (valor, regla) => (String(valor).trim() ? regla(valor) : '');
 
 // RF-018: con "Solicitar código" marcado, el código puede quedar vacío (lo genera Desarrollo Curricular).
 const codigoOpcional = () => camposCurso.solicitarCodigo.checked;
+const ecommerceAbierto = () => camposCurso.ecommerce.value === 'Sí';
 
 const reglasCurso = {
   codigo: v => (codigoOpcional() && !v.trim() ? '' : validarCodigoCurso(v)) ||
@@ -66,6 +68,12 @@ const reglasCurso = {
   casaCertificadora: v => (['', 'No tiene'].includes(camposCurso.certificacion.value)
     ? '' : paraEnvio(v, 'Seleccione la casa certificadora.')),
   nombrePrograma: v => (camposCurso.pertenecePrograma.checked ? paraEnvio(v, 'Ingrese el nombre del programa.') : ''),
+  // RF-026: con e-commerce abierto se piden las fechas y el fin no puede ser antes del inicio.
+  ecommerce: v => paraEnvio(v, 'Indique si el e-commerce está abierto.'),
+  fechaInicio: v => (ecommerceAbierto() ? paraEnvio(v, 'Ingrese la fecha de inicio.') : ''),
+  fechaFin: v => (!ecommerceAbierto() ? '' : paraEnvio(v, 'Ingrese la fecha de fin.') ||
+    (v && v < camposCurso.fechaInicio.value ? 'La fecha de fin no puede ser anterior a la de inicio.' : '')),
+  metadata: v => paraEnvio(v, 'Ingrese la metadata del curso.'),
 };
 
 // RF-040 / RNF-034: contador dinámico de caracteres.
@@ -95,6 +103,11 @@ function actualizarPrograma() {
   camposCurso.nombrePrograma.disabled = !camposCurso.pertenecePrograma.checked;
 }
 
+// RF-026: las fechas solo aplican con e-commerce abierto.
+function actualizarEcommerce() {
+  camposCurso.fechaInicio.disabled = camposCurso.fechaFin.disabled = !ecommerceAbierto();
+}
+
 ['nombrePowerCampus', 'descripcionCorta', 'metaDescripcion'].forEach(nombre => {
   actualizarContador(camposCurso[nombre]);
   camposCurso[nombre].addEventListener('input', e => actualizarContador(e.target));
@@ -108,8 +121,14 @@ camposCurso.pertenecePrograma.addEventListener('change', () => {
   actualizarPrograma();
   validarCampo(formCurso, reglasCurso, 'nombrePrograma');
 });
+camposCurso.ecommerce.addEventListener('change', () => {
+  actualizarEcommerce();
+  ['fechaInicio', 'fechaFin'].forEach(c => validarCampo(formCurso, reglasCurso, c));
+});
+camposCurso.fechaInicio.addEventListener('change', () => validarCampo(formCurso, reglasCurso, 'fechaFin'));
 actualizarTotal();
 actualizarPrograma();
+actualizarEcommerce();
 activarValidacionEnVivo(formCurso, reglasCurso);
 
 formCurso.addEventListener('submit', evento => {
@@ -124,6 +143,9 @@ formCurso.addEventListener('submit', evento => {
   curso.solicitarCodigo = camposCurso.solicitarCodigo.checked;
   curso.pertenecePrograma = camposCurso.pertenecePrograma.checked;
   if (!curso.pertenecePrograma) curso.nombrePrograma = '';
+  if (!ecommerceAbierto()) curso.fechaInicio = curso.fechaFin = '';
+  // RF-026 CA2: la fecha de la metadata solo cambia cuando cambia la metadata.
+  if (curso.metadata !== (cursoExistente?.metadata ?? '')) curso.fechaModificacionMetadata = new Date().toLocaleDateString('en-CA');
   curso.palabrasClave = separarPalabrasClave(curso.palabrasClave); // RF-023: etiquetas sin repetir
   curso.modalidad = camposCurso.modalidad.value;
   curso.totalHoras = totalHoras(curso.horasClase, curso.horasExtra);
