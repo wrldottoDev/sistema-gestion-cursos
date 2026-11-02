@@ -50,7 +50,8 @@ const reglasUsuario = {
   correoPersonal: v => validarCorreo(v, { requerido: false }),
   rol: v => obligatorio(v, 'Seleccione un rol.') ||
     (cargoOcupado(v) ? `Ya existe un usuario con el rol ${v}; solo puede haber uno.` : ''),
-  escuela: v => (esDirector() ? obligatorio(v, 'Seleccione la escuela del director.') : ''),
+  escuela: v => (esDirector() ? obligatorio(v, 'Seleccione la escuela del director.') ||
+    (existente && dirigeOtraEscuela(existente.id, v) ? 'Ese director ya dirige otra escuela.' : '') : ''),
   contrasena: v => (contrasenaOpcional() ? '' : validarContrasena(v)),
   confirmacion: v => (contrasenaOpcional() ? '' : obligatorio(v, 'Confirme la contraseña.') ||
     (v === campos.contrasena.value ? '' : 'Las contraseñas no coinciden.')),

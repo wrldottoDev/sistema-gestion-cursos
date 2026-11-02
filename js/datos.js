@@ -118,6 +118,18 @@ function usosDe(tipo, elemento) {
   return campo ? cursos.filter(c => c[campo] === elemento.nombre).length : 0;
 }
 
+// Director de una escuela: el elegido en el catálogo o, si no hay, el usuario Director asignado a esa escuela.
+function directorDe(escuela) {
+  return leer(CLAVES.usuarios).find(u =>
+    u.id === escuela.director || (!escuela.director && u.rol === 'Director de Escuela' && u.escuela === escuela.codigo));
+}
+
+// RF-011: un director no dirige dos escuelas. Solo se puede mover si su escuela no lo tiene guardado ni tiene cursos.
+function dirigeOtraEscuela(idDirector, codigoEscuela) {
+  return leerCatalogo('escuelas').some(e => e.codigo !== codigoEscuela && directorDe(e)?.id === idDirector
+    && (e.director || leer(CLAVES.cursos).some(c => c.escuela === e.codigo)));
+}
+
 // RNF-005 / RNF-006: la contraseña nunca se guarda en texto plano.
 // PBKDF2-HMAC-SHA256 con sal aleatoria de 16 bytes (Web Crypto API, OWASP 2023).
 const ITERACIONES_PBKDF2 = 600000;

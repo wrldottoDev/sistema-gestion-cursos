@@ -31,15 +31,13 @@ leerCatalogo('escuelas').forEach(e => camposCatalogo.escuela.add(new Option(e.no
 // ¿Otro elemento del catálogo ya tiene ese valor? (sin distinguir mayúsculas ni tildes)
 const repetido = (campo, valor) =>
   elementos.some(e => e !== elementoExistente && normalizar(e[campo]) === normalizar(valor));
-const dirigeOtraEscuela = idDirector =>
-  leerCatalogo('escuelas').some(e => e.director === idDirector && e.codigo !== elementoExistente?.codigo);
 
 const reglasCatalogo = {
   codigo: v => !usa('codigo') ? '' :
     obligatorio(v, 'Ingrese el código.') || (repetido('codigo', v) ? 'Ya existe un elemento con ese código.' : ''),
   nombre: v => obligatorio(v, 'Ingrese el nombre.') || (repetido('nombre', v) ? 'Ya existe un elemento con ese nombre.' : ''),
   director: v => !usa('director') ? '' :
-    obligatorio(v, 'Seleccione el director de la escuela.') || (dirigeOtraEscuela(v) ? 'Ese director ya dirige otra escuela.' : ''),
+    obligatorio(v, 'Seleccione el director de la escuela.') || (dirigeOtraEscuela(v, elementoExistente?.codigo) ? 'Ese director ya dirige otra escuela.' : ''),
   escuela: v => !usa('escuela') ? '' : obligatorio(v, 'Seleccione la escuela.'),
   descripcion: v => catalogo.descripcionObligatoria ? obligatorio(v, 'Ingrese la descripción.') : '',
 };
