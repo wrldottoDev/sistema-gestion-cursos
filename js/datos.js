@@ -64,7 +64,7 @@ const CATALOGOS = {
     ],
   },
   certificaciones: {
-    titulo: 'Certificaciones', singular: 'certificación', campos: ['nombre'], codigoAuto: true, usoEnCurso: 'certificacion',
+    titulo: 'Certificaciones', singular: 'certificación', campos: ['nombre', 'descripcion'], codigoAuto: true, usoEnCurso: 'certificacion',
     semilla: ['No tiene', 'AWS Certified Cloud Practitioner', 'Cisco CCNA', 'CompTIA Security+']
       .map((nombre, i) => ({ codigo: String(i + 1), nombre })),
   },
