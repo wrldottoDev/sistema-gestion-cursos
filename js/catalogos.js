@@ -29,10 +29,8 @@ document.getElementById('campo-filtro-escuela').hidden = tipo !== 'carreras';
 filtros.filtroEscuela.add(new Option('Todas las escuelas', ''));
 leerCatalogo('escuelas').forEach(e => filtros.filtroEscuela.add(new Option(e.nombre, e.codigo)));
 
-// Director de una escuela: el elegido en el catálogo o, si no hay, el usuario director asignado a esa escuela.
 function nombreDirector(escuela) {
-  const director = leer(CLAVES.usuarios).find(u =>
-    u.id === escuela.director || (!escuela.director && u.rol === 'Director de Escuela' && u.escuela === escuela.codigo));
+  const director = directorDe(escuela);
   return director ? `${director.nombre} ${director.apellidos}` : 'Sin asignar';
 }
 
