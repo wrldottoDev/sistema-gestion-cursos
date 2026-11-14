@@ -17,3 +17,6 @@ __pycache__/
 # Archivos del sistema operativo
 .DS_Store
 Thumbs.db
+
+# Archivos temporales de Microsoft Office mientras un documento está abierto
+~$*
