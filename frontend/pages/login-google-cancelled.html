@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Google cancelado · Iniciar sesión · Sistema de Gestión de Cursos</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+    <!-- Integración futura: <script type="module" src="/js/pages/login.page.js"></script> (A-05, RF-001) -->
+  </head>
+  <body>
+    <a class="visually-hidden-focusable skip-link" href="#main">Saltar al contenido principal</a>
+    <div class="auth-layout">
+      <div class="lang-switch auth-layout__lang" role="group" aria-label="Idioma de la interfaz">
+        <svg class="icon" aria-hidden="true" focusable="false">
+          <use href="/img/icons.svg#i-globe"></use>
+        </svg>
+        <button
+          class="lang-switch__option"
+          type="button"
+          lang="es"
+          aria-pressed="true"
+          data-action="set-language"
+          data-language="es"
+        >
+          ES
+        </button>
+        <button
+          class="lang-switch__option"
+          type="button"
+          lang="en"
+          aria-pressed="false"
+          data-action="set-language"
+          data-language="en"
+        >
+          EN
+        </button>
+      </div>
+
+      <header class="auth-layout__brand">
+        <img
+          class="auth-layout__logo"
+          src="/img/logo-horizontal-blanco.svg"
+          alt="Universidad CENFOTEC"
+          width="320"
+          height="141"
+        />
+        <p class="auth-layout__product">Sistema de Gestión de Cursos</p>
+        <p class="auth-layout__intro">
+          Registre, revise y consulte la oferta de cursos de la universidad en un solo lugar, con
+          reglas claras por rol y escuela.
+        </p>
+        <ul class="auth-layout__features">
+          <li class="auth-layout__feature">
+            <span class="auth-layout__feature-icon"
+              ><svg class="icon icon--sm" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-check"></use></svg
+            ></span>
+            Registro progresivo con las validaciones del estándar institucional
+          </li>
+          <li class="auth-layout__feature">
+            <span class="auth-layout__feature-icon"
+              ><svg class="icon icon--sm" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-check"></use></svg
+            ></span>
+            Revisión y aprobación por Desarrollo Curricular
+          </li>
+          <li class="auth-layout__feature">
+            <span class="auth-layout__feature-icon"
+              ><svg class="icon icon--sm" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-check"></use></svg
+            ></span>
+            Consulta y reportes por escuela, estado y período
+          </li>
+        </ul>
+        <p class="auth-layout__copyright">© Universidad CENFOTEC</p>
+      </header>
+
+      <main id="main" class="auth-layout__main" tabindex="-1">
+        <section class="auth-card" aria-labelledby="login-title">
+          <h1 class="auth-card__title" id="login-title">Iniciar sesión</h1>
+          <p class="auth-card__lead">Use su cuenta institucional @ucenfotec.ac.cr</p>
+
+          <div class="alert alert-danger" role="alert">
+            <svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/img/icons.svg#i-circle-alert"></use>
+            </svg>
+            <div>
+              <p class="alert-heading">No se pudo completar el inicio con Google</p>
+              <p>
+                El proceso se canceló o el servicio no respondió. Intente de nuevo o use su correo
+                institucional.
+              </p>
+            </div>
+          </div>
+
+          <button
+            class="btn btn-outline-primary w-100"
+            type="button"
+            data-action="sign-in-with-google"
+            aria-disabled="true"
+          >
+            <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+            Conectando con Google…
+          </button>
+
+          <p class="auth-card__divider">o con su correo institucional</p>
+
+          <form id="login-form" data-form="login" novalidate>
+            <div class="mb-3">
+              <label class="form-label" for="email">
+                Correo institucional <span class="required-mark" aria-hidden="true">*</span
+                ><span class="visually-hidden">(obligatorio)</span>
+              </label>
+              <input
+                class="form-control"
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="username"
+                placeholder="nombre@ucenfotec.ac.cr"
+                required
+              />
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label" for="password">
+                Contraseña <span class="required-mark" aria-hidden="true">*</span
+                ><span class="visually-hidden">(obligatorio)</span>
+              </label>
+              <div class="password-field">
+                <input
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  type="password"
+                  autocomplete="current-password"
+                  placeholder="Ingrese su contraseña"
+                  required
+                />
+                <button
+                  class="icon-button password-field__toggle"
+                  type="button"
+                  aria-controls="password"
+                  aria-pressed="false"
+                  aria-label="Mostrar contraseña"
+                  data-action="toggle-password"
+                >
+                  <svg class="icon" aria-hidden="true" focusable="false">
+                    <use href="/img/icons.svg#i-eye"></use>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <button class="btn btn-primary w-100" type="submit">Iniciar sesión</button>
+          </form>
+
+          <p class="auth-card__help">
+            ¿Problemas para ingresar? Contacte al Administrador del sistema.
+          </p>
+        </section>
+        <p class="view-note text-center">
+          Vista estática de demostración: el inicio de sesión no está conectado. Estado A-05:
+          cancelado o sin respuesta; el botón muestra el estado de carga (RF-001).
+        </p>
+      </main>
+    </div>
+  </body>
+</html>
