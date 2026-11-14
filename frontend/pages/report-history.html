@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reporte histórico por período · Sistema de Gestión de Cursos</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+    <!-- Integración futura: <script type="module" src="/js/pages/report-history.page.js"></script> (RP-03, RF-043) -->
+  </head>
+  <body>
+    <a class="visually-hidden-focusable skip-link" href="#main">Saltar al contenido principal</a>
+
+    <div class="app-shell">
+      <!-- Barra superior móvil (< 768 px) -->
+      <header class="app-mobilebar d-md-none" aria-label="Barra superior móvil">
+        <button
+          class="icon-button icon-button--on-brand"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#app-sidebar"
+          aria-controls="app-sidebar"
+          aria-label="Abrir menú"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-menu"></use>
+          </svg>
+        </button>
+        <p class="app-mobilebar__title" aria-hidden="true">Reportes</p>
+        <a
+          class="icon-button icon-button--on-brand"
+          href="/pages/notifications.html"
+          aria-label="Avisos, sin avisos nuevos"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-bell"></use>
+          </svg>
+        </a>
+      </header>
+
+      <!-- Riel de navegación (tablet, 768–1199 px) -->
+      <nav class="app-rail d-none d-md-flex d-xl-none" aria-label="Principal compacta">
+        <button
+          class="icon-button icon-button--on-brand"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#app-sidebar"
+          aria-controls="app-sidebar"
+          aria-label="Abrir menú"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-menu"></use>
+          </svg>
+        </button>
+        <ul class="app-rail__list">
+          <li>
+            <a class="app-rail__link" href="/pages/home-rector.html"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-layout-dashboard"></use></svg
+              >Inicio</a
+            >
+          </li>
+          <li>
+            <a class="app-rail__link" href="/pages/courses.html"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-book-open"></use></svg
+              >Cursos</a
+            >
+          </li>
+          <li>
+            <a class="app-rail__link" href="/pages/report-production.html" aria-current="page"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-chart-column"></use></svg
+              >Reportes</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Barra lateral: fija ≥ 1200 px; menú lateral (offcanvas) en móvil y tablet (MB-09) -->
+      <div class="app-sidebar">
+        <div
+          class="offcanvas-xl offcanvas-start app-sidebar__panel"
+          id="app-sidebar"
+          tabindex="-1"
+          aria-label="Menú principal"
+        >
+          <div class="offcanvas-header">
+            <button
+              class="btn-close btn-close-white"
+              type="button"
+              data-bs-dismiss="offcanvas"
+              data-bs-target="#app-sidebar"
+              aria-label="Cerrar menú"
+            ></button>
+          </div>
+          <div class="offcanvas-body app-sidebar__body">
+            <a class="app-sidebar__brand" href="/pages/home-rector.html">
+              <img
+                class="app-sidebar__logo"
+                src="/img/logo-horizontal-blanco.svg"
+                alt="Universidad CENFOTEC · Inicio"
+                width="216"
+                height="95"
+              />
+            </a>
+            <p class="app-sidebar__product d-none d-xl-block">Sistema de Gestión de Cursos</p>
+            <p class="app-sidebar__user d-xl-none">María Vargas · Rectoría</p>
+            <hr class="app-sidebar__divider" />
+            <nav aria-labelledby="sidebar-menu-label">
+              <p class="app-sidebar__heading" id="sidebar-menu-label">Menú</p>
+              <ul class="app-sidebar__list">
+                <li>
+                  <a class="app-sidebar__link" href="/pages/home-rector.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-layout-dashboard"></use></svg
+                    >Inicio</a
+                  >
+                </li>
+                <li>
+                  <a class="app-sidebar__link" href="/pages/courses.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-book-open"></use></svg
+                    >Cursos</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="app-sidebar__link"
+                    href="/pages/report-production.html"
+                    aria-current="page"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-chart-column"></use></svg
+                    >Reportes</a
+                  >
+                </li>
+              </ul>
+            </nav>
+            <div class="d-xl-none mt-auto pt-4">
+              <div class="lang-switch" role="group" aria-label="Idioma de la interfaz">
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-globe"></use>
+                </svg>
+                <button
+                  class="lang-switch__option"
+                  type="button"
+                  lang="es"
+                  aria-pressed="true"
+                  data-action="set-language"
+                  data-language="es"
+                >
+                  ES
+                </button>
+                <button
+                  class="lang-switch__option"
+                  type="button"
+                  lang="en"
+                  aria-pressed="false"
+                  data-action="set-language"
+                  data-language="en"
+                >
+                  EN
+                </button>
+              </div>
+              <p class="app-sidebar__user mt-3">Cerrar sesión: fuera de alcance (ERS §1.2).</p>
+            </div>
+            <p class="app-sidebar__footer d-none d-xl-block">Acceso de solo lectura</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-main">
+        <!-- Barra superior (≥ 768 px) -->
+        <header class="app-topbar d-none d-md-flex" aria-label="Barra superior">
+          <nav aria-label="Ruta de navegación">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/pages/report-production.html">Reportes</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Histórico y comparativo</li>
+            </ol>
+          </nav>
+          <div class="app-topbar__actions">
+            <div class="lang-switch" role="group" aria-label="Idioma de la interfaz">
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-globe"></use>
+              </svg>
+              <button
+                class="lang-switch__option"
+                type="button"
+                lang="es"
+                aria-pressed="true"
+                data-action="set-language"
+                data-language="es"
+              >
+                ES
+              </button>
+              <button
+                class="lang-switch__option"
+                type="button"
+                lang="en"
+                aria-pressed="false"
+                data-action="set-language"
+                data-language="en"
+              >
+                EN
+              </button>
+            </div>
+            <button
+              class="icon-button"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#notifications-panel"
+              aria-controls="notifications-panel"
+              aria-label="Avisos, sin avisos nuevos"
+            >
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-bell"></use>
+              </svg>
+            </button>
+            <span class="app-topbar__separator" aria-hidden="true"></span>
+            <div class="dropdown">
+              <button
+                class="user-menu__toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                data-bs-auto-close="outside"
+                aria-expanded="false"
+              >
+                <span class="visually-hidden">Menú de usuario:</span>
+                <span class="avatar" aria-hidden="true">MV</span>
+                <span class="user-menu__identity">
+                  <span class="user-menu__name">María Vargas</span>
+                  <span class="user-menu__role">Rectoría</span>
+                </span>
+                <svg class="icon icon--sm" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-chevron-down"></use>
+                </svg>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end user-menu__panel">
+                <div class="user-menu__header">
+                  <span class="avatar avatar--lg" aria-hidden="true">MV</span>
+                  <div>
+                    <p class="user-menu__name mb-0">María Vargas</p>
+                    <p class="user-menu__email">mvargas@ucenfotec.ac.cr</p>
+                  </div>
+                </div>
+                <dl class="user-menu__details">
+                  <dt>Rol</dt>
+                  <dd>Rectoría · solo lectura</dd>
+                </dl>
+                <fieldset>
+                  <legend class="form-legend">Idioma de la interfaz</legend>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      id="user-language-es"
+                      name="userLanguage"
+                      type="radio"
+                      value="es"
+                      checked
+                    />
+                    <label class="form-check-label" for="user-language-es">Español</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      id="user-language-en"
+                      name="userLanguage"
+                      type="radio"
+                      value="en"
+                    />
+                    <label class="form-check-label" for="user-language-en" lang="en">English</label>
+                  </div>
+                  <p class="form-text">Se recuerda su preferencia (RF-044 CA3).</p>
+                </fieldset>
+                <p class="user-menu__note">
+                  Cerrar sesión no está disponible: fuera de alcance de la ERS (§1.2) y pendiente de
+                  validar (Apéndice E).
+                </p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main id="main" class="app-content" tabindex="-1">
+          <div class="page-header">
+            <div class="page-header__text">
+              <h1 class="page-header__title page-header__title--mobile-hidden">
+                Histórico y comparativo
+              </h1>
+              <div class="page-header__meta">
+                <span class="tag"
+                  ><svg class="icon" aria-hidden="true" focusable="false">
+                    <use href="/img/icons.svg#i-lock"></use></svg
+                  >Solo lectura</span
+                ><span>Calculado al momento de la consulta · 12/10/2026 15:30</span>
+              </div>
+            </div>
+            <div class="page-header__actions">
+              <p class="view-note m-0">Sin exportación (fuera de alcance, ERS §1.2)</p>
+            </div>
+          </div>
+
+          <nav class="mb-4" aria-label="Tipos de reporte">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link" href="/pages/report-production.html">Producción</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/pages/report-history.html" aria-current="page"
+                  >Histórico y comparativo</a
+                >
+              </li>
+            </ul>
+          </nav>
+
+          <section class="card mb-4" aria-labelledby="history-filters-title">
+            <div class="card-body">
+              <h2 class="visually-hidden" id="history-filters-title">Período del reporte</h2>
+              <nav class="mb-4" aria-label="Tipo de reporte histórico">
+                <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/pages/report-history.html" aria-current="page"
+                      >Por período</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/pages/report-comparison.html">Comparativo</a>
+                  </li>
+                </ul>
+              </nav>
+              <form class="row g-3 align-items-start" data-form="history-report" novalidate>
+                <p class="required-note col-12 mb-0">Los campos marcados con * son obligatorios.</p>
+                <div class="col-md">
+                  <label class="form-label" for="history-from"
+                    >Desde <span class="required-mark" aria-hidden="true">*</span
+                    ><span class="visually-hidden">(obligatorio)</span></label
+                  >
+                  <input
+                    class="form-control"
+                    id="history-from"
+                    name="from"
+                    type="date"
+                    value="2026-01-01"
+                    required
+                  />
+                </div>
+                <div class="col-md">
+                  <label class="form-label" for="history-to"
+                    >Hasta <span class="required-mark" aria-hidden="true">*</span
+                    ><span class="visually-hidden">(obligatorio)</span></label
+                  >
+                  <input
+                    class="form-control"
+                    id="history-to"
+                    name="to"
+                    type="date"
+                    value="2026-10-31"
+                    required
+                  />
+                </div>
+                <div class="col-md-auto report-range__action">
+                  <button class="btn btn-primary" type="submit">Aplicar</button>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <ul class="kpi-grid">
+            <li class="kpi-card kpi-card--flat">
+              <p class="kpi-card__label">Creados</p>
+              <span class="icon-circle"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-plus"></use></svg
+              ></span>
+              <p class="kpi-card__value">148</p>
+              <p class="kpi-card__meta">01/01 – 31/10/2026</p>
+            </li>
+            <li class="kpi-card kpi-card--flat">
+              <p class="kpi-card__label">Aprobados</p>
+              <span class="icon-circle"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-circle-check"></use></svg
+              ></span>
+              <p class="kpi-card__value">126</p>
+              <p class="kpi-card__meta">En el período</p>
+            </li>
+            <li class="kpi-card kpi-card--flat">
+              <p class="kpi-card__label">Inactivados</p>
+              <span class="icon-circle"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-archive"></use></svg
+              ></span>
+              <p class="kpi-card__value">9</p>
+              <p class="kpi-card__meta">Incluidos en su período</p>
+            </li>
+          </ul>
+
+          <section class="card" aria-labelledby="history-chart-title">
+            <div class="card-body">
+              <h2 class="card-title" id="history-chart-title">
+                Creados, aprobados e inactivados por mes
+              </h2>
+              <p class="card-subtitle mb-3">
+                Los cursos Inactivos se cuentan en el período en que se crearon o aprobaron (RF-043
+                CA4)
+              </p>
+              <ul class="chart-legend" aria-hidden="true">
+                <li class="chart-legend__item chart-series--created">Creados</li>
+                <li class="chart-legend__item chart-series--approved">Aprobados</li>
+                <li class="chart-legend__item chart-series--deactivated">Inactivados</li>
+              </ul>
+              <figure class="chart" tabindex="0">
+                <svg
+                  class="chart__svg report-chart"
+                  viewBox="0 0 900 280"
+                  role="img"
+                  aria-labelledby="history-chart-svg-title history-chart-desc"
+                >
+                  <title id="history-chart-svg-title">
+                    Creados, aprobados e inactivados por mes
+                  </title>
+                  <desc id="history-chart-desc">
+                    Barras agrupadas por mes de enero a octubre de 2026; los valores están en la
+                    tabla de datos.
+                  </desc>
+                  <line class="chart__grid" x1="40" x2="892" y1="248.0" y2="248.0" />
+                  <text class="chart__tick" x="32" y="252.0" text-anchor="end">0</text>
+                  <line class="chart__grid" x1="40" x2="892" y1="134.0" y2="134.0" />
+                  <text class="chart__tick" x="32" y="138.0" text-anchor="end">9</text>
+                  <line class="chart__grid" x1="40" x2="892" y1="20.0" y2="20.0" />
+                  <text class="chart__tick" x="32" y="24.0" text-anchor="end">18</text>
+                  <line class="chart__axis" x1="40" x2="892" y1="248" y2="248" />
+                  <rect
+                    class="chart-series--created"
+                    x="57.6"
+                    y="96.0"
+                    width="14"
+                    height="152.0"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--approved"
+                    x="75.6"
+                    y="134.0"
+                    width="14"
+                    height="114.0"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--deactivated"
+                    x="93.6"
+                    y="235.3"
+                    width="14"
+                    height="12.7"
+                    rx="2"
+                  />
+                  <text class="chart__label" x="82.6" y="268" text-anchor="middle">Ene</text>
+                  <rect
+                    class="chart-series--created"
+                    x="142.8"
+                    y="70.7"
+                    width="14"
+                    height="177.3"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--approved"
+                    x="160.8"
+                    y="108.7"
+                    width="14"
+                    height="139.3"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--deactivated"
+                    x="178.8"
+                    y="246.0"
+                    width="14"
+                    height="2.0"
+                    rx="2"
+                  />
+                  <text class="chart__label" x="167.8" y="268" text-anchor="middle">Feb</text>
+                  <rect
+                    class="chart-series--created"
+                    x="228.0"
+                    y="45.3"
+                    width="14"
+                    height="202.7"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--approved"
+                    x="246.0"
+                    y="83.3"
+                    width="14"
+                    height="164.7"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--deactivated"
+                    x="264.0"
+                    y="222.7"
+                    width="14"
+                    height="25.3"
+                    rx="2"
+                  />
+                  <text class="chart__label" x="253.0" y="268" text-anchor="middle">Mar</text>
+                  <rect
+                    class="chart-series--created"
+                    x="313.2"
+                    y="58.0"
+                    width="14"
+                    height="190.0"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--approved"
+                    x="331.2"
+                    y="96.0"
+                    width="14"
+                    height="152.0"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--deactivated"
+                    x="349.2"
+                    y="235.3"
+                    width="14"
+                    height="12.7"
+                    rx="2"
+                  />
+                  <text class="chart__label" x="338.2" y="268" text-anchor="middle">Abr</text>
+                  <rect
+                    class="chart-series--created"
+                    x="398.4"
+                    y="83.3"
+                    width="14"
+                    height="164.7"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--approved"
+                    x="416.4"
+                    y="70.7"
+                    width="14"
+                    height="177.3"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--deactivated"
+                    x="434.4"
+                    y="246.0"
+                    width="14"
+                    height="2.0"
+                    rx="2"
+                  />
+                  <text class="chart__label" x="423.4" y="268" text-anchor="middle">May</text>
+                  <rect
+                    class="chart-series--created"
+                    x="483.6"
+                    y="20.0"
+                    width="14"
+                    height="228.0"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--approved"
+                    x="501.6"
+                    y="58.0"
+                    width="14"
+                    height="190.0"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--deactivated"
+                    x="519.6"
+                    y="235.3"
+                    width="14"
+                    height="12.7"
+                    rx="2"
+                  />
+                  <text class="chart__label" x="508.6" y="268" text-anchor="middle">Jun</text>
+                  <rect
+                    class="chart-series--created"
+                    x="568.8"
+                    y="32.7"
+                    width="14"
+                    height="215.3"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--approved"
+                    x="586.8"
+                    y="83.3"
+                    width="14"
+                    height="164.7"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--deactivated"
+                    x="604.8"
+                    y="235.3"
+                    width="14"
+                    height="12.7"
+                    rx="2"
+                  />
+                  <text class="chart__label" x="593.8" y="268" text-anchor="middle">Jul</text>
+                  <rect
+                    class="chart-series--created"
+                    x="654.0"
+                    y="96.0"
+                    width="14"
+                    height="152.0"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--approved"
+                    x="672.0"
+                    y="121.3"
+                    width="14"
+                    height="126.7"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--deactivated"
+                    x="690.0"
+                    y="246.0"
+                    width="14"
+                    height="2.0"
+                    rx="2"
+                  />
+                  <text class="chart__label" x="679.0" y="268" text-anchor="middle">Ago</text>
+                  <rect
+                    class="chart-series--created"
+                    x="739.2"
+                    y="83.3"
+                    width="14"
+                    height="164.7"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--approved"
+                    x="757.2"
+                    y="58.0"
+                    width="14"
+                    height="190.0"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--deactivated"
+                    x="775.2"
+                    y="222.7"
+                    width="14"
+                    height="25.3"
+                    rx="2"
+                  />
+                  <text class="chart__label" x="764.2" y="268" text-anchor="middle">Set</text>
+                  <rect
+                    class="chart-series--created"
+                    x="824.4"
+                    y="20.0"
+                    width="14"
+                    height="228.0"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--approved"
+                    x="842.4"
+                    y="70.7"
+                    width="14"
+                    height="177.3"
+                    rx="2"
+                  />
+                  <rect
+                    class="chart-series--deactivated"
+                    x="860.4"
+                    y="235.3"
+                    width="14"
+                    height="12.7"
+                    rx="2"
+                  />
+                  <text class="chart__label" x="849.4" y="268" text-anchor="middle">Oct</text>
+                </svg>
+              </figure>
+              <details class="chart-data">
+                <summary>Ver tabla de datos</summary>
+                <div class="table-responsive" tabindex="0">
+                  <table class="table">
+                    <caption class="visually-hidden">
+                      Cursos creados, aprobados e inactivados por mes, 2026
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">Mes</th>
+                        <th class="text-end" scope="col">Creados</th>
+                        <th class="text-end" scope="col">Aprobados</th>
+                        <th class="text-end" scope="col">Inactivados</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">Enero</th>
+                        <td class="text-end text-tabular">12</td>
+                        <td class="text-end text-tabular">9</td>
+                        <td class="text-end text-tabular">1</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Febrero</th>
+                        <td class="text-end text-tabular">14</td>
+                        <td class="text-end text-tabular">11</td>
+                        <td class="text-end text-tabular">0</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Marzo</th>
+                        <td class="text-end text-tabular">16</td>
+                        <td class="text-end text-tabular">13</td>
+                        <td class="text-end text-tabular">2</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Abril</th>
+                        <td class="text-end text-tabular">15</td>
+                        <td class="text-end text-tabular">12</td>
+                        <td class="text-end text-tabular">1</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Mayo</th>
+                        <td class="text-end text-tabular">13</td>
+                        <td class="text-end text-tabular">14</td>
+                        <td class="text-end text-tabular">0</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Junio</th>
+                        <td class="text-end text-tabular">18</td>
+                        <td class="text-end text-tabular">15</td>
+                        <td class="text-end text-tabular">1</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Julio</th>
+                        <td class="text-end text-tabular">17</td>
+                        <td class="text-end text-tabular">13</td>
+                        <td class="text-end text-tabular">1</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Agosto</th>
+                        <td class="text-end text-tabular">12</td>
+                        <td class="text-end text-tabular">10</td>
+                        <td class="text-end text-tabular">0</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Setiembre</th>
+                        <td class="text-end text-tabular">13</td>
+                        <td class="text-end text-tabular">15</td>
+                        <td class="text-end text-tabular">2</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Octubre</th>
+                        <td class="text-end text-tabular">18</td>
+                        <td class="text-end text-tabular">14</td>
+                        <td class="text-end text-tabular">1</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </details>
+            </div>
+          </section>
+          <p class="demo-note">
+            <svg class="icon icon--sm" aria-hidden="true" focusable="false">
+              <use href="/img/icons.svg#i-info"></use>
+            </svg>
+            Vista estática de demostración: los datos son ficticios y las acciones no están
+            conectadas.
+          </p>
+        </main>
+      </div>
+
+      <!-- Barra inferior (< 768 px) -->
+      <nav class="app-bottomnav d-md-none" aria-label="Principal inferior">
+        <ul class="app-bottomnav__list">
+          <li>
+            <a class="app-bottomnav__link" href="/pages/home-rector.html"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-layout-dashboard"></use></svg></span
+              >Inicio</a
+            >
+          </li>
+          <li>
+            <a class="app-bottomnav__link" href="/pages/courses.html"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-book-open"></use></svg></span
+              >Cursos</a
+            >
+          </li>
+          <li>
+            <a class="app-bottomnav__link" href="/pages/report-production.html" aria-current="page"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-chart-column"></use></svg></span
+              >Reportes</a
+            >
+          </li>
+          <li>
+            <a class="app-bottomnav__link" href="/pages/notifications.html"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-bell"></use></svg></span
+              >Avisos</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Panel de avisos (N-01, propuesta UX D-09) -->
+    <div
+      class="offcanvas offcanvas-end notification-panel"
+      id="notifications-panel"
+      tabindex="-1"
+      aria-labelledby="notifications-panel-title"
+    >
+      <div class="offcanvas-header">
+        <h2 class="offcanvas-title h3" id="notifications-panel-title">Avisos</h2>
+        <button
+          class="btn-close"
+          type="button"
+          data-bs-dismiss="offcanvas"
+          aria-label="Cerrar avisos"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="empty-state">
+          <span class="icon-circle icon-circle--lg"
+            ><svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/img/icons.svg#i-bell"></use></svg
+          ></span>
+          <p class="empty-state__title">No tiene avisos nuevos</p>
+          <p class="empty-state__description">
+            Los avisos de envío y aprobación de cursos aparecerán aquí.
+          </p>
+        </div>
+        <p class="notification-panel__note">
+          <span class="tag tag--outline">Propuesta UX</span> La ERS define avisos por correo
+          (RF-036, RF-038) y notificación de escritorio (RF-037). Este panel solo los reúne dentro
+          de la aplicación; requiere validación.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
