@@ -15,7 +15,7 @@ Fuera de alcance (se enlazan): capas y BEM en [05](05-CSS-AND-BEM.md); valores d
 | Bootstrap 5.3 como biblioteca de componentes de la Iteración 2 | **Confirmado (ERS)** — §7.1, restricción del curso |
 | CSS compilado (`bootstrap.min.css`) y `bootstrap.bundle.min.js` (incluye Popper), sin modificar sus archivos | **Adoptado** |
 | Personalización solo con custom properties `--bs-*` en capas propias; sin Sass ni recompilación | **Adoptado** — [ADR-0003](../adr/0003-frontend-mpa-es-modules-bootstrap.md) |
-| Bootstrap instalado con npm (versión 5.3 exacta en `package.json`) y servido localmente en `/vendor/bootstrap/` | **Pendiente de validación** — [PV-04](README.md#7-decisiones-pendientes-de-validación) |
+| Bootstrap 5.3.8 servido localmente en `/vendor/bootstrap/`. Mientras no exista `package.json` ni Express, la distribución compilada se copia **sin modificar** en `frontend/vendor/bootstrap/` (`css/bootstrap.min.css`, `js/bootstrap.bundle.min.js`, `LICENSE`); al crear el backend se instala con npm (versión exacta) y Express monta `node_modules/bootstrap/dist/` en la misma URL, sin cambiar HTML ni CSS | **Implementado** (copia temporal) · origen definitivo **Pendiente de validación** — [PV-04](README.md#7-decisiones-pendientes-de-validación) |
 | Sin jQuery, sin temas de terceros, sin modo oscuro (`data-bs-theme`) | **Adoptado** |
 
 Estado actual: **no implementado**. No existe `package.json` ni copia de Bootstrap en el repositorio.

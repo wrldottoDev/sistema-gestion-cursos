@@ -96,7 +96,7 @@ Lista única. Los demás documentos enlazan aquí en vez de repetirla. Mientras 
 | PV-01 | Driver nativo de MongoDB frente a Mongoose | Driver nativo + `$jsonSchema` | [ADR-0004](../adr/0004-mongodb-native-driver-json-schema.md) | Equipo + docente |
 | PV-02 | Flujo de Google: ID token de GIS frente a *authorization code* con PKCE | ID token verificado en servidor | [ADR-0005](../adr/0005-server-sessions-google-identity.md) | Equipo |
 | PV-03 | Duración de sesión, aviso de expiración y cierre de sesión | 30 min de inactividad, 8 h absolutas; aviso 60 s antes con opción de extender (WCAG 2.2.1); endpoint de logout sin botón en UI | ERS §1.2 y Apéndice E; handoff D-07; [14](14-ACCESSIBILITY.md) | Docente |
-| PV-04 | Origen de Bootstrap y fuentes | Paquete npm y fuentes autoalojadas, sin CDN | [07](07-BOOTSTRAP.md), [06](06-DESIGN-SYSTEM.md) | Equipo |
+| PV-04 | Origen de Bootstrap y fuentes | Paquete npm y fuentes autoalojadas, sin CDN. Mientras no hay backend: Bootstrap 5.3.8 copiado sin modificar en `frontend/vendor/bootstrap/` y Barlow/Figtree (OFL) en `frontend/fonts/` | [07](07-BOOTSTRAP.md), [06](06-DESIGN-SYSTEM.md) | Equipo |
 | PV-05 | Notificaciones de escritorio en Iteración 2 (RF-037 CA4) | Server-Sent Events + Notifications API | [09](09-NODEJS-BACKEND.md) | Equipo |
 | PV-06 | Uso de Python (RF-017) | Script con módulo `csv` de la biblioteca estándar, invocado con `spawn` y salida JSON | ERS Apéndice E | Docente |
 | PV-07 | Dependencia circular escuela ↔ director (RF-011 CA1 frente a RF-004 CA3) | Fuente única `users.schoolId`; crear la escuela primero y asignar director después | [11](11-MONGODB.md) | Docente |

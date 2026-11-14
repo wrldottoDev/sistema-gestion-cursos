@@ -148,7 +148,7 @@ Semánticos (consumo en UI):
 | status/approved-fg · bg | `--color-status-approved-fg` · `-bg` | `#1E7B34` · `#E7F5EC` | Aprobado (4,8:1) |
 | status/production-fg · bg | `--color-status-production-fg` · `-bg` | `#FFFFFF` · `#164A98` | En producción |
 | status/inactive-fg · bg | `--color-status-inactive-fg` · `-bg` | `#5A5955` · `#F2F2F0` | Inactivo (6,3:1) |
-| chart/draft, review, approved, production, inactive | `--color-chart-*` | Pendiente | Leyenda y gráficos de reportes — valores a extraer de Figma ([PV-22](README.md#7-decisiones-pendientes-de-validación)) |
+| chart/draft, review, approved, production, inactive | `--color-chart-*` | Aproximados en `tokens/semantic.css` desde P-01 y RP-01 | Leyenda y gráficos de reportes — valores exactos a extraer de Figma ([PV-22](README.md#7-decisiones-pendientes-de-validación)) |
 
 Los ratios entre paréntesis provienen de la tabla "Contraste verificado (WCAG 2.2 AA)" del DS (04-12) y se verifican de nuevo en código según [14](14-ACCESSIBILITY.md).
 
@@ -178,8 +178,8 @@ Pesos: `--font-weight-regular: 400`, `--font-weight-medium: 500`, `--font-weight
 | space/0 · 0-5 · 1 · 2 · 3 · 4 | `--space-0` · `--space-0-5` · `--space-1` · `--space-2` · `--space-3` · `--space-4` | `0` · `0.125rem` · `0.25rem` · `0.5rem` · `0.75rem` · `1rem` |
 | space/5 · 6 · 8 · 10 · 12 · 16 · 20 | `--space-5` · `--space-6` · `--space-8` · `--space-10` · `--space-12` · `--space-16` · `--space-20` | `1.25rem` · `1.5rem` · `2rem` · `2.5rem` · `3rem` · `4rem` · `5rem` |
 | radius/xs · sm · md · lg · xl · full | `--radius-xs` · `--radius-sm` · `--radius-md` · `--radius-lg` · `--radius-xl` · `--radius-full` | `4px` · `6px` · `8px` (controles) · `12px` · `16px` (tarjetas) · `999px` |
-| Elevation/1 Card · 2 Raised · 3 Modal | `--shadow-1` · `--shadow-2` · `--shadow-3` | Pendiente: extraer de los estilos de efecto de Figma (mismo tratamiento que [PV-22](README.md#7-decisiones-pendientes-de-validación)) |
-| Neumorphic/Soft · Inset | `--shadow-neumorphic-soft` · `--shadow-neumorphic-inset` | Pendiente: extraer de Figma |
+| Elevation/1 Card · 2 Raised · 3 Modal | `--shadow-1` · `--shadow-2` · `--shadow-3` | Aproximadas en `tokens/elevation.css`; valores exactos a extraer de los estilos de efecto de Figma (mismo tratamiento que [PV-22](README.md#7-decisiones-pendientes-de-validación)) |
+| Neumorphic/Soft · Inset | `--shadow-neumorphic-soft` · `--shadow-neumorphic-inset` | Aproximadas en `tokens/elevation.css`; pendiente extraer de Figma |
 | Focus/Ring | `--focus-ring-width: 2px` · `--focus-ring-color: var(--color-border-focus)` · `--focus-ring-halo-color: var(--color-brand-blue-light)` | Borde 2 px `#164A98` + halo `#9CC8FF` |
 | Movimiento | `--duration-fast: 150ms` · `--duration-base: 200ms` · `--easing-out: ease-out` | Transiciones 150–200 ms (handoff 09) |
 
@@ -237,7 +237,9 @@ Incorrecto:
 
 ### 6.5 Migración de los tokens implementados (deuda D3)
 
-Los archivos actuales `frontend/css/tokens/colors.css`, `spacing.css` y `typography.css` (**Implementado**) contienen la paleta de la Iteración 1 con nombres en español. Se reemplazan en un único PR (`refactor(ui): migrate tokens to design system`) que crea los archivos de §5, actualiza los usos y elimina los antiguos. Verificación: `grep -rE -- '--(color-(primario|acento|fondo|superficie|texto|borde|error|exito|foco)|fuente|texto-)' frontend/` sin resultados.
+**Realizada el 14 nov 2026** en la fase visual: los archivos de la Iteración 1 se reemplazaron por los de §5 y la verificación de abajo no devuelve resultados. Se conserva la descripción como registro.
+
+Los archivos actuales `frontend/css/tokens/colors.css`, `spacing.css` y `typography.css` (**Implementado**) contienen la paleta de la Iteración 1 con nombres en español. Se reemplazan en un único PR (`refactor(ui): migrate tokens to design system`) que crea los archivos de §5, actualiza los usos y elimina los antiguos. Verificación: `grep -rwE -- '--(color-(primario|acento|fondo|superficie|texto|borde|error|exito|foco)(-[a-z]+)*|fuente|texto-[a-z]+)' frontend/` sin resultados (`-w` evita el falso positivo de `--color-border-*`).
 
 | Token actual | Valor actual | Token nuevo | Valor nuevo | Nota |
 |---|---|---|---|---|

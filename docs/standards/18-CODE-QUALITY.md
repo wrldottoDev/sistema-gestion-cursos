@@ -260,6 +260,8 @@ Deuda detectada en la auditoría del 14 nov 2026 sobre `redesign/iteracion-2` (c
 | D9 | Dependencia circular: RF-011 CA1 exige director al crear una escuela y RF-004 CA3 exige escuela al crear un director | ERS v1.1 | Bloquea el alta inicial de escuelas y directores | Resolver [PV-07](README.md#7-decisiones-pendientes-de-validación) | Alta |
 | D10 | El tag `v1.0-iteracion1` no sigue SemVer | Tags de Git | Inconsistencia con [21](21-VERSIONING.md) | Conservarlo y agregar `v1.0.0` sobre el mismo commit ([PV-18](README.md#7-decisiones-pendientes-de-validación)) | Baja |
 
+Estado al 14 nov 2026 (fase visual de la Iteración 2): **D1, D2 y D3 resueltas**. `reset.css` se eliminó (Bootstrap Reboot es el reset), `index.html` se reescribió (`lang="es"`, rutas absolutas, logotipo con texto alternativo, BEM en inglés) y los tokens se migraron al Design System ([06 §6.5](06-DESIGN-SYSTEM.md#65-migración-de-los-tokens-implementados-deuda-d3)).
+
 Mantenimiento del registro: cada fila se elimina en el PR que la resuelve (el historial de Git conserva la evidencia); la deuda nueva se agrega con el siguiente ID libre (QA-10) y su `TODO(SGC-n)` en el código cuando corresponde.
 
 ## 8. Errores frecuentes

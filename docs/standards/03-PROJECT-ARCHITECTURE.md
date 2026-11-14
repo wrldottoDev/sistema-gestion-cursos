@@ -156,11 +156,11 @@ export function createCatalogsService({ catalogsRepository, countCoursesUsingCat
 ├── backend/.gitkeep                                                        # Vacío: backend no iniciado
 ├── docs/  ERS v1.1 · ESTADO.md · casos de prueba y diseño It1 · standards/
 ├── frontend/
-│   ├── index.html                     # Implementado parcial: A-01 sin JavaScript
-│   ├── css/main.css                   # @import con rutas absolutas /css/...
-│   ├── css/base/reset.css             # Deuda D1: se elimina al integrar Bootstrap Reboot
-│   ├── css/tokens/{colors,spacing,typography}.css   # Deuda D3: valores de Iteración 1
-│   └── img/
+│   ├── index.html · pages/*.html      # Implementado (visual, sin JS): 59 páginas (docs/MATRIZ-COBERTURA-VISUAL.md)
+│   ├── css/main.css                   # @layer vendor, tokens, base, layout, components, utilities
+│   ├── css/{tokens,base,layout,components,utilities}/   # Tokens del DS y bloques BEM (D1 y D3 resueltas)
+│   ├── vendor/bootstrap/ · fonts/     # Bootstrap 5.3.8 sin modificar (PV-04) · Barlow y Figtree (OFL)
+│   └── img/                           # Logotipos oficiales e icons.svg (Lucide)
 └── wireframes/                        # PNG 00–09 y herramienta figma-plugin-sgc (no es parte de la app)
 ```
 
@@ -211,7 +211,7 @@ Montajes estáticos de Express (raíz web = `frontend/`):
 |---|---|---|
 | `/` | `frontend/` | `index.html` es A-01; las demás páginas en `/pages/<page>.html` |
 | `/shared/` | `shared/` | El navegador importa `/shared/validation/course-rules.js` |
-| `/vendor/bootstrap/` | `node_modules/bootstrap/dist/` | PV-04; nunca se copia ni se modifica Bootstrap ([07](07-BOOTSTRAP.md)) |
+| `/vendor/bootstrap/` | `node_modules/bootstrap/dist/` (hoy: copia sin modificar en `frontend/vendor/bootstrap/`) | PV-04; Bootstrap nunca se modifica ([07](07-BOOTSTRAP.md)) |
 | `/api/v1/` | routers de `backend/src/modules/` | API JSON ([10](10-REST-API.md)) |
 
 Todas las referencias del frontend a recursos propios usan **rutas absolutas desde la raíz web** (`/css/main.css`, `/js/pages/course-list.page.js`). Esto corrige la mezcla actual de rutas relativas (`../css/main.css`) y absolutas (deuda D2).
