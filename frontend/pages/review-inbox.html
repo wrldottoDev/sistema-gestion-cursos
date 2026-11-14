@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bandeja de revisión · Sistema de Gestión de Cursos</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+    <!-- Integración futura: <script type="module" src="/js/pages/review-inbox.page.js"></script> (R-01, MB-06, RF-031) -->
+  </head>
+  <body>
+    <a class="visually-hidden-focusable skip-link" href="#main">Saltar al contenido principal</a>
+
+    <div class="app-shell">
+      <!-- Barra superior móvil (< 768 px) -->
+      <header class="app-mobilebar d-md-none" aria-label="Barra superior móvil">
+        <button
+          class="icon-button icon-button--on-brand"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#app-sidebar"
+          aria-controls="app-sidebar"
+          aria-label="Abrir menú"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-menu"></use>
+          </svg>
+        </button>
+        <p class="app-mobilebar__title" aria-hidden="true">Bandeja de revisión</p>
+        <a
+          class="icon-button icon-button--on-brand"
+          href="/pages/notifications.html"
+          aria-label="Avisos, 2 sin leer"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-bell"></use></svg
+          ><span class="icon-button__badge" aria-hidden="true">2</span>
+        </a>
+      </header>
+
+      <!-- Riel de navegación (tablet, 768–1199 px) -->
+      <nav class="app-rail d-none d-md-flex d-xl-none" aria-label="Principal compacta">
+        <button
+          class="icon-button icon-button--on-brand"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#app-sidebar"
+          aria-controls="app-sidebar"
+          aria-label="Abrir menú"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-menu"></use>
+          </svg>
+        </button>
+        <ul class="app-rail__list">
+          <li>
+            <a class="app-rail__link" href="/pages/home-curriculum.html"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-layout-dashboard"></use></svg
+              >Inicio</a
+            >
+          </li>
+          <li>
+            <a class="app-rail__link" href="/pages/review-inbox.html" aria-current="page"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-inbox"></use></svg
+              >Bandeja</a
+            >
+          </li>
+          <li>
+            <a class="app-rail__link" href="/pages/courses.html"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-book-open"></use></svg
+              >Cursos</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Barra lateral: fija ≥ 1200 px; menú lateral (offcanvas) en móvil y tablet (MB-09) -->
+      <div class="app-sidebar">
+        <div
+          class="offcanvas-xl offcanvas-start app-sidebar__panel"
+          id="app-sidebar"
+          tabindex="-1"
+          aria-label="Menú principal"
+        >
+          <div class="offcanvas-header">
+            <button
+              class="btn-close btn-close-white"
+              type="button"
+              data-bs-dismiss="offcanvas"
+              data-bs-target="#app-sidebar"
+              aria-label="Cerrar menú"
+            ></button>
+          </div>
+          <div class="offcanvas-body app-sidebar__body">
+            <a class="app-sidebar__brand" href="/pages/home-curriculum.html">
+              <img
+                class="app-sidebar__logo"
+                src="/img/logo-horizontal-blanco.svg"
+                alt="Universidad CENFOTEC · Inicio"
+                width="216"
+                height="95"
+              />
+            </a>
+            <p class="app-sidebar__product d-none d-xl-block">Sistema de Gestión de Cursos</p>
+            <p class="app-sidebar__user d-xl-none">Luis Solís Rojas · Desarrollo Curricular</p>
+            <hr class="app-sidebar__divider" />
+            <nav aria-labelledby="sidebar-menu-label">
+              <p class="app-sidebar__heading" id="sidebar-menu-label">Menú</p>
+              <ul class="app-sidebar__list">
+                <li>
+                  <a class="app-sidebar__link" href="/pages/home-curriculum.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-layout-dashboard"></use></svg
+                    >Inicio</a
+                  >
+                </li>
+                <li>
+                  <a class="app-sidebar__link" href="/pages/review-inbox.html" aria-current="page"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-inbox"></use></svg
+                    >Bandeja de revisión<span class="app-sidebar__count"
+                      >7<span class="visually-hidden"> cursos en espera</span></span
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a class="app-sidebar__link" href="/pages/courses.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-book-open"></use></svg
+                    >Cursos</a
+                  >
+                </li>
+              </ul>
+            </nav>
+            <div class="d-xl-none mt-auto pt-4">
+              <div class="lang-switch" role="group" aria-label="Idioma de la interfaz">
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-globe"></use>
+                </svg>
+                <button
+                  class="lang-switch__option"
+                  type="button"
+                  lang="es"
+                  aria-pressed="true"
+                  data-action="set-language"
+                  data-language="es"
+                >
+                  ES
+                </button>
+                <button
+                  class="lang-switch__option"
+                  type="button"
+                  lang="en"
+                  aria-pressed="false"
+                  data-action="set-language"
+                  data-language="en"
+                >
+                  EN
+                </button>
+              </div>
+              <p class="app-sidebar__user mt-3">Cerrar sesión: fuera de alcance (ERS §1.2).</p>
+            </div>
+            <p class="app-sidebar__footer d-none d-xl-block">Universidad CENFOTEC</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-main">
+        <!-- Barra superior (≥ 768 px) -->
+        <header class="app-topbar d-none d-md-flex" aria-label="Barra superior">
+          <nav aria-label="Ruta de navegación">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/pages/home-curriculum.html">Inicio</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Bandeja de revisión</li>
+            </ol>
+          </nav>
+          <div class="app-topbar__actions">
+            <div class="lang-switch" role="group" aria-label="Idioma de la interfaz">
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-globe"></use>
+              </svg>
+              <button
+                class="lang-switch__option"
+                type="button"
+                lang="es"
+                aria-pressed="true"
+                data-action="set-language"
+                data-language="es"
+              >
+                ES
+              </button>
+              <button
+                class="lang-switch__option"
+                type="button"
+                lang="en"
+                aria-pressed="false"
+                data-action="set-language"
+                data-language="en"
+              >
+                EN
+              </button>
+            </div>
+            <button
+              class="icon-button"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#notifications-panel"
+              aria-controls="notifications-panel"
+              aria-label="Avisos, 2 sin leer"
+            >
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-bell"></use></svg
+              ><span class="icon-button__badge" aria-hidden="true">2</span>
+            </button>
+            <span class="app-topbar__separator" aria-hidden="true"></span>
+            <div class="dropdown">
+              <button
+                class="user-menu__toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                data-bs-auto-close="outside"
+                aria-expanded="false"
+              >
+                <span class="visually-hidden">Menú de usuario:</span>
+                <span class="avatar" aria-hidden="true">LS</span>
+                <span class="user-menu__identity">
+                  <span class="user-menu__name">Luis Solís Rojas</span>
+                  <span class="user-menu__role">Desarrollo Curricular</span>
+                </span>
+                <svg class="icon icon--sm" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-chevron-down"></use>
+                </svg>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end user-menu__panel">
+                <div class="user-menu__header">
+                  <span class="avatar avatar--lg" aria-hidden="true">LS</span>
+                  <div>
+                    <p class="user-menu__name mb-0">Luis Solís Rojas</p>
+                    <p class="user-menu__email">lsolis@ucenfotec.ac.cr</p>
+                  </div>
+                </div>
+                <dl class="user-menu__details">
+                  <dt>Rol</dt>
+                  <dd>Desarrollo Curricular</dd>
+                </dl>
+                <fieldset>
+                  <legend class="form-legend">Idioma de la interfaz</legend>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      id="user-language-es"
+                      name="userLanguage"
+                      type="radio"
+                      value="es"
+                      checked
+                    />
+                    <label class="form-check-label" for="user-language-es">Español</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      id="user-language-en"
+                      name="userLanguage"
+                      type="radio"
+                      value="en"
+                    />
+                    <label class="form-check-label" for="user-language-en" lang="en">English</label>
+                  </div>
+                  <p class="form-text">Se recuerda su preferencia (RF-044 CA3).</p>
+                </fieldset>
+                <p class="user-menu__note">
+                  Cerrar sesión no está disponible: fuera de alcance de la ERS (§1.2) y pendiente de
+                  validar (Apéndice E).
+                </p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main id="main" class="app-content" tabindex="-1">
+          <div class="page-header">
+            <div class="page-header__text">
+              <h1 class="page-header__title page-header__title--mobile-hidden">
+                Bandeja de revisión
+              </h1>
+              <p class="page-header__subtitle">
+                7 cursos En desarrollo de todas las escuelas · del más antiguo al más reciente
+              </p>
+            </div>
+          </div>
+
+          <form
+            class="filter-bar"
+            role="search"
+            aria-label="Buscar y filtrar la bandeja"
+            data-form="review-inbox-filters"
+          >
+            <div class="search-field">
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-search"></use>
+              </svg>
+              <label class="visually-hidden" for="review-search">Buscar por código o nombre</label>
+              <input
+                class="form-control"
+                id="review-search"
+                name="q"
+                type="search"
+                placeholder="Buscar por código o nombre"
+              />
+            </div>
+            <div class="filter-select">
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-funnel"></use>
+              </svg>
+              <label class="filter-select__label" for="review-school-filter">Escuela:</label>
+              <select
+                class="form-select filter-select__control"
+                id="review-school-filter"
+                name="schoolId"
+              >
+                <option value="" selected>Todas</option>
+                <option value="software-engineering">Ingeniería del Software</option>
+                <option value="cybersecurity">Ciberseguridad</option>
+                <option value="intelligent-systems">Sistemas Inteligentes</option>
+                <option value="information-technology">Tecnologías de Información</option>
+                <option value="information-systems">Sistemas de Información</option>
+                <option value="computing-fundamentals">Fundamentos de Computación</option>
+                <option value="business-administration">Administración de Negocios</option>
+              </select>
+            </div>
+            <button class="btn btn-primary visually-hidden-focusable" type="submit">
+              Aplicar filtros
+            </button>
+          </form>
+
+          <section class="data-card d-none d-md-block" aria-labelledby="review-inbox-caption">
+            <div class="table-responsive" tabindex="0">
+              <table class="table table-hover">
+                <caption class="visually-hidden" id="review-inbox-caption">
+                  Cursos En desarrollo pendientes de revisión, del más antiguo al más reciente
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Nombre del curso</th>
+                    <th class="d-none d-xl-table-cell" scope="col">Escuela</th>
+                    <th class="d-none d-xl-table-cell" scope="col" aria-sort="ascending">
+                      <span class="data-table__sort"
+                        >Enviado
+                        <svg class="icon icon--sm" aria-hidden="true" focusable="false">
+                          <use href="/img/icons.svg#i-arrow-up-down"></use></svg
+                      ></span>
+                    </th>
+                    <th scope="col">En espera</th>
+                    <th class="text-end" scope="col">Adjuntos</th>
+                    <th scope="col"><span class="visually-hidden">Acción</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th class="data-table__code" scope="row">
+                      <a href="/pages/course-review-generate-code.html"
+                        ><span class="tag tag--warning"
+                          ><svg class="icon" aria-hidden="true" focusable="false">
+                            <use href="/img/icons.svg#i-hash"></use></svg
+                          >Código pendiente</span
+                        ></a
+                      >
+                    </th>
+                    <td>
+                      Pruebas de software<span class="data-table__secondary d-xl-none"
+                        >Ingeniería del Software · 06/10/2026</span
+                      >
+                    </td>
+                    <td class="d-none d-xl-table-cell">
+                      <span class="school-marker school-marker--software-engineering"
+                        >Ingeniería del Software</span
+                      >
+                    </td>
+                    <td class="d-none d-xl-table-cell text-tabular">06/10/2026</td>
+                    <td>
+                      <span class="tag tag--warning"
+                        ><svg class="icon" aria-hidden="true" focusable="false">
+                          <use href="/img/icons.svg#i-clock"></use></svg
+                        >5 días</span
+                      >
+                    </td>
+                    <td class="text-end text-tabular">1</td>
+                    <td class="text-end">
+                      <a
+                        class="btn btn-outline-primary btn-sm"
+                        href="/pages/course-review-generate-code.html"
+                        aria-label="Revisar Pruebas de software"
+                        >Revisar</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="data-table__code" scope="row">
+                      <a href="/pages/course-review.html">CIBER-204</a>
+                    </th>
+                    <td>
+                      Hacking ético<span class="data-table__secondary d-xl-none"
+                        >Ciberseguridad · 07/10/2026</span
+                      >
+                    </td>
+                    <td class="d-none d-xl-table-cell">
+                      <span class="school-marker school-marker--cybersecurity">Ciberseguridad</span>
+                    </td>
+                    <td class="d-none d-xl-table-cell text-tabular">07/10/2026</td>
+                    <td>
+                      <span class="tag"
+                        ><svg class="icon" aria-hidden="true" focusable="false">
+                          <use href="/img/icons.svg#i-clock"></use></svg
+                        >4 días</span
+                      >
+                    </td>
+                    <td class="text-end text-tabular">2</td>
+                    <td class="text-end">
+                      <a
+                        class="btn btn-outline-primary btn-sm"
+                        href="/pages/course-review.html"
+                        aria-label="Revisar CIBER-204"
+                        >Revisar</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="data-table__code" scope="row">
+                      <a href="/pages/course-review.html">SINT-110</a>
+                    </th>
+                    <td>
+                      Aprendizaje automático I<span class="data-table__secondary d-xl-none"
+                        >Sistemas Inteligentes · 09/10/2026</span
+                      >
+                    </td>
+                    <td class="d-none d-xl-table-cell">
+                      <span class="school-marker school-marker--intelligent-systems"
+                        >Sistemas Inteligentes</span
+                      >
+                    </td>
+                    <td class="d-none d-xl-table-cell text-tabular">09/10/2026</td>
+                    <td>
+                      <span class="tag"
+                        ><svg class="icon" aria-hidden="true" focusable="false">
+                          <use href="/img/icons.svg#i-clock"></use></svg
+                        >2 días</span
+                      >
+                    </td>
+                    <td class="text-end text-tabular">0</td>
+                    <td class="text-end">
+                      <a
+                        class="btn btn-outline-primary btn-sm"
+                        href="/pages/course-review.html"
+                        aria-label="Revisar SINT-110"
+                        >Revisar</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="data-table__code" scope="row">
+                      <a href="/pages/course-review.html">TI-412</a>
+                    </th>
+                    <td>
+                      Computación en la nube<span class="data-table__secondary d-xl-none"
+                        >Tecnologías de Información · 10/10/2026</span
+                      >
+                    </td>
+                    <td class="d-none d-xl-table-cell">
+                      <span class="school-marker school-marker--information-technology"
+                        >Tecnologías de Información</span
+                      >
+                    </td>
+                    <td class="d-none d-xl-table-cell text-tabular">10/10/2026</td>
+                    <td>
+                      <span class="tag"
+                        ><svg class="icon" aria-hidden="true" focusable="false">
+                          <use href="/img/icons.svg#i-clock"></use></svg
+                        >1 día</span
+                      >
+                    </td>
+                    <td class="text-end text-tabular">1</td>
+                    <td class="text-end">
+                      <a
+                        class="btn btn-outline-primary btn-sm"
+                        href="/pages/course-review.html"
+                        aria-label="Revisar TI-412"
+                        >Revisar</a
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <th class="data-table__code" scope="row">
+                      <a href="/pages/course-review.html">SOFT-210</a>
+                    </th>
+                    <td>
+                      Arquitectura de software<span class="data-table__secondary d-xl-none"
+                        >Ingeniería del Software · 12/10/2026</span
+                      >
+                    </td>
+                    <td class="d-none d-xl-table-cell">
+                      <span class="school-marker school-marker--software-engineering"
+                        >Ingeniería del Software</span
+                      >
+                    </td>
+                    <td class="d-none d-xl-table-cell text-tabular">12/10/2026</td>
+                    <td><span class="tag tag--info">Hoy</span></td>
+                    <td class="text-end text-tabular">2</td>
+                    <td class="text-end">
+                      <a
+                        class="btn btn-outline-primary btn-sm"
+                        href="/pages/course-review.html"
+                        aria-label="Revisar SOFT-210"
+                        >Revisar</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="data-card__footer">
+              <p class="data-card__summary">Mostrando 1–5 de 7 cursos</p>
+              <nav aria-label="Paginación de la bandeja">
+                <ul class="pagination">
+                  <li class="page-item disabled">
+                    <span class="page-link"
+                      ><svg class="icon icon--sm" aria-hidden="true" focusable="false">
+                        <use href="/img/icons.svg#i-chevron-left"></use></svg
+                      ><span class="visually-hidden">Página anterior</span></span
+                    >
+                  </li>
+                  <li class="page-item active">
+                    <a class="page-link" href="/pages/review-inbox.html" aria-current="page">1</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="/pages/review-inbox.html">2</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="/pages/review-inbox.html">3</a>
+                  </li>
+                  <li class="page-item pagination__gap" aria-hidden="true">…</li>
+                  <li class="page-item">
+                    <a class="page-link" href="/pages/review-inbox.html">5</a>
+                  </li>
+                  <li class="page-item">
+                    <a class="page-link" href="/pages/review-inbox.html"
+                      ><svg class="icon icon--sm" aria-hidden="true" focusable="false">
+                        <use href="/img/icons.svg#i-chevron-right"></use></svg
+                      ><span class="visually-hidden">Página siguiente</span></a
+                    >
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </section>
+
+          <!-- Tarjetas (< 768 px, MB-06) -->
+          <section class="d-md-none" aria-label="Cursos pendientes de revisión">
+            <ul class="record-list">
+              <li class="record-card pe-3">
+                <div class="record-card__header">
+                  <span class="tag tag--warning"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-hash"></use></svg
+                    >Código pendiente</span
+                  >
+                  <span class="tag tag--warning"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-clock"></use></svg
+                    >5 días</span
+                  >
+                </div>
+                <h2 class="record-card__title">Pruebas de software</h2>
+                <p class="record-card__meta">Ingeniería del Software · 06/10/2026</p>
+                <a
+                  class="btn btn-outline-primary btn-sm w-100"
+                  href="/pages/course-review-generate-code.html"
+                  aria-label="Revisar Pruebas de software"
+                  >Revisar</a
+                >
+              </li>
+              <li class="record-card pe-3">
+                <div class="record-card__header">
+                  <span class="record-card__code">CIBER-204</span>
+                  <span class="tag tag--warning"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-clock"></use></svg
+                    >4 días</span
+                  >
+                </div>
+                <h2 class="record-card__title">Hacking ético</h2>
+                <p class="record-card__meta">Ciberseguridad · 07/10/2026</p>
+                <a
+                  class="btn btn-outline-primary btn-sm w-100"
+                  href="/pages/course-review.html"
+                  aria-label="Revisar CIBER-204"
+                  >Revisar</a
+                >
+              </li>
+              <li class="record-card pe-3">
+                <div class="record-card__header">
+                  <span class="record-card__code">SOFT-210</span>
+                  <span class="tag tag--info"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-clock"></use></svg
+                    >Hoy</span
+                  >
+                </div>
+                <h2 class="record-card__title">Arquitectura de software</h2>
+                <p class="record-card__meta">Ingeniería del Software · 12/10/2026</p>
+                <a
+                  class="btn btn-outline-primary btn-sm w-100"
+                  href="/pages/course-review.html"
+                  aria-label="Revisar SOFT-210"
+                  >Revisar</a
+                >
+              </li>
+            </ul>
+            <p class="view-note text-center">Mostrando 3 de 7 cursos</p>
+          </section>
+          <p class="demo-note">
+            <svg class="icon icon--sm" aria-hidden="true" focusable="false">
+              <use href="/img/icons.svg#i-info"></use>
+            </svg>
+            Vista estática de demostración: los datos son ficticios y las acciones no están
+            conectadas.
+          </p>
+        </main>
+      </div>
+
+      <!-- Barra inferior (< 768 px) -->
+      <nav class="app-bottomnav d-md-none" aria-label="Principal inferior">
+        <ul class="app-bottomnav__list">
+          <li>
+            <a class="app-bottomnav__link" href="/pages/home-curriculum.html"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-layout-dashboard"></use></svg></span
+              >Inicio</a
+            >
+          </li>
+          <li>
+            <a class="app-bottomnav__link" href="/pages/review-inbox.html" aria-current="page"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-inbox"></use></svg></span
+              >Bandeja</a
+            >
+          </li>
+          <li>
+            <a class="app-bottomnav__link" href="/pages/courses.html"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-book-open"></use></svg></span
+              >Cursos</a
+            >
+          </li>
+          <li>
+            <a class="app-bottomnav__link" href="/pages/notifications.html"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-bell"></use></svg></span
+              >Avisos</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Panel de avisos (N-01, propuesta UX D-09) -->
+    <div
+      class="offcanvas offcanvas-end notification-panel"
+      id="notifications-panel"
+      tabindex="-1"
+      aria-labelledby="notifications-panel-title"
+    >
+      <div class="offcanvas-header">
+        <h2 class="offcanvas-title h3" id="notifications-panel-title">Avisos</h2>
+        <button class="btn btn-link btn-sm ms-auto" type="button" data-action="mark-all-read">
+          Marcar todo como leído
+        </button>
+        <button
+          class="btn-close"
+          type="button"
+          data-bs-dismiss="offcanvas"
+          aria-label="Cerrar avisos"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="notification-list">
+          <li class="notification-item notification-item--unread">
+            <span class="icon-circle"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-inbox"></use></svg
+            ></span>
+            <div>
+              <p class="notification-item__title">
+                <a href="/pages/course-review.html">Nuevo curso para revisión</a
+                ><span class="visually-hidden"> (no leído)</span>
+              </p>
+              <p class="notification-item__meta">
+                SOFT-210 · Arquitectura de software · Ingeniería del Software
+              </p>
+              <p class="notification-item__time">Hace 5 min</p>
+            </div>
+          </li>
+          <li class="notification-item notification-item--unread">
+            <span class="icon-circle"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-inbox"></use></svg
+            ></span>
+            <div>
+              <p class="notification-item__title">
+                <a href="/pages/review-inbox.html">Nuevo curso para revisión</a
+                ><span class="visually-hidden"> (no leído)</span>
+              </p>
+              <p class="notification-item__meta">
+                TI-412 · Computación en la nube · Tecnologías de Información
+              </p>
+              <p class="notification-item__time">Hace 2 días</p>
+            </div>
+          </li>
+          <li class="notification-item">
+            <span class="icon-circle"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-circle-check"></use></svg
+            ></span>
+            <div>
+              <p class="notification-item__title">
+                <a href="/pages/course-review-approved.html">Curso aprobado</a>
+              </p>
+              <p class="notification-item__meta">SOFT-101 · Fundamentos de programación</p>
+              <p class="notification-item__time">12/10/2026</p>
+            </div>
+          </li>
+        </ul>
+        <p class="notification-panel__note">
+          <span class="tag tag--outline">Propuesta UX</span> La ERS define avisos por correo
+          (RF-036, RF-038) y notificación de escritorio (RF-037). Este panel solo los reúne dentro
+          de la aplicación; requiere validación.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
