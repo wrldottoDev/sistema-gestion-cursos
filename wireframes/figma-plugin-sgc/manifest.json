@@ -1,0 +1,18 @@
+{
+  "name": "SGC CENFOTEC · Generador UX/UI",
+  "id": "sgc-cenfotec-ux-generator",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": ["figma"],
+  "documentAccess": "dynamic-page",
+  "networkAccess": { "allowedDomains": ["none"] },
+  "menu": [
+    { "name": "Construir todo (03, 05–09, 00–02)", "command": "all" },
+    { "separator": true },
+    { "name": "03 · Wireframes", "command": "wf" },
+    { "name": "05 · Alta fidelidad desktop", "command": "desk" },
+    { "name": "06–07 · Tablet y móvil", "command": "resp" },
+    { "name": "08 · Conectar prototipo", "command": "proto" },
+    { "name": "00–02 y 09 · Documentación", "command": "docs" }
+  ]
+}
