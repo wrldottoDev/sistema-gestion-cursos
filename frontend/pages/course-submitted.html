@@ -1,0 +1,987 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Curso enviado · SOFT-210 · Arquitectura de software · Sistema de Gestión de Cursos
+    </title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+    <!-- Integración futura: <script type="module" src="/js/pages/course-submitted.page.js"></script> (F-13, RF-019 CA4, RF-030, RF-040) -->
+  </head>
+  <body>
+    <a class="visually-hidden-focusable skip-link" href="#main">Saltar al contenido principal</a>
+
+    <div class="app-shell">
+      <!-- Barra superior móvil (< 768 px) -->
+      <header class="app-mobilebar d-md-none" aria-label="Barra superior móvil">
+        <button
+          class="icon-button icon-button--on-brand"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#app-sidebar"
+          aria-controls="app-sidebar"
+          aria-label="Abrir menú"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-menu"></use>
+          </svg>
+        </button>
+        <p class="app-mobilebar__title" aria-hidden="true">SOFT-210</p>
+        <a
+          class="icon-button icon-button--on-brand"
+          href="/pages/notifications.html"
+          aria-label="Avisos, 3 sin leer"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-bell"></use></svg
+          ><span class="icon-button__badge" aria-hidden="true">3</span>
+        </a>
+      </header>
+
+      <!-- Riel de navegación (tablet, 768–1199 px) -->
+      <nav class="app-rail d-none d-md-flex d-xl-none" aria-label="Principal compacta">
+        <button
+          class="icon-button icon-button--on-brand"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#app-sidebar"
+          aria-controls="app-sidebar"
+          aria-label="Abrir menú"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-menu"></use>
+          </svg>
+        </button>
+        <ul class="app-rail__list">
+          <li>
+            <a class="app-rail__link" href="/pages/home-director.html"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-layout-dashboard"></use></svg
+              >Inicio</a
+            >
+          </li>
+          <li>
+            <a class="app-rail__link" href="/pages/my-courses.html" aria-current="page"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-book-open"></use></svg
+              >Cursos</a
+            >
+          </li>
+          <li>
+            <a class="app-rail__link" href="/pages/report-production-director.html"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-chart-column"></use></svg
+              >Reportes</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Barra lateral: fija ≥ 1200 px; menú lateral (offcanvas) en móvil y tablet (MB-09) -->
+      <div class="app-sidebar">
+        <div
+          class="offcanvas-xl offcanvas-start app-sidebar__panel"
+          id="app-sidebar"
+          tabindex="-1"
+          aria-label="Menú principal"
+        >
+          <div class="offcanvas-header">
+            <button
+              class="btn-close btn-close-white"
+              type="button"
+              data-bs-dismiss="offcanvas"
+              data-bs-target="#app-sidebar"
+              aria-label="Cerrar menú"
+            ></button>
+          </div>
+          <div class="offcanvas-body app-sidebar__body">
+            <a class="app-sidebar__brand" href="/pages/home-director.html">
+              <img
+                class="app-sidebar__logo"
+                src="/img/logo-horizontal-blanco.svg"
+                alt="Universidad CENFOTEC · Inicio"
+                width="216"
+                height="95"
+              />
+            </a>
+            <p class="app-sidebar__product d-none d-xl-block">Sistema de Gestión de Cursos</p>
+            <p class="app-sidebar__user d-xl-none">Ana Mora Quesada · Directora</p>
+            <hr class="app-sidebar__divider" />
+            <nav aria-labelledby="sidebar-menu-label">
+              <p class="app-sidebar__heading" id="sidebar-menu-label">Menú</p>
+              <ul class="app-sidebar__list">
+                <li>
+                  <a class="app-sidebar__link" href="/pages/home-director.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-layout-dashboard"></use></svg
+                    >Inicio</a
+                  >
+                </li>
+                <li>
+                  <a class="app-sidebar__link" href="/pages/my-courses.html" aria-current="page"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-book-open"></use></svg
+                    >Mis cursos</a
+                  >
+                </li>
+                <li>
+                  <a class="app-sidebar__link" href="/pages/report-production-director.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-chart-column"></use></svg
+                    >Reportes</a
+                  >
+                </li>
+              </ul>
+            </nav>
+            <div class="d-xl-none mt-auto pt-4">
+              <div class="lang-switch" role="group" aria-label="Idioma de la interfaz">
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-globe"></use>
+                </svg>
+                <button
+                  class="lang-switch__option"
+                  type="button"
+                  lang="es"
+                  aria-pressed="true"
+                  data-action="set-language"
+                  data-language="es"
+                >
+                  ES
+                </button>
+                <button
+                  class="lang-switch__option"
+                  type="button"
+                  lang="en"
+                  aria-pressed="false"
+                  data-action="set-language"
+                  data-language="en"
+                >
+                  EN
+                </button>
+              </div>
+              <p class="app-sidebar__user mt-3">Cerrar sesión: fuera de alcance (ERS §1.2).</p>
+            </div>
+            <p class="app-sidebar__footer d-none d-xl-block">Universidad CENFOTEC</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-main">
+        <!-- Barra superior (≥ 768 px) -->
+        <header class="app-topbar d-none d-md-flex" aria-label="Barra superior">
+          <nav aria-label="Ruta de navegación">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/pages/my-courses.html">Mis cursos</a></li>
+              <li class="breadcrumb-item active" aria-current="page">SOFT-210</li>
+            </ol>
+          </nav>
+          <div class="app-topbar__actions">
+            <div class="lang-switch" role="group" aria-label="Idioma de la interfaz">
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-globe"></use>
+              </svg>
+              <button
+                class="lang-switch__option"
+                type="button"
+                lang="es"
+                aria-pressed="true"
+                data-action="set-language"
+                data-language="es"
+              >
+                ES
+              </button>
+              <button
+                class="lang-switch__option"
+                type="button"
+                lang="en"
+                aria-pressed="false"
+                data-action="set-language"
+                data-language="en"
+              >
+                EN
+              </button>
+            </div>
+            <button
+              class="icon-button"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#notifications-panel"
+              aria-controls="notifications-panel"
+              aria-label="Avisos, 3 sin leer"
+            >
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-bell"></use></svg
+              ><span class="icon-button__badge" aria-hidden="true">3</span>
+            </button>
+            <span class="app-topbar__separator" aria-hidden="true"></span>
+            <div class="dropdown">
+              <button
+                class="user-menu__toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                data-bs-auto-close="outside"
+                aria-expanded="false"
+              >
+                <span class="visually-hidden">Menú de usuario:</span>
+                <span class="avatar" aria-hidden="true">AM</span>
+                <span class="user-menu__identity">
+                  <span class="user-menu__name">Ana Mora Quesada</span>
+                  <span class="user-menu__role">Directora · Ing. del Software</span>
+                </span>
+                <svg class="icon icon--sm" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-chevron-down"></use>
+                </svg>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end user-menu__panel">
+                <div class="user-menu__header">
+                  <span class="avatar avatar--lg" aria-hidden="true">AM</span>
+                  <div>
+                    <p class="user-menu__name mb-0">Ana Mora Quesada</p>
+                    <p class="user-menu__email">amora@ucenfotec.ac.cr</p>
+                  </div>
+                </div>
+                <dl class="user-menu__details">
+                  <dt>Rol</dt>
+                  <dd>Director de Escuela</dd>
+                  <dt>Escuela</dt>
+                  <dd>Ingeniería del Software</dd>
+                </dl>
+                <fieldset>
+                  <legend class="form-legend">Idioma de la interfaz</legend>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      id="user-language-es"
+                      name="userLanguage"
+                      type="radio"
+                      value="es"
+                      checked
+                    />
+                    <label class="form-check-label" for="user-language-es">Español</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      id="user-language-en"
+                      name="userLanguage"
+                      type="radio"
+                      value="en"
+                    />
+                    <label class="form-check-label" for="user-language-en" lang="en">English</label>
+                  </div>
+                  <p class="form-text">Se recuerda su preferencia (RF-044 CA3).</p>
+                </fieldset>
+                <p class="user-menu__note">
+                  Cerrar sesión no está disponible: fuera de alcance de la ERS (§1.2) y pendiente de
+                  validar (Apéndice E).
+                </p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main id="main" class="app-content" tabindex="-1">
+          <div class="page-header">
+            <div class="page-header__text">
+              <a class="page-header__back" href="/pages/my-courses.html"
+                ><svg class="icon icon--sm" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-arrow-left"></use></svg
+                >Mis cursos</a
+              >
+              <h1 class="page-header__title page-header__title--mobile-hidden">
+                SOFT-210 · Arquitectura de software
+              </h1>
+              <p class="page-header__meta">
+                <span class="badge status-badge status-badge--in-development"
+                  ><svg class="icon" aria-hidden="true" focusable="false">
+                    <use href="/img/icons.svg#i-clock"></use></svg
+                  >En desarrollo</span
+                ><span class="tag"
+                  ><svg class="icon" aria-hidden="true" focusable="false">
+                    <use href="/img/icons.svg#i-lock"></use></svg
+                  >Solo lectura</span
+                ><span>Enviado 12/10/2026 10:30 · Ingeniería del Software</span>
+              </p>
+            </div>
+          </div>
+          <div class="alert alert-success" role="status">
+            <svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/img/icons.svg#i-circle-check"></use>
+            </svg>
+            <div>
+              <p class="alert-heading">Curso enviado a revisión</p>
+              <p>
+                Desarrollo Curricular fue notificado. Le avisaremos por correo cuando sea aprobado.
+                El curso ya no es editable (RF-019 CA4).
+              </p>
+            </div>
+          </div>
+          <div class="row g-4">
+            <div class="col-xl-8 min-w-0">
+              <ul class="nav nav-tabs" role="tablist" aria-label="Información del curso">
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link active"
+                    id="tab-summary"
+                    type="button"
+                    role="tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#panel-summary"
+                    aria-controls="panel-summary"
+                    aria-selected="true"
+                  >
+                    Resumen
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="tab-competency"
+                    type="button"
+                    role="tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#panel-competency"
+                    aria-controls="panel-competency"
+                    aria-selected="false"
+                    tabindex="-1"
+                  >
+                    Competencia y perfiles
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="tab-program"
+                    type="button"
+                    role="tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#panel-program"
+                    aria-controls="panel-program"
+                    aria-selected="false"
+                    tabindex="-1"
+                  >
+                    Programa y metadata
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="tab-attachments"
+                    type="button"
+                    role="tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#panel-attachments"
+                    aria-controls="panel-attachments"
+                    aria-selected="false"
+                    tabindex="-1"
+                  >
+                    Adjuntos
+                    <span class="badge rounded-pill bg-body-secondary text-body-secondary">2</span>
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="tab-history"
+                    type="button"
+                    role="tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#panel-history"
+                    aria-controls="panel-history"
+                    aria-selected="false"
+                    tabindex="-1"
+                  >
+                    Historial
+                  </button>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div
+                  class="tab-pane fade show active"
+                  id="panel-summary"
+                  role="tabpanel"
+                  aria-labelledby="tab-summary"
+                  tabindex="0"
+                >
+                  <div class="d-grid gap-4 pt-4">
+                    <section class="card" aria-labelledby="detail-identificacion">
+                      <div class="card-body">
+                        <h2 class="card-title mb-4" id="detail-identificacion">Identificación</h2>
+                        <dl class="detail-list detail-list--2-cols">
+                          <div>
+                            <dt>Código</dt>
+                            <dd>SOFT-210</dd>
+                          </div>
+                          <div>
+                            <dt>Escuela</dt>
+                            <dd>Ingeniería del Software</dd>
+                          </div>
+                          <div>
+                            <dt>Nombre del curso</dt>
+                            <dd>Arquitectura de software</dd>
+                          </div>
+                          <div>
+                            <dt>Solicitó código a Desarrollo Curricular</dt>
+                            <dd>No</dd>
+                          </div>
+                        </dl>
+                      </div>
+                    </section>
+                    <section class="card" aria-labelledby="detail-clasificacion-academica">
+                      <div class="card-body">
+                        <h2 class="card-title mb-4" id="detail-clasificacion-academica">
+                          Clasificación académica
+                        </h2>
+                        <dl class="detail-list detail-list--2-cols">
+                          <div>
+                            <dt>Área SFIA</dt>
+                            <dd>Desarrollo de software</dd>
+                          </div>
+                          <div>
+                            <dt>Temática</dt>
+                            <dd>Ingeniería de software</dd>
+                          </div>
+                          <div>
+                            <dt>Metodología de aprendizaje</dt>
+                            <dd>Aprendizaje basado en proyectos</dd>
+                          </div>
+                          <div>
+                            <dt>Nivel de complejidad</dt>
+                            <dd>Intermedio</dd>
+                          </div>
+                          <div>
+                            <dt>Certificación</dt>
+                            <dd>No tiene</dd>
+                          </div>
+                          <div>
+                            <dt>Casa certificadora</dt>
+                            <dd>—</dd>
+                          </div>
+                        </dl>
+                      </div>
+                    </section>
+                    <section class="card" aria-labelledby="detail-carga-academica-y-modalidad">
+                      <div class="card-body">
+                        <h2 class="card-title mb-4" id="detail-carga-academica-y-modalidad">
+                          Carga académica y modalidad
+                        </h2>
+                        <dl class="detail-list detail-list--2-cols">
+                          <div>
+                            <dt>Créditos</dt>
+                            <dd>4</dd>
+                          </div>
+                          <div>
+                            <dt>Modalidad</dt>
+                            <dd>Presencial</dd>
+                          </div>
+                          <div>
+                            <dt>Horas clase</dt>
+                            <dd>48</dd>
+                          </div>
+                          <div>
+                            <dt>Horas extra clase</dt>
+                            <dd>96</dd>
+                          </div>
+                          <div>
+                            <dt>Total de horas</dt>
+                            <dd>144 (calculado)</dd>
+                          </div>
+                        </dl>
+                      </div>
+                    </section>
+                    <section class="card" aria-labelledby="detail-textos-y-descripciones">
+                      <div class="card-body">
+                        <h2 class="card-title mb-4" id="detail-textos-y-descripciones">
+                          Textos y descripciones
+                        </h2>
+                        <dl class="detail-list detail-list--2-cols">
+                          <div>
+                            <dt>Nombre en Power Campus</dt>
+                            <dd>Arquitectura de Software · 24/40</dd>
+                          </div>
+                          <div>
+                            <dt>Meta descripción</dt>
+                            <dd>
+                              Aprenda a diseñar arquitecturas de software con patrones, estilos y
+                              decisiones documentadas. Curso intermedio de Ingeniería del Software.
+                            </dd>
+                          </div>
+                          <div>
+                            <dt>Descripción corta</dt>
+                            <dd>
+                              Curso que introduce los principios, estilos y patrones de arquitectura
+                              para diseñar sistemas de software mantenibles, escalables y seguros.
+                            </dd>
+                          </div>
+                          <div>
+                            <dt>Descripción larga</dt>
+                            <dd>
+                              El curso aborda los fundamentos de la arquitectura de software:
+                              atributos de calidad, estilos arquitectónicos (capas, microservicios,
+                              eventos), patrones, documentación con vistas y registro de decisiones.
+                              Incluye un proyecto integrador por equipos.
+                            </dd>
+                          </div>
+                        </dl>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="panel-competency"
+                  role="tabpanel"
+                  aria-labelledby="tab-competency"
+                  tabindex="0"
+                >
+                  <div class="d-grid gap-4 pt-4">
+                    <section class="card" aria-labelledby="detail-competency">
+                      <div class="card-body">
+                        <h2 class="card-title mb-4" id="detail-competency">
+                          Competencia, requisitos y perfiles
+                        </h2>
+                        <dl class="detail-list detail-list--2-cols">
+                          <div>
+                            <dt>Competencia</dt>
+                            <dd>
+                              Diseña arquitecturas de software que satisfacen atributos de calidad
+                              definidos, justificando sus decisiones técnicas.
+                            </dd>
+                          </div>
+                          <div>
+                            <dt>Capacidades específicas</dt>
+                            <dd>
+                              Evalúa estilos arquitectónicos; modela vistas; documenta decisiones
+                              (ADR); valida la arquitectura con escenarios de calidad.
+                            </dd>
+                          </div>
+                          <div>
+                            <dt>Requisitos indispensables</dt>
+                            <dd>Programación orientada a objetos; Bases de datos I.</dd>
+                          </div>
+                          <div>
+                            <dt>Requisitos deseables</dt>
+                            <dd>Experiencia básica con servicios web y control de versiones.</dd>
+                          </div>
+                          <div>
+                            <dt>Perfil de ingreso</dt>
+                            <dd>
+                              Estudiante con fundamentos de programación y diseño orientado a
+                              objetos.
+                            </dd>
+                          </div>
+                          <div>
+                            <dt>Perfil de salida</dt>
+                            <dd>
+                              Profesional capaz de proponer, comunicar y evaluar la arquitectura de
+                              un sistema.
+                            </dd>
+                          </div>
+                          <div>
+                            <dt>Palabras clave</dt>
+                            <dd>arquitectura, patrones, microservicios, ADR</dd>
+                          </div>
+                        </dl>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="panel-program"
+                  role="tabpanel"
+                  aria-labelledby="tab-program"
+                  tabindex="0"
+                >
+                  <div class="d-grid gap-4 pt-4">
+                    <section class="card" aria-labelledby="detail-program">
+                      <div class="card-body">
+                        <h2 class="card-title mb-4" id="detail-program">
+                          Programa, e-commerce y metadata
+                        </h2>
+                        <dl class="detail-list detail-list--2-cols">
+                          <div>
+                            <dt>Pertenece a un programa</dt>
+                            <dd>Sí · Técnico en Desarrollo de Software</dd>
+                          </div>
+                          <div>
+                            <dt>E-commerce abierto</dt>
+                            <dd>Sí · 15/01/2027 – 30/04/2027</dd>
+                          </div>
+                          <div>
+                            <dt>Metadata</dt>
+                            <dd>Área: Software · Público: estudiantes de bachillerato</dd>
+                          </div>
+                          <div>
+                            <dt>Última modificación de la metadata</dt>
+                            <dd>12/10/2026 10:20</dd>
+                          </div>
+                        </dl>
+                      </div>
+                    </section>
+                  </div>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="panel-attachments"
+                  role="tabpanel"
+                  aria-labelledby="tab-attachments"
+                  tabindex="0"
+                >
+                  <div class="d-grid gap-4 pt-4">
+                    <ul class="file-list">
+                      <li class="file-item">
+                        <span class="file-item__icon"
+                          ><svg class="icon" aria-hidden="true" focusable="false">
+                            <use href="/img/icons.svg#i-file-text"></use></svg
+                        ></span>
+                        <div class="file-item__text">
+                          <p class="file-item__name">Sílabo_SOFT-210.pdf</p>
+                          <p class="file-item__meta">1,2 MB · 12/10/2026 10:15</p>
+                        </div>
+                        <div class="file-item__actions">
+                          <button
+                            class="icon-button"
+                            type="button"
+                            data-action="download-attachment"
+                            aria-label="Descargar Sílabo_SOFT-210.pdf"
+                          >
+                            <svg class="icon" aria-hidden="true" focusable="false">
+                              <use href="/img/icons.svg#i-download"></use>
+                            </svg>
+                          </button>
+                        </div>
+                      </li>
+                      <li class="file-item">
+                        <span class="file-item__icon"
+                          ><svg class="icon" aria-hidden="true" focusable="false">
+                            <use href="/img/icons.svg#i-file-text"></use></svg
+                        ></span>
+                        <div class="file-item__text">
+                          <p class="file-item__name">Programa_detallado.docx</p>
+                          <p class="file-item__meta">840 KB · 12/10/2026 10:18</p>
+                        </div>
+                        <div class="file-item__actions">
+                          <button
+                            class="icon-button"
+                            type="button"
+                            data-action="download-attachment"
+                            aria-label="Descargar Programa_detallado.docx"
+                          >
+                            <svg class="icon" aria-hidden="true" focusable="false">
+                              <use href="/img/icons.svg#i-download"></use>
+                            </svg>
+                          </button>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div
+                  class="tab-pane fade"
+                  id="panel-history"
+                  role="tabpanel"
+                  aria-labelledby="tab-history"
+                  tabindex="0"
+                >
+                  <div class="d-grid gap-4 pt-4">
+                    <ol class="timeline">
+                      <li class="timeline__item timeline__item--done">
+                        <span class="timeline__marker" aria-hidden="true"
+                          ><svg class="icon" aria-hidden="true" focusable="false">
+                            <use href="/img/icons.svg#i-check"></use></svg
+                        ></span>
+                        <div>
+                          <p class="timeline__title">
+                            Creado como borrador<span class="visually-hidden"> (completado)</span>
+                          </p>
+                          <p class="timeline__meta">Ana Mora Quesada · 01/10/2026 08:40</p>
+                        </div>
+                      </li>
+                      <li class="timeline__item timeline__item--done">
+                        <span class="timeline__marker" aria-hidden="true"
+                          ><svg class="icon" aria-hidden="true" focusable="false">
+                            <use href="/img/icons.svg#i-check"></use></svg
+                        ></span>
+                        <div>
+                          <p class="timeline__title">
+                            Último guardado<span class="visually-hidden"> (completado)</span>
+                          </p>
+                          <p class="timeline__meta">Ana Mora Quesada · 12/10/2026 10:24</p>
+                        </div>
+                      </li>
+                      <li class="timeline__item timeline__item--current">
+                        <span class="timeline__marker" aria-hidden="true"></span>
+                        <div>
+                          <p class="timeline__title">
+                            Enviado a revisión<span class="visually-hidden"> (estado actual)</span>
+                          </p>
+                          <p class="timeline__meta">Ana Mora Quesada · 12/10/2026 10:30</p>
+                        </div>
+                      </li>
+                      <li class="timeline__item timeline__item--pending">
+                        <span class="timeline__marker" aria-hidden="true"></span>
+                        <div>
+                          <p class="timeline__title">
+                            Revisión y aprobación<span class="visually-hidden"> (pendiente)</span>
+                          </p>
+                          <p class="timeline__meta">Pendiente</p>
+                        </div>
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <aside
+              class="col-xl-4 d-grid gap-4 align-content-start"
+              aria-label="Estado e historial del curso"
+            >
+              <section class="card" aria-labelledby="status-card-title">
+                <div class="card-body">
+                  <h2 class="card-title" id="status-card-title">Estado</h2>
+                  <p class="mb-3">
+                    <span class="badge status-badge status-badge--in-development"
+                      ><svg class="icon" aria-hidden="true" focusable="false">
+                        <use href="/img/icons.svg#i-clock"></use></svg
+                      >En desarrollo</span
+                    >
+                  </p>
+                  <dl class="detail-list">
+                    <div>
+                      <dt>En revisión por</dt>
+                      <dd>Desarrollo Curricular</dd>
+                    </div>
+                    <div>
+                      <dt>Enviado</dt>
+                      <dd>12/10/2026 10:30</dd>
+                    </div>
+                  </dl>
+                </div>
+              </section>
+              <section class="card" aria-labelledby="history-card-title">
+                <div class="card-body">
+                  <h2 class="card-title mb-4" id="history-card-title">Historial del curso</h2>
+                  <ol class="timeline">
+                    <li class="timeline__item timeline__item--done">
+                      <span class="timeline__marker" aria-hidden="true"
+                        ><svg class="icon" aria-hidden="true" focusable="false">
+                          <use href="/img/icons.svg#i-check"></use></svg
+                      ></span>
+                      <div>
+                        <p class="timeline__title">
+                          Creado como borrador<span class="visually-hidden"> (completado)</span>
+                        </p>
+                        <p class="timeline__meta">Ana Mora Quesada · 01/10/2026 08:40</p>
+                      </div>
+                    </li>
+                    <li class="timeline__item timeline__item--done">
+                      <span class="timeline__marker" aria-hidden="true"
+                        ><svg class="icon" aria-hidden="true" focusable="false">
+                          <use href="/img/icons.svg#i-check"></use></svg
+                      ></span>
+                      <div>
+                        <p class="timeline__title">
+                          Último guardado<span class="visually-hidden"> (completado)</span>
+                        </p>
+                        <p class="timeline__meta">Ana Mora Quesada · 12/10/2026 10:24</p>
+                      </div>
+                    </li>
+                    <li class="timeline__item timeline__item--current">
+                      <span class="timeline__marker" aria-hidden="true"></span>
+                      <div>
+                        <p class="timeline__title">
+                          Enviado a revisión<span class="visually-hidden"> (estado actual)</span>
+                        </p>
+                        <p class="timeline__meta">Ana Mora Quesada · 12/10/2026 10:30</p>
+                      </div>
+                    </li>
+                    <li class="timeline__item timeline__item--pending">
+                      <span class="timeline__marker" aria-hidden="true"></span>
+                      <div>
+                        <p class="timeline__title">
+                          Revisión y aprobación<span class="visually-hidden"> (pendiente)</span>
+                        </p>
+                        <p class="timeline__meta">Pendiente</p>
+                      </div>
+                    </li>
+                  </ol>
+                </div>
+              </section>
+              <section class="card" aria-labelledby="files-card-title">
+                <div class="card-body">
+                  <h2 class="card-title mb-4" id="files-card-title">Adjuntos</h2>
+                  <ul class="file-list">
+                    <li class="file-item">
+                      <span class="file-item__icon"
+                        ><svg class="icon" aria-hidden="true" focusable="false">
+                          <use href="/img/icons.svg#i-file-text"></use></svg
+                      ></span>
+                      <div class="file-item__text">
+                        <p class="file-item__name">Sílabo_SOFT-210.pdf</p>
+                        <p class="file-item__meta">1,2 MB · 12/10/2026 10:15</p>
+                      </div>
+                      <div class="file-item__actions">
+                        <button
+                          class="icon-button"
+                          type="button"
+                          data-action="download-attachment"
+                          aria-label="Descargar Sílabo_SOFT-210.pdf"
+                        >
+                          <svg class="icon" aria-hidden="true" focusable="false">
+                            <use href="/img/icons.svg#i-download"></use>
+                          </svg>
+                        </button>
+                      </div>
+                    </li>
+                    <li class="file-item">
+                      <span class="file-item__icon"
+                        ><svg class="icon" aria-hidden="true" focusable="false">
+                          <use href="/img/icons.svg#i-file-text"></use></svg
+                      ></span>
+                      <div class="file-item__text">
+                        <p class="file-item__name">Programa_detallado.docx</p>
+                        <p class="file-item__meta">840 KB · 12/10/2026 10:18</p>
+                      </div>
+                      <div class="file-item__actions">
+                        <button
+                          class="icon-button"
+                          type="button"
+                          data-action="download-attachment"
+                          aria-label="Descargar Programa_detallado.docx"
+                        >
+                          <svg class="icon" aria-hidden="true" focusable="false">
+                            <use href="/img/icons.svg#i-download"></use>
+                          </svg>
+                        </button>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </section>
+            </aside>
+          </div>
+          <p class="demo-note">
+            <svg class="icon icon--sm" aria-hidden="true" focusable="false">
+              <use href="/img/icons.svg#i-info"></use>
+            </svg>
+            Vista estática de demostración: los datos son ficticios y las acciones no están
+            conectadas.
+          </p>
+        </main>
+      </div>
+      <!-- Barra inferior (< 768 px) -->
+      <nav class="app-bottomnav d-md-none" aria-label="Principal inferior">
+        <ul class="app-bottomnav__list">
+          <li>
+            <a class="app-bottomnav__link" href="/pages/home-director.html"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-layout-dashboard"></use></svg></span
+              >Inicio</a
+            >
+          </li>
+          <li>
+            <a class="app-bottomnav__link" href="/pages/my-courses.html" aria-current="page"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-book-open"></use></svg></span
+              >Cursos</a
+            >
+          </li>
+          <li>
+            <a class="app-bottomnav__link" href="/pages/report-production-director.html"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-chart-column"></use></svg></span
+              >Reportes</a
+            >
+          </li>
+          <li>
+            <a class="app-bottomnav__link" href="/pages/notifications.html"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-bell"></use></svg></span
+              >Avisos</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Panel de avisos (N-01, propuesta UX D-09) -->
+    <div
+      class="offcanvas offcanvas-end notification-panel"
+      id="notifications-panel"
+      tabindex="-1"
+      aria-labelledby="notifications-panel-title"
+    >
+      <div class="offcanvas-header">
+        <h2 class="offcanvas-title h3" id="notifications-panel-title">Avisos</h2>
+        <button
+          class="btn btn-link btn-sm ms-auto"
+          type="button"
+          data-action="mark-all-notifications-read"
+        >
+          Marcar todo como leído
+        </button>
+        <button
+          class="btn-close"
+          type="button"
+          data-bs-dismiss="offcanvas"
+          aria-label="Cerrar avisos"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="notification-list">
+          <li class="notification-item notification-item--unread">
+            <span class="icon-circle icon-circle--success"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-circle-check"></use></svg
+            ></span>
+            <div>
+              <p class="notification-item__title">
+                Curso aprobado<span class="visually-hidden"> (no leído)</span>
+              </p>
+              <p class="notification-item__meta">SOFT-101 · Fundamentos de programación</p>
+              <p class="notification-item__time">Hace 2 h</p>
+            </div>
+          </li>
+          <li class="notification-item notification-item--unread">
+            <span class="icon-circle icon-circle--success"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-circle-check"></use></svg
+            ></span>
+            <div>
+              <p class="notification-item__title">
+                Curso aprobado<span class="visually-hidden"> (no leído)</span>
+              </p>
+              <p class="notification-item__meta">SOFT-118 · Desarrollo web I</p>
+              <p class="notification-item__time">11/10/2026</p>
+            </div>
+          </li>
+          <li class="notification-item notification-item--unread">
+            <span class="icon-circle icon-circle--success"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-circle-check"></use></svg
+            ></span>
+            <div>
+              <p class="notification-item__title">
+                Curso aprobado<span class="visually-hidden"> (no leído)</span>
+              </p>
+              <p class="notification-item__meta">SOFT-220 · Ingeniería de requerimientos</p>
+              <p class="notification-item__time">20/09/2026</p>
+            </div>
+          </li>
+        </ul>
+        <p class="notification-panel__note">
+          <span class="tag tag--outline">Propuesta UX</span> La ERS define avisos por correo
+          (RF-036, RF-038) y notificación de escritorio (RF-037). Este panel solo los reúne dentro
+          de la aplicación; requiere validación.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

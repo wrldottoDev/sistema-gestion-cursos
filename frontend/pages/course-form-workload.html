@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Carga académica y modalidad · SOFT-210 · Arquitectura de software · Sistema de Gestión de
+      Cursos
+    </title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+    <!-- Integración futura: <script type="module" src="/js/pages/course-form-workload.page.js"></script> (F-03, TB-04, RF-019, RF-021) -->
+  </head>
+  <body>
+    <a class="visually-hidden-focusable skip-link" href="#main">Saltar al contenido principal</a>
+
+    <div class="app-shell">
+      <!-- Barra superior móvil (< 768 px) -->
+      <header class="app-mobilebar d-md-none" aria-label="Barra superior móvil">
+        <button
+          class="icon-button icon-button--on-brand"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#app-sidebar"
+          aria-controls="app-sidebar"
+          aria-label="Abrir menú"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-menu"></use>
+          </svg>
+        </button>
+        <p class="app-mobilebar__title" aria-hidden="true">SOFT-210</p>
+        <a
+          class="icon-button icon-button--on-brand"
+          href="/pages/notifications.html"
+          aria-label="Avisos, 3 sin leer"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-bell"></use></svg
+          ><span class="icon-button__badge" aria-hidden="true">3</span>
+        </a>
+      </header>
+
+      <!-- Riel de navegación (tablet, 768–1199 px) -->
+      <nav class="app-rail d-none d-md-flex d-xl-none" aria-label="Principal compacta">
+        <button
+          class="icon-button icon-button--on-brand"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#app-sidebar"
+          aria-controls="app-sidebar"
+          aria-label="Abrir menú"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-menu"></use>
+          </svg>
+        </button>
+        <ul class="app-rail__list">
+          <li>
+            <a class="app-rail__link" href="/pages/home-director.html"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-layout-dashboard"></use></svg
+              >Inicio</a
+            >
+          </li>
+          <li>
+            <a class="app-rail__link" href="/pages/my-courses.html" aria-current="page"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-book-open"></use></svg
+              >Cursos</a
+            >
+          </li>
+          <li>
+            <a class="app-rail__link" href="/pages/report-production-director.html"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-chart-column"></use></svg
+              >Reportes</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Barra lateral: fija ≥ 1200 px; menú lateral (offcanvas) en móvil y tablet (MB-09) -->
+      <div class="app-sidebar">
+        <div
+          class="offcanvas-xl offcanvas-start app-sidebar__panel"
+          id="app-sidebar"
+          tabindex="-1"
+          aria-label="Menú principal"
+        >
+          <div class="offcanvas-header">
+            <button
+              class="btn-close btn-close-white"
+              type="button"
+              data-bs-dismiss="offcanvas"
+              data-bs-target="#app-sidebar"
+              aria-label="Cerrar menú"
+            ></button>
+          </div>
+          <div class="offcanvas-body app-sidebar__body">
+            <a class="app-sidebar__brand" href="/pages/home-director.html">
+              <img
+                class="app-sidebar__logo"
+                src="/img/logo-horizontal-blanco.svg"
+                alt="Universidad CENFOTEC · Inicio"
+                width="216"
+                height="95"
+              />
+            </a>
+            <p class="app-sidebar__product d-none d-xl-block">Sistema de Gestión de Cursos</p>
+            <p class="app-sidebar__user d-xl-none">Ana Mora Quesada · Directora</p>
+            <hr class="app-sidebar__divider" />
+            <nav aria-labelledby="sidebar-menu-label">
+              <p class="app-sidebar__heading" id="sidebar-menu-label">Menú</p>
+              <ul class="app-sidebar__list">
+                <li>
+                  <a class="app-sidebar__link" href="/pages/home-director.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-layout-dashboard"></use></svg
+                    >Inicio</a
+                  >
+                </li>
+                <li>
+                  <a class="app-sidebar__link" href="/pages/my-courses.html" aria-current="page"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-book-open"></use></svg
+                    >Mis cursos</a
+                  >
+                </li>
+                <li>
+                  <a class="app-sidebar__link" href="/pages/report-production-director.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-chart-column"></use></svg
+                    >Reportes</a
+                  >
+                </li>
+              </ul>
+            </nav>
+            <div class="d-xl-none mt-auto pt-4">
+              <div class="lang-switch" role="group" aria-label="Idioma de la interfaz">
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-globe"></use>
+                </svg>
+                <button
+                  class="lang-switch__option"
+                  type="button"
+                  lang="es"
+                  aria-pressed="true"
+                  data-action="set-language"
+                  data-language="es"
+                >
+                  ES
+                </button>
+                <button
+                  class="lang-switch__option"
+                  type="button"
+                  lang="en"
+                  aria-pressed="false"
+                  data-action="set-language"
+                  data-language="en"
+                >
+                  EN
+                </button>
+              </div>
+              <p class="app-sidebar__user mt-3">Cerrar sesión: fuera de alcance (ERS §1.2).</p>
+            </div>
+            <p class="app-sidebar__footer d-none d-xl-block">Universidad CENFOTEC</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-main">
+        <!-- Barra superior (≥ 768 px) -->
+        <header class="app-topbar d-none d-md-flex" aria-label="Barra superior">
+          <nav aria-label="Ruta de navegación">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/pages/my-courses.html">Mis cursos</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                SOFT-210 · Arquitectura de software
+              </li>
+            </ol>
+          </nav>
+          <div class="app-topbar__actions">
+            <div class="lang-switch" role="group" aria-label="Idioma de la interfaz">
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-globe"></use>
+              </svg>
+              <button
+                class="lang-switch__option"
+                type="button"
+                lang="es"
+                aria-pressed="true"
+                data-action="set-language"
+                data-language="es"
+              >
+                ES
+              </button>
+              <button
+                class="lang-switch__option"
+                type="button"
+                lang="en"
+                aria-pressed="false"
+                data-action="set-language"
+                data-language="en"
+              >
+                EN
+              </button>
+            </div>
+            <button
+              class="icon-button"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#notifications-panel"
+              aria-controls="notifications-panel"
+              aria-label="Avisos, 3 sin leer"
+            >
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-bell"></use></svg
+              ><span class="icon-button__badge" aria-hidden="true">3</span>
+            </button>
+            <span class="app-topbar__separator" aria-hidden="true"></span>
+            <div class="dropdown">
+              <button
+                class="user-menu__toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                data-bs-auto-close="outside"
+                aria-expanded="false"
+              >
+                <span class="visually-hidden">Menú de usuario:</span>
+                <span class="avatar" aria-hidden="true">AM</span>
+                <span class="user-menu__identity">
+                  <span class="user-menu__name">Ana Mora Quesada</span>
+                  <span class="user-menu__role">Directora · Ing. del Software</span>
+                </span>
+                <svg class="icon icon--sm" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-chevron-down"></use>
+                </svg>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end user-menu__panel">
+                <div class="user-menu__header">
+                  <span class="avatar avatar--lg" aria-hidden="true">AM</span>
+                  <div>
+                    <p class="user-menu__name mb-0">Ana Mora Quesada</p>
+                    <p class="user-menu__email">amora@ucenfotec.ac.cr</p>
+                  </div>
+                </div>
+                <dl class="user-menu__details">
+                  <dt>Rol</dt>
+                  <dd>Director de Escuela</dd>
+                  <dt>Escuela</dt>
+                  <dd>Ingeniería del Software</dd>
+                </dl>
+                <fieldset>
+                  <legend class="form-legend">Idioma de la interfaz</legend>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      id="user-language-es"
+                      name="userLanguage"
+                      type="radio"
+                      value="es"
+                      checked
+                    />
+                    <label class="form-check-label" for="user-language-es">Español</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      id="user-language-en"
+                      name="userLanguage"
+                      type="radio"
+                      value="en"
+                    />
+                    <label class="form-check-label" for="user-language-en" lang="en">English</label>
+                  </div>
+                  <p class="form-text">Se recuerda su preferencia (RF-044 CA3).</p>
+                </fieldset>
+                <p class="user-menu__note">
+                  Cerrar sesión no está disponible: fuera de alcance de la ERS (§1.2) y pendiente de
+                  validar (Apéndice E).
+                </p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main id="main" class="app-content" tabindex="-1">
+          <div class="page-header">
+            <div class="page-header__text">
+              <a class="page-header__back" href="/pages/my-courses.html"
+                ><svg class="icon icon--sm" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-arrow-left"></use></svg
+                >Mis cursos</a
+              >
+              <h1 class="page-header__title page-header__title--mobile-hidden">
+                SOFT-210 · Arquitectura de software
+              </h1>
+              <p class="page-header__meta">
+                <span class="badge status-badge status-badge--draft"
+                  ><svg class="icon" aria-hidden="true" focusable="false">
+                    <use href="/img/icons.svg#i-pencil"></use></svg
+                  >Borrador</span
+                ><span>Ingeniería del Software · Último guardado 12/10/2026 10:24</span>
+              </p>
+            </div>
+          </div>
+          <form class="course-form" id="course-form" data-form="course" novalidate>
+            <nav class="stepper" aria-labelledby="stepper-title">
+              <h2 class="stepper__title" id="stepper-title">Secciones del curso</h2>
+              <button
+                class="stepper__toggle d-md-none"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#stepper-list"
+                aria-expanded="false"
+                aria-controls="stepper-list"
+              >
+                <span>Paso 3 de 8 · Carga académica y modalidad</span>
+                <svg class="icon icon--sm" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-chevron-down"></use>
+                </svg>
+              </button>
+              <p class="stepper__summary d-none d-md-block d-xl-none">
+                Paso 3 de 8 · 40 % de obligatorios
+              </p>
+              <div class="stepper__progress">
+                <p class="stepper__progress-label" id="required-progress-label">
+                  <span>Obligatorios completos</span><span>40 %</span>
+                </p>
+                <progress
+                  class="stepper__meter"
+                  max="100"
+                  value="40"
+                  aria-labelledby="required-progress-label"
+                >
+                  40 %
+                </progress>
+              </div>
+              <ol class="stepper__list collapse" id="stepper-list">
+                <li class="stepper__item stepper__item--complete">
+                  <a class="stepper__link" href="/pages/course-form-identification.html">
+                    <span class="stepper__marker" aria-hidden="true"
+                      ><svg class="icon" aria-hidden="true" focusable="false">
+                        <use href="/img/icons.svg#i-check"></use></svg
+                    ></span>
+                    <span class="stepper__text">
+                      <span class="stepper__label"
+                        ><span class="stepper__index">1. </span>Identificación</span
+                      >
+                      <span class="stepper__status">Completo</span>
+                    </span>
+                  </a>
+                </li>
+                <li class="stepper__item stepper__item--complete">
+                  <a class="stepper__link" href="/pages/course-form-classification.html">
+                    <span class="stepper__marker" aria-hidden="true"
+                      ><svg class="icon" aria-hidden="true" focusable="false">
+                        <use href="/img/icons.svg#i-check"></use></svg
+                    ></span>
+                    <span class="stepper__text">
+                      <span class="stepper__label"
+                        ><span class="stepper__index">2. </span>Clasificación académica</span
+                      >
+                      <span class="stepper__status">Completo</span>
+                    </span>
+                  </a>
+                </li>
+                <li class="stepper__item stepper__item--current">
+                  <a
+                    class="stepper__link"
+                    href="/pages/course-form-workload.html"
+                    aria-current="step"
+                  >
+                    <span class="stepper__marker" aria-hidden="true">3</span>
+                    <span class="stepper__text">
+                      <span class="stepper__label"
+                        ><span class="stepper__index">3. </span>Carga académica</span
+                      >
+                      <span class="stepper__status">Créditos, horas y modalidad</span>
+                    </span>
+                  </a>
+                </li>
+                <li class="stepper__item">
+                  <a class="stepper__link" href="/pages/course-form-texts.html">
+                    <span class="stepper__marker" aria-hidden="true">4</span>
+                    <span class="stepper__text">
+                      <span class="stepper__label"
+                        ><span class="stepper__index">4. </span>Textos y descripciones</span
+                      >
+                      <span class="stepper__status">Límites 40 / 250 / 155</span>
+                    </span>
+                  </a>
+                </li>
+                <li class="stepper__item">
+                  <a class="stepper__link" href="/pages/course-form-competency.html">
+                    <span class="stepper__marker" aria-hidden="true">5</span>
+                    <span class="stepper__text">
+                      <span class="stepper__label"
+                        ><span class="stepper__index">5. </span>Competencia y perfiles</span
+                      >
+                      <span class="stepper__status">Competencia, requisitos, perfiles</span>
+                    </span>
+                  </a>
+                </li>
+                <li class="stepper__item">
+                  <a class="stepper__link" href="/pages/course-form-program.html">
+                    <span class="stepper__marker" aria-hidden="true">6</span>
+                    <span class="stepper__text">
+                      <span class="stepper__label"
+                        ><span class="stepper__index">6. </span>Programa, e-commerce y
+                        metadata</span
+                      >
+                      <span class="stepper__status">Programa, e-commerce, metadata</span>
+                    </span>
+                  </a>
+                </li>
+                <li class="stepper__item">
+                  <a class="stepper__link" href="/pages/course-form-attachments.html">
+                    <span class="stepper__marker" aria-hidden="true">7</span>
+                    <span class="stepper__text">
+                      <span class="stepper__label"
+                        ><span class="stepper__index">7. </span>Adjuntos</span
+                      >
+                      <span class="stepper__status">Word o PDF · opcional</span>
+                    </span>
+                  </a>
+                </li>
+                <li class="stepper__item">
+                  <a class="stepper__link" href="/pages/course-form-review.html">
+                    <span class="stepper__marker" aria-hidden="true">8</span>
+                    <span class="stepper__text">
+                      <span class="stepper__label"
+                        ><span class="stepper__index">8. </span>Revisión y envío</span
+                      >
+                      <span class="stepper__status">Validación completa</span>
+                    </span>
+                  </a>
+                </li>
+              </ol>
+            </nav>
+            <div class="course-form__sections">
+              <section class="card" aria-labelledby="section-workload-title">
+                <div class="card-body">
+                  <div class="course-form__section-header">
+                    <h2 class="course-form__section-title" id="section-workload-title">
+                      3. Carga académica y modalidad
+                    </h2>
+                    <p class="course-form__section-subtitle">
+                      El total de horas se calcula automáticamente
+                    </p>
+                  </div>
+                  <p class="required-note">
+                    Los campos marcados con * son obligatorios para enviar a revisión.
+                  </p>
+                  <div class="course-form__grid course-form__grid--2-cols">
+                    <div class="course-form__field">
+                      <label class="form-label" for="credits"
+                        >Créditos <span class="required-mark" aria-hidden="true">*</span
+                        ><span class="visually-hidden">(obligatorio)</span></label
+                      >
+                      <input
+                        class="form-control"
+                        id="credits"
+                        name="credits"
+                        type="number"
+                        value="4"
+                        min="1"
+                        max="12"
+                        step="1"
+                        inputmode="numeric"
+                        required
+                        aria-describedby="credits-help"
+                      />
+
+                      <p class="form-text" id="credits-help">Número entero entre 1 y 12.</p>
+                    </div>
+                    <div class="course-form__field">
+                      <label class="form-label" for="total-hours">Total de horas</label>
+                      <div class="locked-field">
+                        <output
+                          class="form-control course-form__output"
+                          id="total-hours"
+                          name="totalHours"
+                          for="class-hours extra-class-hours"
+                          aria-describedby="total-hours-help"
+                          >144</output
+                        >
+                        <svg class="icon" aria-hidden="true" focusable="false">
+                          <use href="/img/icons.svg#i-lock"></use>
+                        </svg>
+                      </div>
+                      <p class="form-text" id="total-hours-help">
+                        Horas clase + Horas extra clase · no editable (RN-16).
+                      </p>
+                    </div>
+                    <div class="course-form__field">
+                      <label class="form-label" for="class-hours"
+                        >Horas clase <span class="required-mark" aria-hidden="true">*</span
+                        ><span class="visually-hidden">(obligatorio)</span></label
+                      >
+                      <input
+                        class="form-control"
+                        id="class-hours"
+                        name="classHours"
+                        type="number"
+                        value="48"
+                        min="0"
+                        max="300"
+                        step="1"
+                        inputmode="numeric"
+                        required
+                        aria-describedby="class-hours-help"
+                      />
+
+                      <p class="form-text" id="class-hours-help">Entero entre 0 y 300.</p>
+                    </div>
+                    <div class="course-form__field">
+                      <label class="form-label" for="extra-class-hours"
+                        >Horas extra clase <span class="required-mark" aria-hidden="true">*</span
+                        ><span class="visually-hidden">(obligatorio)</span></label
+                      >
+                      <input
+                        class="form-control"
+                        id="extra-class-hours"
+                        name="extraClassHours"
+                        type="number"
+                        value="96"
+                        min="0"
+                        max="300"
+                        step="1"
+                        inputmode="numeric"
+                        required
+                        aria-describedby="extra-class-hours-help"
+                      />
+
+                      <p class="form-text" id="extra-class-hours-help">Entero entre 0 y 300.</p>
+                    </div>
+                    <div class="course-form__field course-form__field--full">
+                      <fieldset aria-describedby="modality-help">
+                        <legend class="form-legend">
+                          Modalidad <span class="required-mark" aria-hidden="true">*</span
+                          ><span class="visually-hidden">(obligatorio)</span>
+                        </legend>
+                        <div class="d-flex flex-wrap column-gap-4">
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              id="modality-in-person"
+                              name="modality"
+                              type="radio"
+                              value="in_person"
+                              checked
+                              required
+                            />
+                            <label class="form-check-label" for="modality-in-person"
+                              >Presencial</label
+                            >
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              id="modality-online-synchronous"
+                              name="modality"
+                              type="radio"
+                              value="online_synchronous"
+                              required
+                            />
+                            <label class="form-check-label" for="modality-online-synchronous"
+                              >Virtual sincrónica</label
+                            >
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              id="modality-online-asynchronous"
+                              name="modality"
+                              type="radio"
+                              value="online_asynchronous"
+                              required
+                            />
+                            <label class="form-check-label" for="modality-online-asynchronous"
+                              >Virtual asincrónica</label
+                            >
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input
+                              class="form-check-input"
+                              id="modality-hybrid"
+                              name="modality"
+                              type="radio"
+                              value="hybrid"
+                              required
+                            />
+                            <label class="form-check-label" for="modality-hybrid">Híbrida</label>
+                          </div>
+                        </div>
+                      </fieldset>
+                      <p class="form-text" id="modality-help">Valores fijos (RN-14).</p>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="form-action-bar">
+              <p class="form-action-bar__status" role="status">
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-circle-check"></use></svg
+                ><span class="d-xl-none">Guardado 10:24</span
+                ><span class="d-none d-xl-inline">Borrador guardado · 12/10/2026 10:24</span>
+              </p>
+              <a class="btn btn-link form-action-bar__cancel" href="/pages/my-courses.html"
+                >Cancelar</a
+              >
+              <button
+                class="btn btn-outline-primary"
+                type="submit"
+                name="intent"
+                value="save-draft"
+                data-action="save-draft"
+              >
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-save"></use></svg
+                >Guardar borrador
+              </button>
+              <button
+                class="btn btn-primary"
+                type="submit"
+                name="intent"
+                value="submit"
+                data-action="submit-for-review"
+              >
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-send"></use></svg
+                >Listo para enviar
+              </button>
+            </div>
+          </form>
+          <p class="demo-note">
+            <svg class="icon icon--sm" aria-hidden="true" focusable="false">
+              <use href="/img/icons.svg#i-info"></use>
+            </svg>
+            Vista estática de demostración: los datos son ficticios y las acciones no están
+            conectadas.
+          </p>
+        </main>
+      </div>
+    </div>
+
+    <!-- Panel de avisos (N-01, propuesta UX D-09) -->
+    <div
+      class="offcanvas offcanvas-end notification-panel"
+      id="notifications-panel"
+      tabindex="-1"
+      aria-labelledby="notifications-panel-title"
+    >
+      <div class="offcanvas-header">
+        <h2 class="offcanvas-title h3" id="notifications-panel-title">Avisos</h2>
+        <button
+          class="btn btn-link btn-sm ms-auto"
+          type="button"
+          data-action="mark-all-notifications-read"
+        >
+          Marcar todo como leído
+        </button>
+        <button
+          class="btn-close"
+          type="button"
+          data-bs-dismiss="offcanvas"
+          aria-label="Cerrar avisos"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="notification-list">
+          <li class="notification-item notification-item--unread">
+            <span class="icon-circle icon-circle--success"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-circle-check"></use></svg
+            ></span>
+            <div>
+              <p class="notification-item__title">
+                Curso aprobado<span class="visually-hidden"> (no leído)</span>
+              </p>
+              <p class="notification-item__meta">SOFT-101 · Fundamentos de programación</p>
+              <p class="notification-item__time">Hace 2 h</p>
+            </div>
+          </li>
+          <li class="notification-item notification-item--unread">
+            <span class="icon-circle icon-circle--success"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-circle-check"></use></svg
+            ></span>
+            <div>
+              <p class="notification-item__title">
+                Curso aprobado<span class="visually-hidden"> (no leído)</span>
+              </p>
+              <p class="notification-item__meta">SOFT-118 · Desarrollo web I</p>
+              <p class="notification-item__time">11/10/2026</p>
+            </div>
+          </li>
+          <li class="notification-item notification-item--unread">
+            <span class="icon-circle icon-circle--success"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-circle-check"></use></svg
+            ></span>
+            <div>
+              <p class="notification-item__title">
+                Curso aprobado<span class="visually-hidden"> (no leído)</span>
+              </p>
+              <p class="notification-item__meta">SOFT-220 · Ingeniería de requerimientos</p>
+              <p class="notification-item__time">20/09/2026</p>
+            </div>
+          </li>
+        </ul>
+        <p class="notification-panel__note">
+          <span class="tag tag--outline">Propuesta UX</span> La ERS define avisos por correo
+          (RF-036, RF-038) y notificación de escritorio (RF-037). Este panel solo los reúne dentro
+          de la aplicación; requiere validación.
+        </p>
+      </div>
+    </div>
+
+    <!-- Confirmación de guardado (toast estático, 6 s en la implementación; handoff 09 · Comportamientos) -->
+    <div class="toast-container position-fixed top-0 end-0 p-3 mt-5">
+      <div class="toast show" role="status" aria-live="polite" aria-atomic="true">
+        <div class="toast-body">
+          <svg class="icon text-success" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-circle-check"></use>
+          </svg>
+          <span class="flex-grow-1">Borrador guardado · 12/10/2026 10:24</span>
+          <button
+            class="btn-close"
+            type="button"
+            data-bs-dismiss="toast"
+            aria-label="Cerrar mensaje"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
