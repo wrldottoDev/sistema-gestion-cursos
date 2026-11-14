@@ -1,0 +1,583 @@
+/* Ajustes de componentes Bootstrap 5.3 al DS (handoff 09 · Mapeo a Bootstrap 5). Se usan las variables
+   --bs-* de cada componente; la capa components gana a vendor sin !important (05-CSS-AND-BEM). */
+
+/* ---------- Botones: Primary / Secondary / Tertiary / Destructive (DS 04 · Acciones) ---------- */
+.btn {
+  --bs-btn-padding-x: var(--space-5);
+  --bs-btn-padding-y: var(--space-2);
+  --bs-btn-font-size: var(--font-size-button-md);
+  --bs-btn-font-weight: var(--font-weight-semibold);
+  --bs-btn-line-height: var(--line-height-body-md);
+  --bs-btn-border-radius: var(--radius-md);
+  --bs-btn-focus-box-shadow: none;
+  --bs-btn-disabled-opacity: 1;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-block-size: var(--size-control);
+}
+
+.btn-sm {
+  --bs-btn-padding-x: var(--space-3);
+  --bs-btn-padding-y: var(--space-1);
+  --bs-btn-font-size: var(--font-size-button-sm);
+  --bs-btn-border-radius: var(--radius-md);
+
+  min-block-size: var(--size-control-sm);
+}
+
+.btn-primary {
+  --bs-btn-color: var(--color-text-inverse);
+  --bs-btn-bg: var(--color-action-primary);
+  --bs-btn-border-color: var(--color-action-primary);
+  --bs-btn-hover-color: var(--color-text-inverse);
+  --bs-btn-hover-bg: var(--color-action-primary-hover);
+  --bs-btn-hover-border-color: var(--color-action-primary-hover);
+  --bs-btn-active-color: var(--color-text-inverse);
+  --bs-btn-active-bg: var(--color-action-primary-pressed);
+  --bs-btn-active-border-color: var(--color-action-primary-pressed);
+  --bs-btn-disabled-color: var(--color-text-disabled);
+  --bs-btn-disabled-bg: var(--color-action-disabled);
+  --bs-btn-disabled-border-color: var(--color-action-disabled);
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--color-action-primary);
+  --bs-btn-bg: var(--color-bg-surface);
+  --bs-btn-border-color: var(--color-action-primary);
+  --bs-btn-hover-color: var(--color-action-primary-hover);
+  --bs-btn-hover-bg: var(--color-action-secondary-hover);
+  --bs-btn-hover-border-color: var(--color-action-primary-hover);
+  --bs-btn-active-color: var(--color-action-primary-pressed);
+  --bs-btn-active-bg: var(--color-bg-brand-soft);
+  --bs-btn-active-border-color: var(--color-action-primary-pressed);
+  --bs-btn-disabled-color: var(--color-text-disabled);
+  --bs-btn-disabled-bg: var(--color-action-disabled);
+  --bs-btn-disabled-border-color: var(--color-action-disabled);
+}
+
+.btn-link {
+  --bs-btn-color: var(--color-text-link);
+  --bs-btn-hover-color: var(--color-action-primary-hover);
+  --bs-btn-active-color: var(--color-action-primary-pressed);
+  --bs-btn-disabled-color: var(--color-text-disabled);
+
+  text-decoration: none;
+}
+
+.btn-link:hover {
+  background: var(--color-action-secondary-hover);
+}
+
+.btn-danger {
+  --bs-btn-color: var(--color-text-inverse);
+  --bs-btn-bg: var(--color-action-destructive);
+  --bs-btn-border-color: var(--color-action-destructive);
+  --bs-btn-hover-color: var(--color-text-inverse);
+  --bs-btn-hover-bg: var(--color-action-destructive-hover);
+  --bs-btn-hover-border-color: var(--color-action-destructive-hover);
+  --bs-btn-active-color: var(--color-text-inverse);
+  --bs-btn-active-bg: var(--color-action-destructive-hover);
+  --bs-btn-active-border-color: var(--color-action-destructive-hover);
+  --bs-btn-disabled-color: var(--color-text-disabled);
+  --bs-btn-disabled-bg: var(--color-action-disabled);
+  --bs-btn-disabled-border-color: var(--color-action-disabled);
+}
+
+/* ---------- Formularios (DS 04 · Formularios) ---------- */
+.form-label {
+  margin-block-end: var(--space-2);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.form-label__optional {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+}
+
+.required-mark {
+  color: var(--color-feedback-error);
+}
+
+.form-control,
+.form-select {
+  min-block-size: var(--size-control);
+  padding-inline: var(--space-3);
+  border-color: var(--color-border-strong);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-body-lg); /* 16 px: evita el zoom automático de iOS al enfocar. */
+}
+
+.form-select {
+  padding-inline-end: var(--space-10);
+}
+
+textarea.form-control {
+  min-block-size: 7rem;
+  padding-block: var(--space-3);
+}
+
+.form-control::placeholder {
+  color: var(--color-text-secondary);
+  opacity: 1;
+}
+
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+  border-color: var(--color-border-focus);
+  box-shadow:
+    0 0 0 1px var(--color-border-focus),
+    0 0 0 4px var(--focus-ring-halo-color);
+  outline: none;
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  border-color: var(--color-bg-muted);
+  background-color: var(--color-bg-muted);
+  color: var(--color-text-disabled);
+}
+
+.form-control[readonly] {
+  border-color: var(--color-bg-subtle);
+  background-color: var(--color-bg-subtle);
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+  padding-inline-end: var(--space-3);
+  border-color: var(--color-feedback-error);
+  background-image: none;
+  box-shadow: 0 0 0 1px var(--color-feedback-error);
+}
+
+.form-select.is-invalid {
+  --bs-form-select-bg-icon: none;
+
+  padding-inline-end: var(--space-10);
+  background-image: var(--bs-form-select-bg-img);
+}
+
+.form-control.is-invalid:focus,
+.form-select.is-invalid:focus {
+  border-color: var(--color-feedback-error);
+  box-shadow:
+    0 0 0 1px var(--color-feedback-error),
+    0 0 0 4px var(--color-feedback-error-bg);
+}
+
+.form-text {
+  margin-block-start: var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-sm);
+}
+
+.invalid-feedback {
+  gap: var(--space-1);
+  align-items: center;
+  margin-block-start: var(--space-1);
+  color: var(--color-feedback-error);
+  font-size: var(--font-size-body-sm);
+}
+
+.is-invalid ~ .invalid-feedback {
+  display: flex;
+}
+
+/* Con .d-block (display:block !important de Bootstrap) el icono queda en línea: se separa con margen. */
+.invalid-feedback > .icon {
+  margin-inline-end: var(--space-1);
+}
+
+.form-check {
+  min-block-size: var(--size-control-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-inline-start: 0;
+}
+
+.form-check .form-check-input {
+  float: none;
+  flex: none;
+  margin: 0;
+}
+
+.form-check-input {
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  border-color: var(--color-border-strong);
+}
+
+.form-check-input:checked {
+  border-color: var(--color-action-primary);
+  background-color: var(--color-action-primary);
+}
+
+.form-check-label {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-body-lg);
+}
+
+fieldset legend,
+.form-legend {
+  float: none;
+  margin-block-end: var(--space-2);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+.input-group > .form-control:not(:last-child) {
+  border-inline-end: 0;
+}
+
+.input-group-text {
+  border-color: var(--color-border-strong);
+  background: var(--color-bg-surface);
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Tablas (DS 04 · Tablas) ---------- */
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--color-text-primary);
+  --bs-table-border-color: var(--color-border-subtle);
+  --bs-table-hover-bg: var(--color-bg-subtle);
+  --bs-table-hover-color: var(--color-text-primary);
+  --bs-table-striped-bg: var(--color-bg-subtle);
+
+  margin: 0;
+  font-size: var(--font-size-body-md);
+  vertical-align: middle;
+}
+
+.table > thead > tr > th {
+  block-size: 3rem;
+  padding-inline: var(--space-4);
+  border-block-end-color: var(--color-border-default);
+  background: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+.table > tbody > tr > * {
+  block-size: var(--size-table-row);
+  padding-inline: var(--space-4);
+}
+
+.table > tbody > tr:last-child > * {
+  border-block-end: 0;
+}
+
+.table caption {
+  caption-side: top;
+}
+
+/* Contiene los descendientes posicionados (caption .visually-hidden) para que no desborden la página. */
+.table-responsive {
+  position: relative;
+}
+
+/* ---------- Alertas (DS 04 · Feedback) ---------- */
+.alert {
+  --bs-alert-padding-x: var(--space-4);
+  --bs-alert-padding-y: var(--space-3);
+  --bs-alert-border-radius: var(--radius-md);
+
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  border-width: 0 0 0 4px;
+  font-size: var(--font-size-body-md);
+}
+
+.alert-heading {
+  margin: 0 0 var(--space-0-5);
+  color: inherit;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-body-md);
+}
+
+.alert p:last-child {
+  margin: 0;
+}
+
+.alert-info {
+  --bs-alert-bg: var(--color-feedback-info-bg);
+  --bs-alert-border-color: var(--color-feedback-info);
+  --bs-alert-color: var(--color-text-primary);
+}
+
+.alert-success {
+  --bs-alert-bg: var(--color-feedback-success-bg);
+  --bs-alert-border-color: var(--color-feedback-success);
+  --bs-alert-color: var(--color-text-primary);
+}
+
+.alert-warning {
+  --bs-alert-bg: var(--color-feedback-warning-bg);
+  --bs-alert-border-color: var(--color-feedback-warning);
+  --bs-alert-color: var(--color-text-primary);
+}
+
+.alert-danger {
+  --bs-alert-bg: var(--color-feedback-error-bg);
+  --bs-alert-border-color: var(--color-feedback-error);
+  --bs-alert-color: var(--color-text-primary);
+}
+
+.alert-info .alert-heading,
+.alert-info > .icon {
+  color: var(--color-feedback-info);
+}
+
+.alert-success .alert-heading,
+.alert-success > .icon {
+  color: var(--color-feedback-success);
+}
+
+.alert-warning .alert-heading,
+.alert-warning > .icon {
+  color: var(--color-feedback-warning);
+}
+
+.alert-danger .alert-heading,
+.alert-danger > .icon {
+  color: var(--color-feedback-error);
+}
+
+/* ---------- Toasts (esquina superior derecha, 6 s; handoff 09 · Comportamientos) ---------- */
+.toast {
+  --bs-toast-max-width: 26rem;
+  --bs-toast-padding-x: var(--space-4);
+  --bs-toast-padding-y: var(--space-3);
+  --bs-toast-font-size: var(--font-size-body-lg);
+  --bs-toast-bg: var(--color-bg-surface);
+  --bs-toast-border-color: var(--color-border-default);
+  --bs-toast-border-radius: var(--radius-lg);
+  --bs-toast-box-shadow: var(--shadow-2);
+}
+
+.toast-body {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* ---------- Modales (DS 04 · Feedback) ---------- */
+.modal {
+  --bs-modal-padding: var(--space-6);
+  --bs-modal-border-radius: var(--radius-xl);
+  --bs-modal-border-color: transparent;
+  --bs-modal-box-shadow: var(--shadow-3);
+  --bs-modal-header-padding: var(--space-6) var(--space-6) 0;
+  --bs-modal-header-border-width: 0;
+  --bs-modal-footer-border-width: 0;
+  --bs-modal-footer-gap: var(--space-3);
+  --bs-modal-title-line-height: var(--line-height-heading-h3);
+}
+
+.modal-backdrop {
+  --bs-backdrop-bg: var(--color-bg-overlay);
+  --bs-backdrop-opacity: 0.45;
+}
+
+.modal-header {
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.modal-title {
+  font-size: var(--font-size-heading-h3);
+}
+
+.modal-description {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-secondary);
+}
+
+.modal-footer {
+  padding-block-start: 0;
+}
+
+/* ---------- Menús desplegables y offcanvas ---------- */
+.dropdown-menu {
+  --bs-dropdown-border-color: var(--color-border-default);
+  --bs-dropdown-border-radius: var(--radius-lg);
+  --bs-dropdown-box-shadow: var(--shadow-2);
+  --bs-dropdown-font-size: var(--font-size-body-md);
+  --bs-dropdown-link-active-bg: var(--color-bg-brand-subtle);
+  --bs-dropdown-link-active-color: var(--color-text-brand);
+
+  box-shadow: var(--bs-dropdown-box-shadow);
+}
+
+.offcanvas {
+  --bs-offcanvas-box-shadow: var(--shadow-3);
+}
+
+/* ---------- Paginación (botones separados de 40 px) ---------- */
+.pagination {
+  --bs-pagination-color: var(--color-text-primary);
+  --bs-pagination-border-color: var(--color-border-default);
+  --bs-pagination-border-radius: var(--radius-md);
+  --bs-pagination-hover-bg: var(--color-bg-subtle);
+  --bs-pagination-hover-color: var(--color-text-primary);
+  --bs-pagination-active-bg: var(--color-action-primary);
+  --bs-pagination-active-border-color: var(--color-action-primary);
+  --bs-pagination-disabled-color: var(--color-text-disabled);
+  --bs-pagination-disabled-bg: var(--color-bg-surface);
+  --bs-pagination-focus-box-shadow: none;
+
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.page-link {
+  display: grid;
+  place-items: center;
+  min-inline-size: var(--size-icon-button);
+  block-size: var(--size-icon-button);
+  margin-left: 0;
+  border-radius: var(--radius-md);
+}
+
+.page-item:not(:first-child) .page-link {
+  margin-left: 0;
+}
+
+.page-item:first-child .page-link,
+.page-item:last-child .page-link {
+  border-radius: var(--radius-md);
+}
+
+.pagination__gap {
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Breadcrumb ---------- */
+.breadcrumb {
+  --bs-breadcrumb-divider: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235a6472' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 18 6-6-6-6'/%3E%3C/svg%3E");
+  --bs-breadcrumb-item-padding-x: var(--space-3);
+  --bs-breadcrumb-item-active-color: var(--color-text-primary);
+  --bs-breadcrumb-font-size: var(--font-size-body-md);
+
+  align-items: center;
+  margin: 0;
+}
+
+.breadcrumb-item a {
+  text-decoration: none;
+}
+
+.breadcrumb-item.active {
+  font-weight: var(--font-weight-semibold);
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  display: flex;
+  align-items: center;
+}
+
+/* ---------- Pestañas, progreso, skeleton y spinner ---------- */
+.nav-tabs {
+  --bs-nav-tabs-border-color: var(--color-border-default);
+  --bs-nav-tabs-link-active-color: var(--color-text-brand);
+  --bs-nav-tabs-link-active-bg: transparent;
+  --bs-nav-tabs-link-active-border-color: transparent;
+  --bs-nav-link-color: var(--color-text-secondary);
+  --bs-nav-link-hover-color: var(--color-text-primary);
+  --bs-nav-link-font-weight: var(--font-weight-medium);
+
+  gap: var(--space-4);
+}
+
+.nav-tabs .nav-link {
+  padding-inline: var(--space-1);
+  border: 0;
+  border-block-end: 2px solid transparent;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link[aria-current='page'] {
+  border-block-end-color: var(--color-action-primary);
+  color: var(--color-text-brand);
+}
+
+.progress {
+  --bs-progress-height: 0.5rem;
+  --bs-progress-bg: var(--color-bg-muted);
+  --bs-progress-bar-bg: var(--color-action-primary);
+  --bs-progress-border-radius: var(--radius-full);
+}
+
+.placeholder {
+  background-color: var(--color-bg-muted);
+  opacity: 1;
+  border-radius: var(--radius-full);
+}
+
+.spinner-border {
+  --bs-spinner-border-width: 0.2em;
+
+  color: var(--color-action-primary);
+}
+
+.btn .spinner-border {
+  --bs-spinner-width: 1rem;
+  --bs-spinner-height: 1rem;
+
+  color: currentcolor;
+}
+
+.btn-close:focus {
+  box-shadow: none;
+}
+
+/* ---------- Tarjetas ---------- */
+.card {
+  --bs-card-border-color: var(--color-border-default);
+  --bs-card-border-radius: var(--radius-xl);
+  --bs-card-inner-border-radius: calc(var(--radius-xl) - 1px);
+  --bs-card-spacer-x: var(--space-6);
+  --bs-card-spacer-y: var(--space-6);
+  --bs-card-cap-bg: var(--color-bg-surface);
+  --bs-card-title-spacer-y: var(--space-1);
+
+  box-shadow: var(--shadow-1);
+}
+
+.card-title {
+  font-size: var(--font-size-heading-h3);
+  line-height: var(--line-height-heading-h3);
+}
+
+.card-subtitle {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-md);
+}
+
+@media (width < 768px) {
+  .card {
+    --bs-card-spacer-x: var(--space-4);
+    --bs-card-spacer-y: var(--space-4);
+  }
+
+  .modal {
+    --bs-modal-padding: var(--space-4);
+    --bs-modal-header-padding: var(--space-4) var(--space-4) 0;
+  }
+}

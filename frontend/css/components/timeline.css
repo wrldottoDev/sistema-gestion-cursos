@@ -1,0 +1,73 @@
+/* Historial del curso (F-13, C-05, R-*): hitos con estado hecho / actual / pendiente, siempre con texto. */
+.timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline__item {
+  position: relative;
+  display: flex;
+  gap: var(--space-3);
+  padding-block-end: var(--space-4);
+}
+
+.timeline__item:last-child {
+  padding-block-end: 0;
+}
+
+.timeline__item:not(:last-child)::before {
+  position: absolute;
+  inset-block: 1.5rem 0;
+  inset-inline-start: calc(0.75rem - 1px);
+  inline-size: 2px;
+  background: var(--color-border-default);
+  content: '';
+}
+
+.timeline__marker {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  border: 2px solid var(--color-border-strong);
+  border-radius: var(--radius-full);
+  background: var(--color-bg-surface);
+}
+
+.timeline__marker .icon {
+  inline-size: 0.875rem;
+  block-size: 0.875rem;
+}
+
+.timeline__item--done .timeline__marker {
+  border-color: var(--color-feedback-success);
+  background: var(--color-feedback-success);
+  color: var(--color-text-inverse);
+}
+
+.timeline__item--done:not(:last-child)::before {
+  background: var(--color-feedback-success);
+}
+
+.timeline__item--current .timeline__marker {
+  border-color: var(--color-action-primary);
+  box-shadow: inset 0 0 0 3px var(--color-bg-surface);
+  background: var(--color-action-primary);
+}
+
+.timeline__title {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+}
+
+.timeline__item--pending .timeline__title {
+  color: var(--color-text-secondary);
+}
+
+.timeline__meta {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-sm);
+}

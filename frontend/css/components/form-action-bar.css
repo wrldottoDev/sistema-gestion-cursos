@@ -1,0 +1,77 @@
+/* Barra fija Guardar / Enviar del formulario de curso (handoff D-01: distinguir guardar de enviar).
+   Siempre visible al pie; html { scroll-padding-block } (base.css) evita que tape el campo con foco
+   (WCAG 2.4.11) y .course-form reserva su alto al final del contenido. */
+.form-action-bar {
+  position: fixed;
+  inset-inline: 0;
+  inset-block-end: 0;
+  z-index: 1015;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--layout-margin-mobile)
+    calc(var(--space-3) + env(safe-area-inset-bottom));
+  border-block-start: 1px solid var(--color-border-default);
+  background: var(--color-bg-surface);
+}
+
+.form-action-bar > .btn {
+  flex: 1;
+}
+
+/* En móvil los botones van sin icono para caber en una línea (MB-04, MB-05). */
+.form-action-bar > .btn > .icon {
+  display: none;
+}
+
+.form-action-bar__status {
+  display: none;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0 auto 0 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-md);
+}
+
+.form-action-bar__status > .icon {
+  color: var(--color-feedback-success);
+}
+
+.form-action-bar__status--unsaved > .icon {
+  color: var(--color-feedback-warning);
+}
+
+.form-action-bar__cancel {
+  display: none;
+}
+
+@media (width >= 768px) {
+  .form-action-bar {
+    inset-inline-start: var(--layout-rail-width);
+    gap: var(--space-3);
+    padding-inline: var(--layout-margin-tablet);
+  }
+
+  .form-action-bar > .btn {
+    flex: none;
+  }
+
+  .form-action-bar > .btn > .icon {
+    display: inline-block;
+  }
+
+  .form-action-bar__status {
+    display: flex;
+  }
+}
+
+@media (width >= 1200px) {
+  .form-action-bar {
+    inset-inline-start: var(--layout-sidebar-width);
+    padding-inline: var(--layout-margin-desktop);
+  }
+
+  .form-action-bar > .form-action-bar__cancel {
+    display: inline-flex;
+  }
+}

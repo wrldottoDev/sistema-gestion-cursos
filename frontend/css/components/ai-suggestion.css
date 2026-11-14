@@ -1,0 +1,64 @@
+/* Asistencia de redacción con Gemini (RF-028, RF-029; F-09, F-10, MB-04): botón por campo permitido y
+   panel con la propuesta editable. La propuesta solo reemplaza el texto si la persona la acepta. */
+.ai-suggest-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-block-size: 2rem;
+  padding: var(--space-1) var(--space-2);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-brand-subtle);
+  color: var(--color-text-brand);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.ai-suggest-button:hover {
+  background: var(--color-bg-brand-soft);
+}
+
+.ai-suggest-button > .icon {
+  inline-size: 1rem;
+  block-size: 1rem;
+}
+
+.ai-suggestion {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1px dashed var(--color-border-brand);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-brand-subtle);
+}
+
+.ai-suggestion__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.ai-suggestion__title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  color: var(--color-text-brand);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+.ai-suggestion .alert {
+  margin: 0;
+}
+
+.ai-suggestion__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}

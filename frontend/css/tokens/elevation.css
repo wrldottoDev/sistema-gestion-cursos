@@ -1,0 +1,21 @@
+/* Elevación, foco y movimiento (DS 04 · Fundamentos). Las sombras son aproximaciones medidas sobre
+   las pantallas exportadas; los valores exactos se extraen de los estilos de efecto de Figma (PV-22). */
+:root {
+  --shadow-1: 0 1px 2px rgb(16 24 40 / 6%), 0 1px 3px rgb(16 24 40 / 8%);
+  --shadow-2: 0 4px 8px -2px rgb(16 24 40 / 10%), 0 2px 4px -2px rgb(16 24 40 / 6%);
+  --shadow-3: 0 20px 24px -4px rgb(16 24 40 / 12%), 0 8px 8px -4px rgb(16 24 40 / 5%);
+  /* Solo KPI y paneles resumen de Inicio sobre bg/canvas (DS-11, handoff D-05). */
+  --shadow-neumorphic-soft:
+    6px 6px 16px rgb(22 74 152 / 10%), -6px -6px 16px rgb(255 255 255 / 90%);
+  --shadow-neumorphic-inset:
+    inset 2px 2px 5px rgb(22 74 152 / 12%), inset -2px -2px 5px rgb(255 255 255 / 90%);
+
+  --focus-ring-width: 2px;
+  --focus-ring-color: var(--color-border-focus);
+  --focus-ring-halo-color: var(--color-brand-blue-light);
+  --focus-ring: 0 0 0 4px var(--focus-ring-halo-color);
+
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --easing-out: ease-out;
+}

@@ -1,0 +1,40 @@
+/* Avance de un borrador con <progress> nativo (P-02, TB-02): sin estilos en línea ni JavaScript. */
+.progress-meter {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.progress-meter__bar {
+  inline-size: var(--space-20);
+  block-size: var(--space-2);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-muted);
+  color: var(--color-action-primary);
+  appearance: none;
+}
+
+.progress-meter__bar::-webkit-progress-bar {
+  border-radius: var(--radius-full);
+  background: var(--color-bg-muted);
+}
+
+.progress-meter__bar::-webkit-progress-value {
+  border-radius: var(--radius-full);
+  background: var(--color-action-primary);
+}
+
+.progress-meter__bar::-moz-progress-bar {
+  border-radius: var(--radius-full);
+  background: var(--color-action-primary);
+}
+
+.progress-meter__value {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}

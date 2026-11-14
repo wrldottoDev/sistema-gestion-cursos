@@ -1,0 +1,198 @@
+/* Inicio por rol (propuesta UX D-02) y reportes: KPI, accesos rápidos y gráficos. */
+
+/* ---------- KPI (neumorfismo solo aquí, DS-11) ---------- */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr));
+  gap: var(--space-4);
+  margin: 0 0 var(--space-6);
+  padding: 0;
+  list-style: none;
+}
+
+.kpi-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-1) var(--space-3);
+  padding: var(--space-5) var(--space-6);
+  border-radius: var(--radius-xl);
+  background: var(--color-bg-canvas);
+  box-shadow: var(--shadow-neumorphic-soft);
+}
+
+.kpi-card--flat {
+  border: 1px solid var(--color-border-default);
+  background: var(--color-bg-surface);
+  box-shadow: var(--shadow-1);
+}
+
+.kpi-card__label {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-lg);
+}
+
+.kpi-card__value {
+  grid-column: 1 / -1;
+  margin: var(--space-2) 0 0;
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-data-kpi);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-data-kpi);
+}
+
+.kpi-card__meta {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-sm);
+}
+
+.kpi-card .icon-circle {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+/* ---------- Accesos rápidos ---------- */
+.quick-links {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.quick-links__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-block-size: 3.5rem;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+}
+
+.quick-links__link:hover {
+  border-color: var(--color-border-brand);
+  background: var(--color-bg-brand-subtle);
+  color: var(--color-text-primary);
+}
+
+.quick-links__link > .icon:last-child {
+  margin-inline-start: auto;
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Gráficos de barras SVG con tabla equivalente (WCAG 1.1.1 y 1.4.1) ---------- */
+.chart {
+  margin: 0;
+  overflow-x: auto;
+}
+
+/* Por debajo de 28rem el gráfico conserva su tamaño legible y se desplaza dentro de su tarjeta. */
+.chart__svg {
+  display: block;
+  inline-size: 100%;
+  min-inline-size: 28rem;
+  block-size: auto;
+  font-family: var(--font-family-body);
+}
+
+.chart__axis {
+  stroke: var(--color-border-default);
+}
+
+.chart__grid {
+  stroke: var(--color-border-subtle);
+}
+
+.chart__tick,
+.chart__label {
+  fill: var(--color-text-secondary);
+  font-size: 12px;
+}
+
+.chart__value {
+  fill: var(--color-text-primary);
+  font-size: 12px;
+  font-weight: var(--font-weight-semibold);
+}
+
+.chart__caption {
+  margin-block-start: var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-sm);
+}
+
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-body-md);
+  list-style: none;
+}
+
+.chart-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.chart-legend__item::before {
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+  border-radius: var(--radius-xs);
+  background: var(--series-color);
+  content: '';
+}
+
+.chart-series--draft {
+  --series-color: var(--color-chart-draft);
+
+  fill: var(--color-chart-draft);
+}
+
+.chart-series--in-development {
+  --series-color: var(--color-chart-review);
+
+  fill: var(--color-chart-review);
+}
+
+.chart-series--approved {
+  --series-color: var(--color-chart-approved);
+
+  fill: var(--color-chart-approved);
+}
+
+.chart-series--in-production {
+  --series-color: var(--color-chart-production);
+
+  fill: var(--color-chart-production);
+}
+
+.chart-series--inactive {
+  --series-color: var(--color-chart-inactive);
+
+  fill: var(--color-chart-inactive);
+}
+
+.chart-data {
+  margin-block-start: var(--space-3);
+}
+
+.chart-data > summary {
+  color: var(--color-text-link);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+}
+
+.chart-data .table {
+  margin-block-start: var(--space-3);
+}

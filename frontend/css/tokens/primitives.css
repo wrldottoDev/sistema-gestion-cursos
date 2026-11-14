@@ -1,0 +1,22 @@
+/* Primitivos oficiales del Libro de Marca CENFOTEC 2022 (DS 04 · Fundamentos de color).
+   Solo se consumen desde semantic.css, marcadores de escuela y el logotipo (docs/standards/06-DESIGN-SYSTEM.md, DS-01). */
+:root {
+  --color-brand-blue-dark: #164a98;
+  --color-brand-blue: #006aea;
+  --color-brand-blue-light: #9cc8ff;
+  --color-brand-gray-light: #d2d2d2;
+  --color-brand-gray: #7c7b75;
+  --color-brand-yellow: #fff200;
+  --color-brand-amber: #ffc63e;
+
+  /* Secundarios por escuela: solo marcadores puntuales junto al nombre (DS-06, handoff D-04). */
+  --color-school-information-systems: #2b93d1;
+  --color-school-cybersecurity: #f05323;
+  --color-school-intelligent-systems: #00734a;
+  --color-school-information-technology: #4aa147;
+  --color-school-computing-fundamentals: #d2232a;
+  --color-school-student-affairs: #00928d;
+  --color-school-software-engineering: #c81f66;
+  --color-school-business-administration: #c7ac19;
+  --color-school-alumni: #712c86;
+}

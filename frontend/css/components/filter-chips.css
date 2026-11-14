@@ -1,0 +1,56 @@
+/* Filtros activos con opción de quitarlos (C-03). */
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-block-end: var(--space-4);
+  font-size: var(--font-size-body-sm);
+}
+
+.filter-chips__label {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.filter-chips__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.filter-chips__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding-inline: var(--space-2) var(--space-1);
+  border: 1px solid var(--color-border-brand);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-brand-subtle);
+  color: var(--color-text-brand);
+  font-weight: var(--font-weight-medium);
+}
+
+.filter-chips__remove {
+  display: inline-grid;
+  place-items: center;
+  inline-size: var(--size-control-sm);
+  block-size: var(--size-control-sm);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: inherit;
+}
+
+.filter-chips__remove:hover {
+  background: var(--color-bg-brand-soft);
+}
+
+.filter-chips__clear {
+  font-weight: var(--font-weight-medium);
+}

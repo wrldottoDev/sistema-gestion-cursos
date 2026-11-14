@@ -1,3 +1,34 @@
+/* Escala tipográfica del DS (04 · Fundamentos de tipografía). Barlow y Figtree sustituyen a
+   DIN Alternate Bold y Circular Std del Libro de Marca (handoff D-12, DS-08). */
 :root {
-    --fuente: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-family-heading: 'Barlow', 'Arial Narrow', system-ui, sans-serif;
+  --font-family-body: 'Figtree', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --font-size-display-xl: 2.5rem;
+  --line-height-display-xl: 3rem;
+  --font-size-heading-h1: 1.875rem;
+  --line-height-heading-h1: 2.25rem;
+  --font-size-heading-h2: 1.375rem;
+  --line-height-heading-h2: 1.75rem;
+  --font-size-heading-h3: 1.125rem;
+  --line-height-heading-h3: 1.5rem;
+  --font-size-heading-h4: 1rem;
+  --line-height-heading-h4: 1.5rem;
+  --font-size-data-kpi: 2.125rem;
+  --line-height-data-kpi: 2.5rem;
+  --font-size-body-lg: 1rem;
+  --line-height-body-lg: 1.5rem;
+  --font-size-body-md: 0.875rem;
+  --line-height-body-md: 1.25rem;
+  --font-size-body-sm: 0.75rem;
+  --line-height-body-sm: 1rem;
+  --font-size-label-overline: 0.75rem;
+  --letter-spacing-overline: 0.06em;
+  --font-size-button-md: 0.9375rem;
+  --font-size-button-sm: 0.8125rem;
 }
