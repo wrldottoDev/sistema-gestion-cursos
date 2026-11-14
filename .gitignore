@@ -1,2 +1,19 @@
 GUIA-VALENTINA.md
 wireframes/v2/index.html
+
+# Dependencias y artefactos generados
+node_modules/
+coverage/
+playwright-report/
+test-results/
+__pycache__/
+*.log
+
+# Variables de entorno: nunca versionar secretos (docs/standards/12-SECURITY.md)
+.env
+.env.*
+!.env.example
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
