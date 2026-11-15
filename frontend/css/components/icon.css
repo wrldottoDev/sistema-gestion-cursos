@@ -1,0 +1,106 @@
+/* Iconos lineales estilo Lucide desde el sprite /img/icons.svg (DS-15). */
+.icon {
+  flex: none;
+  inline-size: var(--size-icon);
+  block-size: var(--size-icon);
+  vertical-align: -0.3em;
+}
+
+.icon--sm {
+  inline-size: 1rem;
+  block-size: 1rem;
+  vertical-align: -0.2em;
+}
+
+.icon--lg {
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+}
+
+/* Botón de solo icono (40 px). Lleva siempre nombre accesible (HTML-09). */
+.icon-button {
+  position: relative;
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  inline-size: var(--size-icon-button);
+  block-size: var(--size-icon-button);
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: background-color var(--duration-fast) var(--easing-out);
+}
+
+.icon-button:hover {
+  background: var(--color-bg-subtle);
+  color: var(--color-text-primary);
+}
+
+.icon-button--on-brand {
+  color: var(--color-text-inverse);
+}
+
+.icon-button--on-brand:hover {
+  background: rgb(255 255 255 / 12%);
+  color: var(--color-text-inverse);
+}
+
+.icon-button--danger:hover {
+  background: var(--color-feedback-error-bg);
+  color: var(--color-feedback-error);
+}
+
+.icon-button__badge {
+  position: absolute;
+  inset-block-start: 0.125rem;
+  inset-inline-end: 0.125rem;
+  min-inline-size: 1.125rem;
+  padding: 0 var(--space-1);
+  border: 2px solid var(--color-bg-surface);
+  border-radius: var(--radius-full);
+  background: var(--color-feedback-error);
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-body-sm);
+  text-align: center;
+}
+
+.icon-button--on-brand .icon-button__badge {
+  border-color: var(--color-bg-brand);
+}
+
+/* Círculo de icono para tarjetas, avisos y estados (info, éxito, error, advertencia). */
+.icon-circle {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-brand-subtle);
+  color: var(--color-text-brand);
+}
+
+.icon-circle--lg {
+  inline-size: 3rem;
+  block-size: 3rem;
+}
+
+.icon-circle--success {
+  background: var(--color-feedback-success-bg);
+  color: var(--color-feedback-success);
+}
+
+.icon-circle--error {
+  background: var(--color-feedback-error-bg);
+  color: var(--color-feedback-error);
+}
+
+.icon-circle--warning {
+  background: var(--color-feedback-warning-bg);
+  color: var(--color-feedback-warning);
+}

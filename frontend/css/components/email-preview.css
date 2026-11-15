@@ -1,0 +1,148 @@
+/* Vista previa de las plantillas de correo (N-03, N-04). Solo muestra el diseño: el correo real lo genera
+   el servidor con estilos en línea por compatibilidad con clientes de correo (excepción de HTML-22). */
+.email-preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-block-size: 100vh;
+  padding: var(--space-8) var(--layout-margin-mobile);
+  background: var(--color-bg-muted);
+}
+
+.email-preview > * {
+  inline-size: 100%;
+  max-inline-size: 40rem;
+  margin-inline: auto;
+}
+
+.email-preview__title {
+  margin: var(--space-2) 0 0;
+  font-size: var(--font-size-heading-h2);
+  line-height: var(--line-height-heading-h2);
+}
+
+.email-preview__envelope {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-surface);
+  box-shadow: var(--shadow-1);
+}
+
+.email-preview__subject {
+  margin: 0 0 var(--space-1);
+  font-weight: var(--font-weight-semibold);
+}
+
+.email-preview__from {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-sm);
+}
+
+.email-preview__message {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-surface);
+  box-shadow: var(--shadow-2);
+}
+
+.email-preview__header {
+  padding: var(--space-6) var(--space-8);
+  background: var(--color-bg-brand);
+}
+
+.email-preview__logo {
+  display: block;
+  inline-size: 12.5rem;
+  block-size: auto;
+}
+
+.email-preview__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-8);
+}
+
+.email-preview__body h2 {
+  margin: 0;
+}
+
+.email-preview__lead {
+  margin: 0;
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-body-lg);
+}
+
+.email-preview__details {
+  inline-size: 100%;
+  margin: 0;
+}
+
+.email-preview__row {
+  display: grid;
+  grid-template-columns: minmax(8rem, 12.5rem) 1fr;
+  gap: var(--space-4);
+  padding: var(--space-2) var(--space-2);
+  border-block-end: 1px solid var(--color-border-subtle);
+}
+
+.email-preview__row dt {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-regular);
+}
+
+.email-preview__row dd {
+  margin: 0;
+}
+
+.email-preview__row--highlight {
+  background: var(--color-bg-brand-subtle);
+}
+
+.email-preview__row--highlight dd {
+  font-weight: var(--font-weight-semibold);
+}
+
+.email-preview__variant {
+  inline-size: 100%;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-subtle);
+}
+
+.email-preview__variant-label {
+  margin: 0 0 var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-label-overline);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-overline);
+  text-transform: uppercase;
+}
+
+.email-preview__footer {
+  padding: var(--space-4) var(--space-8);
+  background: var(--color-bg-subtle);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-sm);
+}
+
+.email-preview__footer p {
+  margin: 0;
+}
+
+@media (width < 768px) {
+  .email-preview__header,
+  .email-preview__body,
+  .email-preview__footer {
+    padding-inline: var(--space-4);
+  }
+
+  .email-preview__row {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+}

@@ -1,0 +1,134 @@
+/* Detalle de curso de solo lectura (C-05, C-06, R-02…R-07, MB-03): pestañas + secciones en tarjetas,
+   columna lateral con estado/acciones, historial (timeline.css) y adjuntos (file-item.css). En móvil las pestañas se ocultan y todas las
+   secciones se muestran como tarjetas plegables nativas (<details>). */
+.course-detail {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.course-detail__main {
+  min-inline-size: 0;
+}
+
+.course-detail__side {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+  order: -1;
+}
+
+.course-detail__tabs {
+  display: none;
+  margin-block-end: var(--space-4);
+}
+
+.course-detail__tab-count {
+  margin-inline-start: var(--space-2);
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-full);
+  background: var(--color-bg-muted);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-sm);
+}
+
+/* Móvil: todas las secciones visibles una tras otra (acordeón MB-03). */
+.course-detail__panes > .tab-pane {
+  display: block;
+  opacity: 1;
+}
+
+.course-detail__panes > .tab-pane + .tab-pane {
+  margin-block-start: var(--space-3);
+}
+
+/* ---------- Sección (tarjeta plegable) ---------- */
+.detail-section {
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-xl);
+  background: var(--color-bg-surface);
+  box-shadow: var(--shadow-1);
+}
+
+.detail-section + .detail-section {
+  margin-block-start: var(--space-3);
+}
+
+.detail-section__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  list-style: none;
+  cursor: pointer;
+}
+
+.detail-section__summary::-webkit-details-marker {
+  display: none;
+}
+
+.detail-section__title {
+  margin: 0;
+  font-size: var(--font-size-heading-h3);
+  line-height: var(--line-height-heading-h3);
+}
+
+.detail-section__chevron {
+  color: var(--color-text-secondary);
+  transition: rotate var(--duration-fast) var(--easing-out);
+}
+
+.detail-section[open] .detail-section__chevron {
+  rotate: 180deg;
+}
+
+.detail-section__body {
+  padding: 0 var(--space-4) var(--space-4);
+}
+
+.detail-list__full {
+  grid-column: 1 / -1;
+}
+
+@media (width >= 768px) {
+  .course-detail__tabs {
+    display: flex;
+  }
+
+  .course-detail__panes > .tab-pane:not(.active) {
+    display: none;
+  }
+
+  .course-detail__panes > .tab-pane + .tab-pane {
+    margin-block-start: 0;
+  }
+
+  .course-detail__side {
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  }
+
+  .detail-section__summary {
+    padding: var(--space-5) var(--space-5) var(--space-4);
+    cursor: default;
+  }
+
+  .detail-section__chevron {
+    display: none;
+  }
+
+  .detail-section__body {
+    padding: 0 var(--space-5) var(--space-5);
+  }
+}
+
+@media (width >= 1200px) {
+  .course-detail {
+    grid-template-columns: minmax(0, 1fr) 23.75rem;
+    align-items: start;
+  }
+
+  .course-detail__side {
+    grid-template-columns: none;
+    order: 0;
+  }
+}

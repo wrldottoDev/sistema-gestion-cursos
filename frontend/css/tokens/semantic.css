@@ -1,0 +1,62 @@
+/* Tokens semánticos del DS (Figma, sección 04). Los componentes solo consumen estos (DS-01). */
+:root {
+  --color-bg-canvas: #f4f6fa;
+  --color-bg-surface: #ffffff;
+  --color-bg-subtle: #f1f4f9;
+  --color-bg-muted: #e6eaf0;
+  --color-bg-brand: var(--color-brand-blue-dark);
+  --color-bg-brand-subtle: #eef5ff;
+  --color-bg-brand-soft: #dcebff;
+  --color-bg-overlay: #101828;
+
+  --color-text-primary: #101828;
+  --color-text-secondary: #5a6472;
+  --color-text-disabled: #8c95a3;
+  --color-text-inverse: #ffffff;
+  --color-text-brand: var(--color-brand-blue-dark);
+  --color-text-link: var(--color-brand-blue);
+  --color-text-on-brand-muted: #dcebff;
+
+  --color-border-subtle: #e6eaf0;
+  --color-border-default: #d5dbe3;
+  --color-border-strong: #7c8597;
+  --color-border-focus: var(--color-brand-blue-dark);
+  --color-border-brand: var(--color-brand-blue);
+
+  --color-action-primary: var(--color-brand-blue);
+  --color-action-primary-hover: #0055bd;
+  --color-action-primary-pressed: var(--color-brand-blue-dark);
+  --color-action-secondary-hover: #eef5ff;
+  --color-action-disabled: #e6eaf0;
+  --color-action-destructive: #b3261e;
+  --color-action-destructive-hover: #8f1e18;
+
+  --color-feedback-success: #1e7b34;
+  --color-feedback-success-bg: #e7f5ec;
+  --color-feedback-error: #b3261e;
+  --color-feedback-error-bg: #fdecea;
+  --color-feedback-warning: #8a5a00;
+  --color-feedback-warning-bg: #fff6e0;
+  --color-feedback-warning-accent: var(--color-brand-amber);
+  --color-feedback-info: var(--color-brand-blue-dark);
+  --color-feedback-info-bg: #eef5ff;
+
+  --color-status-draft-fg: #344054;
+  --color-status-draft-bg: #eef0f3;
+  --color-status-review-fg: var(--color-brand-blue-dark);
+  --color-status-review-bg: #dcebff;
+  --color-status-approved-fg: #1e7b34;
+  --color-status-approved-bg: #e7f5ec;
+  --color-status-production-fg: #ffffff;
+  --color-status-production-bg: var(--color-brand-blue-dark);
+  --color-status-inactive-fg: #5a5955;
+  --color-status-inactive-bg: #f2f2f0;
+
+  /* Series de gráficos: tomadas de las pantallas P-01 y RP-01; valores exactos pendientes de Figma (PV-22).
+     Los gráficos siempre llevan valores rotulados y tabla equivalente (WCAG 1.4.1). */
+  --color-chart-draft: var(--color-brand-gray);
+  --color-chart-review: var(--color-brand-blue);
+  --color-chart-approved: #1e7b34;
+  --color-chart-production: var(--color-brand-blue-dark);
+  --color-chart-inactive: var(--color-brand-gray-light);
+}

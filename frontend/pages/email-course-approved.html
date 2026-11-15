@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vista previa: correo de curso aprobado · Sistema de Gestión de Cursos</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <!-- Vista previa estática (N-04, RF-038). La plantilla real la generará el servidor (backend/src/integrations/mailer.js) con estilos en línea. -->
+  </head>
+  <body>
+    <a class="visually-hidden-focusable skip-link" href="#main">Saltar al contenido principal</a>
+    <main id="main" class="email-preview" tabindex="-1">
+      <header>
+        <span class="tag tag--info"
+          ><svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-mail"></use></svg
+          >Vista previa de plantilla de correo</span
+        >
+        <h1 class="email-preview__title">
+          Correo de aprobación a Vicerrectoría y al Director (N-04)
+        </h1>
+      </header>
+
+      <section class="email-preview__envelope" aria-label="Datos del mensaje">
+        <p class="email-preview__subject">
+          Asunto: [SGC] Curso aprobado para Power Campus: SOFT-210
+        </p>
+        <p class="email-preview__from">De: Sistema de Gestión de Cursos · Para: Vicerrectoría</p>
+      </section>
+
+      <article class="email-preview__message" aria-labelledby="email-title">
+        <div class="email-preview__header">
+          <img
+            class="email-preview__logo"
+            src="/img/logo-horizontal-blanco.svg"
+            alt="Universidad CENFOTEC"
+            width="200"
+            height="88"
+          />
+        </div>
+        <div class="email-preview__body">
+          <h2 id="email-title">Curso aprobado · listo para transcribir</h2>
+          <p class="email-preview__lead">
+            Desarrollo Curricular aprobó el siguiente curso. Transcríbalo manualmente a Power
+            Campus.
+          </p>
+          <dl class="email-preview__details">
+            <div class="email-preview__row">
+              <dt>Código</dt>
+              <dd>SOFT-210</dd>
+            </div>
+            <div class="email-preview__row">
+              <dt>Nombre</dt>
+              <dd>Arquitectura de software</dd>
+            </div>
+            <div class="email-preview__row email-preview__row--highlight">
+              <dt>Nombre en Power Campus</dt>
+              <dd>Arquitectura de Software (24/40)</dd>
+            </div>
+            <div class="email-preview__row">
+              <dt>Aprobado</dt>
+              <dd>Luis Solís Rojas · 12/10/2026 15:10</dd>
+            </div>
+          </dl>
+          <a class="btn btn-primary" href="/pages/course-detail-power-campus.html"
+            >Ver detalle del curso</a
+          >
+          <section class="email-preview__variant" aria-labelledby="director-variant-title">
+            <h3 class="email-preview__variant-label" id="director-variant-title">
+              Variante para el Director
+            </h3>
+            <p class="fw-semibold mb-1">Asunto: [SGC] Su curso SOFT-210 fue aprobado</p>
+            <p class="small text-body-secondary mb-0">
+              "Su curso Arquitectura de software fue aprobado por Desarrollo Curricular." · Enlace
+              al detalle.
+            </p>
+          </section>
+        </div>
+        <footer class="email-preview__footer">
+          <p>
+            Mensaje automático del Sistema de Gestión de Cursos · Universidad CENFOTEC. No responda
+            a este correo.
+          </p>
+        </footer>
+      </article>
+
+      <p class="view-note">
+        RF-038: correo a Vicerrectoría (código, nombre, Nombre en Power Campus, enlace) y al
+        Director de la escuela. Un fallo de correo no revierte la aprobación; el error queda
+        registrado.
+      </p>
+      <p class="view-note">
+        Esta página solo muestra el diseño del mensaje. El correo real lo arma y envía el servidor;
+        por compatibilidad con los clientes de correo llevará estilos en línea (excepción de
+        HTML-22). El botón abre la vista correspondiente del prototipo.
+      </p>
+      <p class="demo-note">
+        <svg class="icon icon--sm" aria-hidden="true" focusable="false">
+          <use href="/img/icons.svg#i-info"></use>
+        </svg>
+        Vista estática de demostración: los datos son ficticios y no se envía ningún correo.
+      </p>
+    </main>
+  </body>
+</html>

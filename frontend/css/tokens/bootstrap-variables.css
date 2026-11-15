@@ -1,0 +1,55 @@
+/* Asigna tokens del DS a las variables globales de Bootstrap 5.3 (capa tokens > vendor).
+   Los componentes cuyo color Bootstrap compila como valor fijo (.btn-primary, :focus…) se ajustan en
+   components/bootstrap-components.css (docs/standards/07-BOOTSTRAP.md). */
+:root {
+  --bs-primary: #006aea;
+  --bs-primary-rgb: 0, 106, 234;
+  --bs-danger: #b3261e;
+  --bs-danger-rgb: 179, 38, 30;
+  --bs-success: #1e7b34;
+  --bs-success-rgb: 30, 123, 52;
+  --bs-warning: #ffc63e;
+  --bs-warning-rgb: 255, 198, 62;
+  --bs-info: #164a98;
+  --bs-info-rgb: 22, 74, 152;
+
+  --bs-body-font-family: var(--font-family-body);
+  --bs-body-font-size: var(--font-size-body-md);
+  --bs-body-line-height: 1.4286;
+  --bs-body-color: var(--color-text-primary);
+  --bs-body-color-rgb: 16, 24, 40;
+  /* Bootstrap usa --bs-body-bg como superficie de campos, tarjetas, modales y menús: se asigna bg/surface
+     y el lienzo bg/canvas se aplica al body en base/base.css. */
+  --bs-body-bg: var(--color-bg-surface);
+  --bs-body-bg-rgb: 255, 255, 255;
+  --bs-emphasis-color: var(--color-text-primary);
+  --bs-heading-color: var(--color-text-primary);
+  --bs-secondary-color: var(--color-text-secondary);
+  --bs-secondary-bg: var(--color-bg-muted);
+  --bs-tertiary-bg: var(--color-bg-subtle);
+
+  --bs-link-color: var(--color-text-link);
+  --bs-link-color-rgb: 0, 106, 234;
+  --bs-link-hover-color: var(--color-action-primary-hover);
+  --bs-link-hover-color-rgb: 0, 85, 189;
+
+  --bs-border-color: var(--color-border-default);
+  --bs-border-radius: var(--radius-md);
+  --bs-border-radius-sm: var(--radius-sm);
+  --bs-border-radius-lg: var(--radius-lg);
+  --bs-border-radius-xl: var(--radius-xl);
+  --bs-border-radius-pill: var(--radius-full);
+
+  --bs-box-shadow-sm: var(--shadow-1);
+  --bs-box-shadow: var(--shadow-2);
+  --bs-box-shadow-lg: var(--shadow-3);
+
+  --bs-focus-ring-width: 4px;
+  --bs-focus-ring-opacity: 1;
+  --bs-focus-ring-color: var(--focus-ring-halo-color);
+
+  --bs-form-invalid-color: var(--color-feedback-error);
+  --bs-form-invalid-border-color: var(--color-feedback-error);
+  --bs-form-valid-color: var(--color-feedback-success);
+  --bs-form-valid-border-color: var(--color-feedback-success);
+}

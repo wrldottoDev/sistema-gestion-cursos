@@ -1,0 +1,748 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Carreras · Sistema de Gestión de Cursos</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+    <!-- Integración futura: <script type="module" src="/js/pages/catalog.page.js"></script> (K-03, RF-011, RF-016) -->
+  </head>
+  <body>
+    <a class="visually-hidden-focusable skip-link" href="#main">Saltar al contenido principal</a>
+
+    <div class="app-shell">
+      <!-- Barra superior móvil (< 768 px) -->
+      <header class="app-mobilebar d-md-none" aria-label="Barra superior móvil">
+        <button
+          class="icon-button icon-button--on-brand"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#app-sidebar"
+          aria-controls="app-sidebar"
+          aria-label="Abrir menú"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-menu"></use>
+          </svg>
+        </button>
+        <p class="app-mobilebar__title" aria-hidden="true">Carreras</p>
+        <a
+          class="icon-button icon-button--on-brand"
+          href="/pages/notifications.html"
+          aria-label="Avisos"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-bell"></use>
+          </svg>
+        </a>
+      </header>
+
+      <!-- Riel de navegación (tablet, 768–1199 px) -->
+      <nav class="app-rail d-none d-md-flex d-xl-none" aria-label="Principal compacta">
+        <button
+          class="icon-button icon-button--on-brand"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#app-sidebar"
+          aria-controls="app-sidebar"
+          aria-label="Abrir menú"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-menu"></use>
+          </svg>
+        </button>
+        <ul class="app-rail__list">
+          <li>
+            <a class="app-rail__link" href="/pages/home-admin.html"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-layout-dashboard"></use></svg
+              >Inicio</a
+            >
+          </li>
+          <li>
+            <a class="app-rail__link" href="/pages/users.html"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-user"></use></svg
+              >Usuarios</a
+            >
+          </li>
+          <li>
+            <a class="app-rail__link" href="/pages/catalogs.html" aria-current="page"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-layers"></use></svg
+              >Catálogos</a
+            >
+          </li>
+          <li>
+            <a class="app-rail__link" href="/pages/csv-import.html"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-upload"></use></svg
+              >CSV</a
+            >
+          </li>
+          <li>
+            <a class="app-rail__link" href="/pages/courses.html"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-book-open"></use></svg
+              >Cursos</a
+            >
+          </li>
+          <li>
+            <a class="app-rail__link" href="/pages/report-production.html"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-chart-column"></use></svg
+              >Reportes</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Barra lateral: fija ≥ 1200 px; menú lateral (offcanvas) en móvil y tablet (MB-09) -->
+      <div class="app-sidebar">
+        <div
+          class="offcanvas-xl offcanvas-start app-sidebar__panel"
+          id="app-sidebar"
+          tabindex="-1"
+          aria-label="Menú principal"
+        >
+          <div class="offcanvas-header">
+            <button
+              class="btn-close btn-close-white"
+              type="button"
+              data-bs-dismiss="offcanvas"
+              data-bs-target="#app-sidebar"
+              aria-label="Cerrar menú"
+            ></button>
+          </div>
+          <div class="offcanvas-body app-sidebar__body">
+            <a class="app-sidebar__brand" href="/pages/home-admin.html">
+              <img
+                class="app-sidebar__logo"
+                src="/img/logo-horizontal-blanco.svg"
+                alt="Universidad CENFOTEC · Inicio"
+                width="216"
+                height="95"
+              />
+            </a>
+            <p class="app-sidebar__product d-none d-xl-block">Sistema de Gestión de Cursos</p>
+            <p class="app-sidebar__user d-xl-none">Marco Salazar · Administrador del sistema</p>
+            <hr class="app-sidebar__divider" />
+            <nav aria-labelledby="sidebar-menu-label">
+              <p class="app-sidebar__heading" id="sidebar-menu-label">Menú</p>
+              <ul class="app-sidebar__list">
+                <li>
+                  <a class="app-sidebar__link" href="/pages/home-admin.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-layout-dashboard"></use></svg
+                    >Inicio</a
+                  >
+                </li>
+                <li>
+                  <a class="app-sidebar__link" href="/pages/users.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-user"></use></svg
+                    >Usuarios</a
+                  >
+                </li>
+                <li>
+                  <a class="app-sidebar__link" href="/pages/catalogs.html" aria-current="page"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-layers"></use></svg
+                    >Catálogos</a
+                  >
+                </li>
+                <li>
+                  <a class="app-sidebar__link" href="/pages/csv-import.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-upload"></use></svg
+                    >Importar CSV</a
+                  >
+                </li>
+                <li>
+                  <a class="app-sidebar__link" href="/pages/courses.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-book-open"></use></svg
+                    >Cursos</a
+                  >
+                </li>
+                <li>
+                  <a class="app-sidebar__link" href="/pages/report-production.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-chart-column"></use></svg
+                    >Reportes</a
+                  >
+                </li>
+              </ul>
+            </nav>
+            <div class="d-xl-none mt-auto pt-4">
+              <div class="lang-switch" role="group" aria-label="Idioma de la interfaz">
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-globe"></use>
+                </svg>
+                <button
+                  class="lang-switch__option"
+                  type="button"
+                  lang="es"
+                  aria-pressed="true"
+                  data-action="set-language"
+                  data-language="es"
+                >
+                  ES
+                </button>
+                <button
+                  class="lang-switch__option"
+                  type="button"
+                  lang="en"
+                  aria-pressed="false"
+                  data-action="set-language"
+                  data-language="en"
+                >
+                  EN
+                </button>
+              </div>
+              <p class="app-sidebar__user mt-3">Cerrar sesión: fuera de alcance (ERS §1.2).</p>
+            </div>
+            <p class="app-sidebar__footer d-none d-xl-block">Universidad CENFOTEC</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-main">
+        <!-- Barra superior (≥ 768 px) -->
+        <header class="app-topbar d-none d-md-flex" aria-label="Barra superior">
+          <nav aria-label="Ruta de navegación">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/pages/catalogs.html">Catálogos</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Carreras</li>
+            </ol>
+          </nav>
+          <div class="app-topbar__actions">
+            <div class="lang-switch" role="group" aria-label="Idioma de la interfaz">
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-globe"></use>
+              </svg>
+              <button
+                class="lang-switch__option"
+                type="button"
+                lang="es"
+                aria-pressed="true"
+                data-action="set-language"
+                data-language="es"
+              >
+                ES
+              </button>
+              <button
+                class="lang-switch__option"
+                type="button"
+                lang="en"
+                aria-pressed="false"
+                data-action="set-language"
+                data-language="en"
+              >
+                EN
+              </button>
+            </div>
+            <button
+              class="icon-button"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#notifications-panel"
+              aria-controls="notifications-panel"
+              aria-label="Avisos, sin avisos nuevos"
+            >
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-bell"></use>
+              </svg>
+            </button>
+            <span class="app-topbar__separator" aria-hidden="true"></span>
+            <div class="dropdown">
+              <button
+                class="user-menu__toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                data-bs-auto-close="outside"
+                aria-expanded="false"
+              >
+                <span class="visually-hidden">Menú de usuario:</span>
+                <span class="avatar" aria-hidden="true">MS</span>
+                <span class="user-menu__identity">
+                  <span class="user-menu__name">Marco Salazar</span>
+                  <span class="user-menu__role">Administrador del sistema</span>
+                </span>
+                <svg class="icon icon--sm" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-chevron-down"></use>
+                </svg>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end user-menu__panel">
+                <div class="user-menu__header">
+                  <span class="avatar avatar--lg" aria-hidden="true">MS</span>
+                  <div>
+                    <p class="user-menu__name mb-0">Marco Salazar</p>
+                    <p class="user-menu__email">msalazar@ucenfotec.ac.cr</p>
+                  </div>
+                </div>
+                <dl class="user-menu__details">
+                  <dt>Rol</dt>
+                  <dd>Administrador</dd>
+                </dl>
+                <fieldset>
+                  <legend class="form-legend">Idioma de la interfaz</legend>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      id="user-language-es"
+                      name="userLanguage"
+                      type="radio"
+                      value="es"
+                      checked
+                    />
+                    <label class="form-check-label" for="user-language-es">Español</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      id="user-language-en"
+                      name="userLanguage"
+                      type="radio"
+                      value="en"
+                    />
+                    <label class="form-check-label" for="user-language-en" lang="en">English</label>
+                  </div>
+                  <p class="form-text">Se recuerda su preferencia (RF-044 CA3).</p>
+                </fieldset>
+                <p class="user-menu__note">
+                  Cerrar sesión no está disponible: fuera de alcance de la ERS (§1.2) y pendiente de
+                  validar (Apéndice E).
+                </p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main id="main" class="app-content" tabindex="-1">
+          <div class="page-header">
+            <div class="page-header__text">
+              <h1 class="page-header__title page-header__title--mobile-hidden">Carreras</h1>
+              <p class="page-header__subtitle">
+                Cada carrera pertenece a una escuela y aparece en los filtros de reportes
+              </p>
+            </div>
+            <div class="page-header__actions">
+              <button class="btn btn-primary" type="button" data-action="create-catalog-item">
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-plus"></use></svg
+                >Registrar carrera
+              </button>
+            </div>
+          </div>
+          <div class="catalog-layout">
+            <nav class="catalog-nav" aria-labelledby="catalog-nav-title">
+              <p class="catalog-nav__title" id="catalog-nav-title">Catálogos</p>
+              <ul class="catalog-nav__list">
+                <li>
+                  <a class="catalog-nav__link" href="/pages/catalog-schools.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-building-2"></use></svg
+                    ><span class="catalog-nav__name">Escuelas</span
+                    ><span class="catalog-nav__count"
+                      >7<span class="visually-hidden"> elementos</span></span
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="catalog-nav__link"
+                    href="/pages/catalog-degree-programs.html"
+                    aria-current="page"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-graduation-cap"></use></svg
+                    ><span class="catalog-nav__name">Carreras</span
+                    ><span class="catalog-nav__count"
+                      >18<span class="visually-hidden"> elementos</span></span
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a class="catalog-nav__link" href="/pages/catalog-sfia-areas.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-layers"></use></svg
+                    ><span class="catalog-nav__name">Áreas SFIA</span
+                    ><span class="catalog-nav__count"
+                      >12<span class="visually-hidden"> elementos</span></span
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a class="catalog-nav__link" href="/pages/catalogs.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-tag"></use></svg
+                    ><span class="catalog-nav__name">Temáticas</span
+                    ><span class="catalog-nav__count"
+                      >30<span class="visually-hidden"> elementos</span></span
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a class="catalog-nav__link" href="/pages/catalogs.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-book-open"></use></svg
+                    ><span class="catalog-nav__name">Metodologías de aprendizaje</span
+                    ><span class="catalog-nav__count"
+                      >8<span class="visually-hidden"> elementos</span></span
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a class="catalog-nav__link" href="/pages/catalog-complexity-levels.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-lock"></use></svg
+                    ><span class="catalog-nav__name">Niveles de complejidad</span
+                    ><span class="catalog-nav__count"
+                      >5<span class="visually-hidden"> elementos</span></span
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a class="catalog-nav__link" href="/pages/catalogs.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-badge-check"></use></svg
+                    ><span class="catalog-nav__name">Casas certificadoras</span
+                    ><span class="catalog-nav__count"
+                      >9<span class="visually-hidden"> elementos</span></span
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a class="catalog-nav__link" href="/pages/catalog-certifications.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-circle-check"></use></svg
+                    ><span class="catalog-nav__name">Certificaciones</span
+                    ><span class="catalog-nav__count"
+                      >14<span class="visually-hidden"> elementos</span></span
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a class="catalog-nav__link" href="/pages/catalogs.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-lock"></use></svg
+                    ><span class="catalog-nav__name">Estados de curso</span
+                    ><span class="catalog-nav__count"
+                      >5<span class="visually-hidden"> elementos</span></span
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a class="catalog-nav__link" href="/pages/catalogs.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-lock"></use></svg
+                    ><span class="catalog-nav__name">Moneda</span
+                    ><span class="catalog-nav__count"
+                      >2<span class="visually-hidden"> elementos</span></span
+                    ></a
+                  >
+                </li>
+              </ul>
+            </nav>
+            <div class="catalog-layout__content">
+              <form
+                class="filter-bar"
+                role="search"
+                aria-label="Buscar y filtrar carreras"
+                data-form="catalog-search"
+              >
+                <div class="search-field">
+                  <svg class="icon" aria-hidden="true" focusable="false">
+                    <use href="/img/icons.svg#i-search"></use>
+                  </svg>
+                  <label class="visually-hidden" for="degree-program-search"
+                    >Buscar por código o nombre</label
+                  >
+                  <input
+                    class="form-control"
+                    id="degree-program-search"
+                    name="q"
+                    type="search"
+                    placeholder="Buscar por código o nombre"
+                  />
+                </div>
+                <div class="filter-select filter-select--active">
+                  <svg class="icon" aria-hidden="true" focusable="false">
+                    <use href="/img/icons.svg#i-funnel"></use>
+                  </svg>
+                  <label class="filter-select__label" for="degree-program-school-filter"
+                    >Escuela:</label
+                  >
+                  <select
+                    class="form-select filter-select__control"
+                    id="degree-program-school-filter"
+                    name="schoolId"
+                  >
+                    <option value="">Todas</option>
+                    <option value="software-engineering" selected>Ingeniería del Software</option>
+                    <option value="cybersecurity">Ciberseguridad</option>
+                    <option value="intelligent-systems">Sistemas Inteligentes</option>
+                    <option value="information-technology">Tecnologías de Información</option>
+                    <option value="information-systems">Sistemas de Información</option>
+                    <option value="computing-fundamentals">Fundamentos de Computación</option>
+                    <option value="business-administration">Administración de Negocios</option>
+                  </select>
+                </div>
+                <button class="btn btn-primary visually-hidden-focusable" type="submit">
+                  Aplicar filtros
+                </button>
+              </form>
+              <div class="d-flex flex-wrap align-items-center gap-2 mb-4">
+                <p class="text-body-secondary small fw-medium mb-0">Filtros activos:</p>
+                <span class="tag tag--info">Escuela: Ingeniería del Software</span>
+                <a class="btn btn-link btn-sm" href="/pages/catalog-degree-programs.html"
+                  >Limpiar filtros</a
+                >
+              </div>
+              <section class="data-card mb-4" aria-labelledby="degree-programs-caption">
+                <div class="table-responsive" tabindex="0">
+                  <table class="table table-hover">
+                    <caption class="visually-hidden" id="degree-programs-caption">
+                      Carreras de la escuela Ingeniería del Software
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">Código</th>
+                        <th scope="col">Nombre</th>
+                        <th class="d-none d-xl-table-cell" scope="col">Escuela</th>
+                        <th class="d-none d-md-table-cell text-end" scope="col">En uso</th>
+                        <th class="text-end" scope="col">Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th class="data-table__code" scope="row">ISW-BACH</th>
+                        <td>Bachillerato en Ingeniería del Software</td>
+                        <td class="d-none d-xl-table-cell">
+                          <span class="school-marker school-marker--software-engineering"
+                            >Ingeniería del Software</span
+                          >
+                        </td>
+                        <td class="d-none d-md-table-cell text-end text-tabular">22</td>
+                        <td>
+                          <div class="data-table__actions">
+                            <button
+                              class="icon-button"
+                              type="button"
+                              data-action="edit-catalog-item"
+                              aria-label="Editar carrera Bachillerato en Ingeniería del Software"
+                            >
+                              <svg class="icon" aria-hidden="true" focusable="false">
+                                <use href="/img/icons.svg#i-pencil"></use>
+                              </svg>
+                            </button>
+                            <button
+                              class="icon-button icon-button--danger"
+                              type="button"
+                              data-action="delete-catalog-item"
+                              aria-label="Eliminar carrera Bachillerato en Ingeniería del Software"
+                            >
+                              <svg class="icon" aria-hidden="true" focusable="false">
+                                <use href="/img/icons.svg#i-trash-2"></use>
+                              </svg>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class="data-table__code" scope="row">ISW-LIC</th>
+                        <td>Licenciatura en Ingeniería del Software</td>
+                        <td class="d-none d-xl-table-cell">
+                          <span class="school-marker school-marker--software-engineering"
+                            >Ingeniería del Software</span
+                          >
+                        </td>
+                        <td class="d-none d-md-table-cell text-end text-tabular">9</td>
+                        <td>
+                          <div class="data-table__actions">
+                            <button
+                              class="icon-button"
+                              type="button"
+                              data-action="edit-catalog-item"
+                              aria-label="Editar carrera Licenciatura en Ingeniería del Software"
+                            >
+                              <svg class="icon" aria-hidden="true" focusable="false">
+                                <use href="/img/icons.svg#i-pencil"></use>
+                              </svg>
+                            </button>
+                            <button
+                              class="icon-button icon-button--danger"
+                              type="button"
+                              data-action="delete-catalog-item"
+                              aria-label="Eliminar carrera Licenciatura en Ingeniería del Software"
+                            >
+                              <svg class="icon" aria-hidden="true" focusable="false">
+                                <use href="/img/icons.svg#i-trash-2"></use>
+                              </svg>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class="data-table__code" scope="row">TDS</th>
+                        <td>Técnico en Desarrollo de Software</td>
+                        <td class="d-none d-xl-table-cell">
+                          <span class="school-marker school-marker--software-engineering"
+                            >Ingeniería del Software</span
+                          >
+                        </td>
+                        <td class="d-none d-md-table-cell text-end text-tabular">6</td>
+                        <td>
+                          <div class="data-table__actions">
+                            <button
+                              class="icon-button"
+                              type="button"
+                              data-action="edit-catalog-item"
+                              aria-label="Editar carrera Técnico en Desarrollo de Software"
+                            >
+                              <svg class="icon" aria-hidden="true" focusable="false">
+                                <use href="/img/icons.svg#i-pencil"></use>
+                              </svg>
+                            </button>
+                            <button
+                              class="icon-button icon-button--danger"
+                              type="button"
+                              data-action="delete-catalog-item"
+                              aria-label="Eliminar carrera Técnico en Desarrollo de Software"
+                            >
+                              <svg class="icon" aria-hidden="true" focusable="false">
+                                <use href="/img/icons.svg#i-trash-2"></use>
+                              </svg>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th class="data-table__code" scope="row">ISW-MAE</th>
+                        <td>Maestría en Ingeniería del Software</td>
+                        <td class="d-none d-xl-table-cell">
+                          <span class="school-marker school-marker--software-engineering"
+                            >Ingeniería del Software</span
+                          >
+                        </td>
+                        <td class="d-none d-md-table-cell text-end text-tabular">2</td>
+                        <td>
+                          <div class="data-table__actions">
+                            <button
+                              class="icon-button"
+                              type="button"
+                              data-action="edit-catalog-item"
+                              aria-label="Editar carrera Maestría en Ingeniería del Software"
+                            >
+                              <svg class="icon" aria-hidden="true" focusable="false">
+                                <use href="/img/icons.svg#i-pencil"></use>
+                              </svg>
+                            </button>
+                            <button
+                              class="icon-button icon-button--danger"
+                              type="button"
+                              data-action="delete-catalog-item"
+                              aria-label="Eliminar carrera Maestría en Ingeniería del Software"
+                            >
+                              <svg class="icon" aria-hidden="true" focusable="false">
+                                <use href="/img/icons.svg#i-trash-2"></use>
+                              </svg>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="data-card__footer">
+                  <p class="data-card__summary" role="status">Mostrando 1–4 de 4 carreras</p>
+                </div>
+              </section>
+            </div>
+          </div>
+          <p class="demo-note">
+            <svg class="icon icon--sm" aria-hidden="true" focusable="false">
+              <use href="/img/icons.svg#i-info"></use>
+            </svg>
+            Vista estática de demostración: los datos son ficticios y las acciones no están
+            conectadas.
+          </p>
+        </main>
+      </div>
+
+      <!-- Barra inferior (< 768 px) -->
+      <nav class="app-bottomnav d-md-none" aria-label="Principal inferior">
+        <ul class="app-bottomnav__list">
+          <li>
+            <a class="app-bottomnav__link" href="/pages/home-admin.html"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-layout-dashboard"></use></svg></span
+              >Inicio</a
+            >
+          </li>
+          <li>
+            <a class="app-bottomnav__link" href="/pages/users.html"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-user"></use></svg></span
+              >Usuarios</a
+            >
+          </li>
+          <li>
+            <a class="app-bottomnav__link" href="/pages/courses.html"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-book-open"></use></svg></span
+              >Cursos</a
+            >
+          </li>
+          <li>
+            <a class="app-bottomnav__link" href="/pages/notifications.html"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-bell"></use></svg></span
+              >Avisos</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Panel de avisos (N-01, propuesta UX D-09) -->
+    <div
+      class="offcanvas offcanvas-end notification-panel"
+      id="notifications-panel"
+      tabindex="-1"
+      aria-labelledby="notifications-panel-title"
+    >
+      <div class="offcanvas-header">
+        <h2 class="offcanvas-title h3" id="notifications-panel-title">Avisos</h2>
+        <button
+          class="btn-close"
+          type="button"
+          data-bs-dismiss="offcanvas"
+          aria-label="Cerrar avisos"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="empty-state">
+          <span class="icon-circle icon-circle--lg"
+            ><svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/img/icons.svg#i-bell"></use></svg
+          ></span>
+          <p class="empty-state__title">No tiene avisos nuevos</p>
+          <p class="empty-state__description">
+            Los avisos de envío y aprobación de cursos aparecerán aquí.
+          </p>
+        </div>
+        <p class="notification-panel__note">
+          <span class="tag tag--outline">Propuesta UX</span> La ERS define avisos por correo
+          (RF-036, RF-038) y notificación de escritorio (RF-037). Este panel solo los reúne dentro
+          de la aplicación; requiere validación.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1067 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reporte de producción · Sistema de Gestión de Cursos</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
+    <!-- Integración futura: <script type="module" src="/js/pages/report-production.page.js"></script> (RP-01, TB-06, MB-07, RF-042) -->
+  </head>
+  <body>
+    <a class="visually-hidden-focusable skip-link" href="#main">Saltar al contenido principal</a>
+
+    <div class="app-shell">
+      <!-- Barra superior móvil (< 768 px) -->
+      <header class="app-mobilebar d-md-none" aria-label="Barra superior móvil">
+        <button
+          class="icon-button icon-button--on-brand"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#app-sidebar"
+          aria-controls="app-sidebar"
+          aria-label="Abrir menú"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-menu"></use>
+          </svg>
+        </button>
+        <p class="app-mobilebar__title" aria-hidden="true">Reportes</p>
+        <a
+          class="icon-button icon-button--on-brand"
+          href="/pages/notifications.html"
+          aria-label="Avisos, sin avisos nuevos"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-bell"></use>
+          </svg>
+        </a>
+      </header>
+
+      <!-- Riel de navegación (tablet, 768–1199 px) -->
+      <nav class="app-rail d-none d-md-flex d-xl-none" aria-label="Principal compacta">
+        <button
+          class="icon-button icon-button--on-brand"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#app-sidebar"
+          aria-controls="app-sidebar"
+          aria-label="Abrir menú"
+        >
+          <svg class="icon" aria-hidden="true" focusable="false">
+            <use href="/img/icons.svg#i-menu"></use>
+          </svg>
+        </button>
+        <ul class="app-rail__list">
+          <li>
+            <a class="app-rail__link" href="/pages/home-rector.html"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-layout-dashboard"></use></svg
+              >Inicio</a
+            >
+          </li>
+          <li>
+            <a class="app-rail__link" href="/pages/courses.html"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-book-open"></use></svg
+              >Cursos</a
+            >
+          </li>
+          <li>
+            <a class="app-rail__link" href="/pages/report-production.html" aria-current="page"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-chart-column"></use></svg
+              >Reportes</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Barra lateral: fija ≥ 1200 px; menú lateral (offcanvas) en móvil y tablet (MB-09) -->
+      <div class="app-sidebar">
+        <div
+          class="offcanvas-xl offcanvas-start app-sidebar__panel"
+          id="app-sidebar"
+          tabindex="-1"
+          aria-label="Menú principal"
+        >
+          <div class="offcanvas-header">
+            <button
+              class="btn-close btn-close-white"
+              type="button"
+              data-bs-dismiss="offcanvas"
+              data-bs-target="#app-sidebar"
+              aria-label="Cerrar menú"
+            ></button>
+          </div>
+          <div class="offcanvas-body app-sidebar__body">
+            <a class="app-sidebar__brand" href="/pages/home-rector.html">
+              <img
+                class="app-sidebar__logo"
+                src="/img/logo-horizontal-blanco.svg"
+                alt="Universidad CENFOTEC · Inicio"
+                width="216"
+                height="95"
+              />
+            </a>
+            <p class="app-sidebar__product d-none d-xl-block">Sistema de Gestión de Cursos</p>
+            <p class="app-sidebar__user d-xl-none">María Vargas · Rectoría</p>
+            <hr class="app-sidebar__divider" />
+            <nav aria-labelledby="sidebar-menu-label">
+              <p class="app-sidebar__heading" id="sidebar-menu-label">Menú</p>
+              <ul class="app-sidebar__list">
+                <li>
+                  <a class="app-sidebar__link" href="/pages/home-rector.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-layout-dashboard"></use></svg
+                    >Inicio</a
+                  >
+                </li>
+                <li>
+                  <a class="app-sidebar__link" href="/pages/courses.html"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-book-open"></use></svg
+                    >Cursos</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="app-sidebar__link"
+                    href="/pages/report-production.html"
+                    aria-current="page"
+                    ><svg class="icon" aria-hidden="true" focusable="false">
+                      <use href="/img/icons.svg#i-chart-column"></use></svg
+                    >Reportes</a
+                  >
+                </li>
+              </ul>
+            </nav>
+            <div class="d-xl-none mt-auto pt-4">
+              <div class="lang-switch" role="group" aria-label="Idioma de la interfaz">
+                <svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-globe"></use>
+                </svg>
+                <button
+                  class="lang-switch__option"
+                  type="button"
+                  lang="es"
+                  aria-pressed="true"
+                  data-action="set-language"
+                  data-language="es"
+                >
+                  ES
+                </button>
+                <button
+                  class="lang-switch__option"
+                  type="button"
+                  lang="en"
+                  aria-pressed="false"
+                  data-action="set-language"
+                  data-language="en"
+                >
+                  EN
+                </button>
+              </div>
+              <p class="app-sidebar__user mt-3">Cerrar sesión: fuera de alcance (ERS §1.2).</p>
+            </div>
+            <p class="app-sidebar__footer d-none d-xl-block">Acceso de solo lectura</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-main">
+        <!-- Barra superior (≥ 768 px) -->
+        <header class="app-topbar d-none d-md-flex" aria-label="Barra superior">
+          <nav aria-label="Ruta de navegación">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/pages/report-production.html">Reportes</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Producción</li>
+            </ol>
+          </nav>
+          <div class="app-topbar__actions">
+            <div class="lang-switch" role="group" aria-label="Idioma de la interfaz">
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-globe"></use>
+              </svg>
+              <button
+                class="lang-switch__option"
+                type="button"
+                lang="es"
+                aria-pressed="true"
+                data-action="set-language"
+                data-language="es"
+              >
+                ES
+              </button>
+              <button
+                class="lang-switch__option"
+                type="button"
+                lang="en"
+                aria-pressed="false"
+                data-action="set-language"
+                data-language="en"
+              >
+                EN
+              </button>
+            </div>
+            <button
+              class="icon-button"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#notifications-panel"
+              aria-controls="notifications-panel"
+              aria-label="Avisos, sin avisos nuevos"
+            >
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-bell"></use>
+              </svg>
+            </button>
+            <span class="app-topbar__separator" aria-hidden="true"></span>
+            <div class="dropdown">
+              <button
+                class="user-menu__toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                data-bs-auto-close="outside"
+                aria-expanded="false"
+              >
+                <span class="visually-hidden">Menú de usuario:</span>
+                <span class="avatar" aria-hidden="true">MV</span>
+                <span class="user-menu__identity">
+                  <span class="user-menu__name">María Vargas</span>
+                  <span class="user-menu__role">Rectoría</span>
+                </span>
+                <svg class="icon icon--sm" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-chevron-down"></use>
+                </svg>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end user-menu__panel">
+                <div class="user-menu__header">
+                  <span class="avatar avatar--lg" aria-hidden="true">MV</span>
+                  <div>
+                    <p class="user-menu__name mb-0">María Vargas</p>
+                    <p class="user-menu__email">mvargas@ucenfotec.ac.cr</p>
+                  </div>
+                </div>
+                <dl class="user-menu__details">
+                  <dt>Rol</dt>
+                  <dd>Rectoría · solo lectura</dd>
+                </dl>
+                <fieldset>
+                  <legend class="form-legend">Idioma de la interfaz</legend>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      id="user-language-es"
+                      name="userLanguage"
+                      type="radio"
+                      value="es"
+                      checked
+                    />
+                    <label class="form-check-label" for="user-language-es">Español</label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      id="user-language-en"
+                      name="userLanguage"
+                      type="radio"
+                      value="en"
+                    />
+                    <label class="form-check-label" for="user-language-en" lang="en">English</label>
+                  </div>
+                  <p class="form-text">Se recuerda su preferencia (RF-044 CA3).</p>
+                </fieldset>
+                <p class="user-menu__note">
+                  Cerrar sesión no está disponible: fuera de alcance de la ERS (§1.2) y pendiente de
+                  validar (Apéndice E).
+                </p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <main id="main" class="app-content" tabindex="-1">
+          <div class="page-header">
+            <div class="page-header__text">
+              <h1 class="page-header__title page-header__title--mobile-hidden">
+                Producción de cursos
+              </h1>
+              <div class="page-header__meta">
+                <span class="tag"
+                  ><svg class="icon" aria-hidden="true" focusable="false">
+                    <use href="/img/icons.svg#i-lock"></use></svg
+                  >Solo lectura</span
+                ><span>Calculado al momento de la consulta · 12/10/2026 15:30</span>
+              </div>
+            </div>
+            <div class="page-header__actions">
+              <p class="view-note m-0">Sin exportación (fuera de alcance, ERS §1.2)</p>
+            </div>
+          </div>
+
+          <nav class="mb-4" aria-label="Tipos de reporte">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link" href="/pages/report-production.html" aria-current="page"
+                  >Producción</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/pages/report-history.html">Histórico y comparativo</a>
+              </li>
+            </ul>
+          </nav>
+
+          <form
+            class="filter-bar"
+            role="search"
+            aria-label="Filtrar reporte de producción"
+            data-form="production-report-filters"
+          >
+            <div class="filter-select">
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-funnel"></use>
+              </svg>
+              <label class="filter-select__label" for="report-school-filter">Escuela:</label>
+              <select
+                class="form-select filter-select__control"
+                id="report-school-filter"
+                name="schoolId"
+              >
+                <option value="" selected>Todas</option>
+                <option value="software-engineering">Ingeniería del Software</option>
+                <option value="cybersecurity">Ciberseguridad</option>
+                <option value="intelligent-systems">Sistemas Inteligentes</option>
+                <option value="information-technology">Tecnologías de Información</option>
+                <option value="information-systems">Sistemas de Información</option>
+                <option value="computing-fundamentals">Fundamentos de Computación</option>
+                <option value="business-administration">Administración de Negocios</option>
+              </select>
+            </div>
+            <div class="filter-select">
+              <svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-funnel"></use>
+              </svg>
+              <label class="filter-select__label" for="career-filter">Carrera:</label>
+              <select
+                class="form-select filter-select__control"
+                id="career-filter"
+                name="degreeProgramId"
+              >
+                <option value="" selected>Todas</option>
+                <option value="software-technician">Técnico en Desarrollo de Software</option>
+                <option value="software-bachelor">Bachillerato en Ingeniería del Software</option>
+              </select>
+            </div>
+            <span class="tag tag--warning text-wrap"
+              ><svg class="icon" aria-hidden="true" focusable="false">
+                <use href="/img/icons.svg#i-triangle-alert"></use></svg
+              >Filtro por carrera: relación curso–carrera pendiente de validar</span
+            >
+            <button class="btn btn-primary visually-hidden-focusable" type="submit">
+              Aplicar filtros
+            </button>
+          </form>
+
+          <div class="d-none d-md-block">
+            <ul class="kpi-grid">
+              <li class="kpi-card kpi-card--flat">
+                <p class="kpi-card__label">Borrador</p>
+                <span class="icon-circle"
+                  ><svg class="icon" aria-hidden="true" focusable="false">
+                    <use href="/img/icons.svg#i-pencil"></use></svg
+                ></span>
+                <p class="kpi-card__value">41</p>
+                <p class="kpi-card__meta">Institucional</p>
+              </li>
+              <li class="kpi-card kpi-card--flat">
+                <p class="kpi-card__label">En desarrollo</p>
+                <span class="icon-circle"
+                  ><svg class="icon" aria-hidden="true" focusable="false">
+                    <use href="/img/icons.svg#i-clock"></use></svg
+                ></span>
+                <p class="kpi-card__value">12</p>
+                <p class="kpi-card__meta">Institucional</p>
+              </li>
+              <li class="kpi-card kpi-card--flat">
+                <p class="kpi-card__label">Aprobado</p>
+                <span class="icon-circle"
+                  ><svg class="icon" aria-hidden="true" focusable="false">
+                    <use href="/img/icons.svg#i-circle-check"></use></svg
+                ></span>
+                <p class="kpi-card__value">44</p>
+                <p class="kpi-card__meta">Institucional</p>
+              </li>
+              <li class="kpi-card kpi-card--flat">
+                <p class="kpi-card__label">En producción</p>
+                <span class="icon-circle"
+                  ><svg class="icon" aria-hidden="true" focusable="false">
+                    <use href="/img/icons.svg#i-circle-play"></use></svg
+                ></span>
+                <p class="kpi-card__value">198</p>
+                <p class="kpi-card__meta">63 % del total</p>
+              </li>
+              <li class="kpi-card kpi-card--flat">
+                <p class="kpi-card__label">Inactivo</p>
+                <span class="icon-circle"
+                  ><svg class="icon" aria-hidden="true" focusable="false">
+                    <use href="/img/icons.svg#i-archive"></use></svg
+                ></span>
+                <p class="kpi-card__value">17</p>
+                <p class="kpi-card__meta">Institucional</p>
+              </li>
+            </ul>
+
+            <section class="card mb-4" aria-labelledby="production-chart-title">
+              <div class="card-body">
+                <h2 class="card-title" id="production-chart-title">Cursos por estado y escuela</h2>
+                <p class="card-subtitle mb-3">Totales institucionales: 312 cursos</p>
+                <ul class="chart-legend" aria-hidden="true">
+                  <li class="chart-legend__item chart-series--draft">Borrador</li>
+                  <li class="chart-legend__item chart-series--in-development">En desarrollo</li>
+                  <li class="chart-legend__item chart-series--approved">Aprobado</li>
+                  <li class="chart-legend__item chart-series--in-production">En producción</li>
+                  <li class="chart-legend__item chart-series--inactive">Inactivo</li>
+                </ul>
+                <figure class="chart" tabindex="0">
+                  <svg
+                    class="chart__svg report-chart"
+                    viewBox="0 0 900 300"
+                    role="img"
+                    aria-labelledby="production-chart-svg-title production-chart-desc"
+                  >
+                    <title id="production-chart-svg-title">Cursos por estado y escuela</title>
+                    <desc id="production-chart-desc">
+                      Barras apiladas por escuela con el total rotulado; los valores por estado
+                      están en la tabla equivalente.
+                    </desc>
+                    <line class="chart__grid" x1="48" x2="892" y1="252.0" y2="252.0" />
+                    <text class="chart__tick" x="38" y="256.0" text-anchor="end">0</text>
+                    <line class="chart__grid" x1="48" x2="892" y1="138.0" y2="138.0" />
+                    <text class="chart__tick" x="38" y="142.0" text-anchor="end">29</text>
+                    <line class="chart__grid" x1="48" x2="892" y1="28.0" y2="28.0" />
+                    <text class="chart__tick" x="38" y="32.0" text-anchor="end">57</text>
+                    <line class="chart__axis" x1="48" x2="48" y1="28" y2="252" />
+                    <line class="chart__axis" x1="48" x2="892" y1="252" y2="252" />
+                    <rect class="chart-series--draft" x="84.3" y="236.3" width="48" height="15.7" />
+                    <rect
+                      class="chart-series--in-development"
+                      x="84.3"
+                      y="228.4"
+                      width="48"
+                      height="7.9"
+                    />
+                    <rect
+                      class="chart-series--approved"
+                      x="84.3"
+                      y="193.1"
+                      width="48"
+                      height="35.4"
+                    />
+                    <rect
+                      class="chart-series--in-production"
+                      x="84.3"
+                      y="110.5"
+                      width="48"
+                      height="82.5"
+                    />
+                    <rect
+                      class="chart-series--inactive"
+                      x="84.3"
+                      y="98.7"
+                      width="48"
+                      height="11.8"
+                    />
+                    <text class="chart__value" x="108.3" y="90.7" text-anchor="middle">39</text>
+                    <text class="chart__label" x="108.3" y="272" text-anchor="middle">SOFT</text>
+                    <rect
+                      class="chart-series--draft"
+                      x="204.9"
+                      y="228.4"
+                      width="48"
+                      height="23.6"
+                    />
+                    <rect
+                      class="chart-series--in-development"
+                      x="204.9"
+                      y="216.6"
+                      width="48"
+                      height="11.8"
+                    />
+                    <rect
+                      class="chart-series--approved"
+                      x="204.9"
+                      y="197.0"
+                      width="48"
+                      height="19.6"
+                    />
+                    <rect
+                      class="chart-series--in-production"
+                      x="204.9"
+                      y="126.2"
+                      width="48"
+                      height="70.7"
+                    />
+                    <rect
+                      class="chart-series--inactive"
+                      x="204.9"
+                      y="122.3"
+                      width="48"
+                      height="3.9"
+                    />
+                    <text class="chart__value" x="228.9" y="114.3" text-anchor="middle">33</text>
+                    <text class="chart__label" x="228.9" y="272" text-anchor="middle">CIBER</text>
+                    <rect
+                      class="chart-series--draft"
+                      x="325.4"
+                      y="220.6"
+                      width="48"
+                      height="31.4"
+                    />
+                    <rect
+                      class="chart-series--in-development"
+                      x="325.4"
+                      y="212.7"
+                      width="48"
+                      height="7.9"
+                    />
+                    <rect
+                      class="chart-series--approved"
+                      x="325.4"
+                      y="189.1"
+                      width="48"
+                      height="23.6"
+                    />
+                    <rect
+                      class="chart-series--in-production"
+                      x="325.4"
+                      y="134.1"
+                      width="48"
+                      height="55.0"
+                    />
+                    <rect
+                      class="chart-series--inactive"
+                      x="325.4"
+                      y="126.2"
+                      width="48"
+                      height="7.9"
+                    />
+                    <text class="chart__value" x="349.4" y="118.2" text-anchor="middle">32</text>
+                    <text class="chart__label" x="349.4" y="272" text-anchor="middle">SINT</text>
+                    <rect
+                      class="chart-series--draft"
+                      x="446.0"
+                      y="232.4"
+                      width="48"
+                      height="19.6"
+                    />
+                    <rect
+                      class="chart-series--in-development"
+                      x="446.0"
+                      y="228.4"
+                      width="48"
+                      height="3.9"
+                    />
+                    <rect
+                      class="chart-series--approved"
+                      x="446.0"
+                      y="200.9"
+                      width="48"
+                      height="27.5"
+                    />
+                    <rect
+                      class="chart-series--in-production"
+                      x="446.0"
+                      y="43.7"
+                      width="48"
+                      height="157.2"
+                    />
+                    <rect
+                      class="chart-series--inactive"
+                      x="446.0"
+                      y="28.0"
+                      width="48"
+                      height="15.7"
+                    />
+                    <text class="chart__value" x="470.0" y="20.0" text-anchor="middle">57</text>
+                    <text class="chart__label" x="470.0" y="272" text-anchor="middle">TI</text>
+                    <rect
+                      class="chart-series--draft"
+                      x="566.6"
+                      y="224.5"
+                      width="48"
+                      height="27.5"
+                    />
+                    <rect
+                      class="chart-series--in-development"
+                      x="566.6"
+                      y="216.6"
+                      width="48"
+                      height="7.9"
+                    />
+                    <rect
+                      class="chart-series--approved"
+                      x="566.6"
+                      y="193.1"
+                      width="48"
+                      height="23.6"
+                    />
+                    <rect
+                      class="chart-series--in-production"
+                      x="566.6"
+                      y="43.7"
+                      width="48"
+                      height="149.3"
+                    />
+                    <rect
+                      class="chart-series--inactive"
+                      x="566.6"
+                      y="31.9"
+                      width="48"
+                      height="11.8"
+                    />
+                    <text class="chart__value" x="590.6" y="23.9" text-anchor="middle">56</text>
+                    <text class="chart__label" x="590.6" y="272" text-anchor="middle">SI</text>
+                    <rect
+                      class="chart-series--draft"
+                      x="687.1"
+                      y="228.4"
+                      width="48"
+                      height="23.6"
+                    />
+                    <rect
+                      class="chart-series--in-development"
+                      x="687.1"
+                      y="224.5"
+                      width="48"
+                      height="3.9"
+                    />
+                    <rect
+                      class="chart-series--approved"
+                      x="687.1"
+                      y="204.8"
+                      width="48"
+                      height="19.6"
+                    />
+                    <rect
+                      class="chart-series--in-production"
+                      x="687.1"
+                      y="67.3"
+                      width="48"
+                      height="137.5"
+                    />
+                    <rect
+                      class="chart-series--inactive"
+                      x="687.1"
+                      y="55.5"
+                      width="48"
+                      height="11.8"
+                    />
+                    <text class="chart__value" x="711.1" y="47.5" text-anchor="middle">50</text>
+                    <text class="chart__label" x="711.1" y="272" text-anchor="middle">FCOMP</text>
+                    <rect
+                      class="chart-series--draft"
+                      x="807.7"
+                      y="232.4"
+                      width="48"
+                      height="19.6"
+                    />
+                    <rect
+                      class="chart-series--in-development"
+                      x="807.7"
+                      y="228.4"
+                      width="48"
+                      height="3.9"
+                    />
+                    <rect
+                      class="chart-series--approved"
+                      x="807.7"
+                      y="204.8"
+                      width="48"
+                      height="23.6"
+                    />
+                    <rect
+                      class="chart-series--in-production"
+                      x="807.7"
+                      y="79.1"
+                      width="48"
+                      height="125.8"
+                    />
+                    <rect
+                      class="chart-series--inactive"
+                      x="807.7"
+                      y="75.2"
+                      width="48"
+                      height="3.9"
+                    />
+                    <text class="chart__value" x="831.7" y="67.2" text-anchor="middle">45</text>
+                    <text class="chart__label" x="831.7" y="272" text-anchor="middle">ADM</text>
+                  </svg>
+                  <figcaption class="chart__caption">
+                    Gráfico con valores rotulados; la tabla equivalente presenta los mismos datos
+                    (no depende solo del color).
+                  </figcaption>
+                </figure>
+              </div>
+            </section>
+
+            <section class="card" aria-labelledby="production-table-title">
+              <div class="card-body">
+                <h2 class="card-title" id="production-table-title">Tabla equivalente</h2>
+                <p class="card-subtitle mb-3">Mismos datos del gráfico</p>
+                <p class="view-note d-xl-none mt-0 mb-2">
+                  Desplace horizontalmente para ver todas las columnas →
+                </p>
+                <div class="table-responsive" tabindex="0">
+                  <table class="table">
+                    <caption class="visually-hidden">
+                      Cursos por escuela y estado
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">Escuela</th>
+                        <th class="text-end" scope="col">Borrador</th>
+                        <th class="text-end" scope="col">En desarrollo</th>
+                        <th class="text-end" scope="col">Aprobado</th>
+                        <th class="text-end" scope="col">En producción</th>
+                        <th class="text-end" scope="col">Inactivo</th>
+                        <th class="text-end" scope="col">Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">
+                          <span class="school-marker school-marker--software-engineering"
+                            >Ingeniería del Software</span
+                          >
+                        </th>
+                        <td class="text-end text-tabular">4</td>
+                        <td class="text-end text-tabular">2</td>
+                        <td class="text-end text-tabular">9</td>
+                        <td class="text-end text-tabular">21</td>
+                        <td class="text-end text-tabular">3</td>
+                        <td class="text-end text-tabular fw-semibold">39</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">
+                          <span class="school-marker school-marker--cybersecurity"
+                            >Ciberseguridad</span
+                          >
+                        </th>
+                        <td class="text-end text-tabular">6</td>
+                        <td class="text-end text-tabular">3</td>
+                        <td class="text-end text-tabular">5</td>
+                        <td class="text-end text-tabular">18</td>
+                        <td class="text-end text-tabular">1</td>
+                        <td class="text-end text-tabular fw-semibold">33</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">
+                          <span class="school-marker school-marker--intelligent-systems"
+                            >Sistemas Inteligentes</span
+                          >
+                        </th>
+                        <td class="text-end text-tabular">8</td>
+                        <td class="text-end text-tabular">2</td>
+                        <td class="text-end text-tabular">6</td>
+                        <td class="text-end text-tabular">14</td>
+                        <td class="text-end text-tabular">2</td>
+                        <td class="text-end text-tabular fw-semibold">32</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">
+                          <span class="school-marker school-marker--information-technology"
+                            >Tecnologías de Información</span
+                          >
+                        </th>
+                        <td class="text-end text-tabular">5</td>
+                        <td class="text-end text-tabular">1</td>
+                        <td class="text-end text-tabular">7</td>
+                        <td class="text-end text-tabular">40</td>
+                        <td class="text-end text-tabular">4</td>
+                        <td class="text-end text-tabular fw-semibold">57</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">
+                          <span class="school-marker school-marker--information-systems"
+                            >Sistemas de Información</span
+                          >
+                        </th>
+                        <td class="text-end text-tabular">7</td>
+                        <td class="text-end text-tabular">2</td>
+                        <td class="text-end text-tabular">6</td>
+                        <td class="text-end text-tabular">38</td>
+                        <td class="text-end text-tabular">3</td>
+                        <td class="text-end text-tabular fw-semibold">56</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">
+                          <span class="school-marker school-marker--computing-fundamentals"
+                            >Fundamentos de Computación</span
+                          >
+                        </th>
+                        <td class="text-end text-tabular">6</td>
+                        <td class="text-end text-tabular">1</td>
+                        <td class="text-end text-tabular">5</td>
+                        <td class="text-end text-tabular">35</td>
+                        <td class="text-end text-tabular">3</td>
+                        <td class="text-end text-tabular fw-semibold">50</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">
+                          <span class="school-marker school-marker--business-administration"
+                            >Administración de Negocios</span
+                          >
+                        </th>
+                        <td class="text-end text-tabular">5</td>
+                        <td class="text-end text-tabular">1</td>
+                        <td class="text-end text-tabular">6</td>
+                        <td class="text-end text-tabular">32</td>
+                        <td class="text-end text-tabular">1</td>
+                        <td class="text-end text-tabular fw-semibold">45</td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th scope="row">Total institucional</th>
+                        <td class="text-end text-tabular fw-semibold">41</td>
+                        <td class="text-end text-tabular fw-semibold">12</td>
+                        <td class="text-end text-tabular fw-semibold">44</td>
+                        <td class="text-end text-tabular fw-semibold">198</td>
+                        <td class="text-end text-tabular fw-semibold">17</td>
+                        <td class="text-end text-tabular fw-semibold">312</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- Móvil (MB-07): resumen, barras por estado y totales por escuela -->
+          <div class="d-md-none">
+            <ul class="kpi-grid">
+              <li class="kpi-card kpi-card--flat">
+                <p class="kpi-card__label">Cursos</p>
+                <span class="icon-circle"
+                  ><svg class="icon" aria-hidden="true" focusable="false">
+                    <use href="/img/icons.svg#i-book-open"></use></svg
+                ></span>
+                <p class="kpi-card__value">312</p>
+                <p class="kpi-card__meta">7 escuelas</p>
+              </li>
+              <li class="kpi-card kpi-card--flat">
+                <p class="kpi-card__label">En producción</p>
+                <span class="icon-circle"
+                  ><svg class="icon" aria-hidden="true" focusable="false">
+                    <use href="/img/icons.svg#i-circle-play"></use></svg
+                ></span>
+                <p class="kpi-card__value">198</p>
+                <p class="kpi-card__meta">63 %</p>
+              </li>
+            </ul>
+            <section class="card mb-3" aria-labelledby="mobile-states-title">
+              <div class="card-body">
+                <h2 class="card-title" id="mobile-states-title">Cursos por estado</h2>
+                <ul class="state-bars">
+                  <li class="state-bars__item">
+                    <span class="state-bars__label">Borrador</span>
+                    <svg
+                      class="state-bars__bar"
+                      viewBox="0 0 100 10"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <rect class="state-bars__track" width="100" height="10" />
+                      <rect class="chart-series--draft" width="20.7" height="10" />
+                    </svg>
+                    <span class="state-bars__value">41</span>
+                  </li>
+                  <li class="state-bars__item">
+                    <span class="state-bars__label">En desarrollo</span>
+                    <svg
+                      class="state-bars__bar"
+                      viewBox="0 0 100 10"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <rect class="state-bars__track" width="100" height="10" />
+                      <rect class="chart-series--in-development" width="6.1" height="10" />
+                    </svg>
+                    <span class="state-bars__value">12</span>
+                  </li>
+                  <li class="state-bars__item">
+                    <span class="state-bars__label">Aprobado</span>
+                    <svg
+                      class="state-bars__bar"
+                      viewBox="0 0 100 10"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <rect class="state-bars__track" width="100" height="10" />
+                      <rect class="chart-series--approved" width="22.2" height="10" />
+                    </svg>
+                    <span class="state-bars__value">44</span>
+                  </li>
+                  <li class="state-bars__item">
+                    <span class="state-bars__label">En producción</span>
+                    <svg
+                      class="state-bars__bar"
+                      viewBox="0 0 100 10"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <rect class="state-bars__track" width="100" height="10" />
+                      <rect class="chart-series--in-production" width="100.0" height="10" />
+                    </svg>
+                    <span class="state-bars__value">198</span>
+                  </li>
+                  <li class="state-bars__item">
+                    <span class="state-bars__label">Inactivo</span>
+                    <svg
+                      class="state-bars__bar"
+                      viewBox="0 0 100 10"
+                      preserveAspectRatio="none"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <rect class="state-bars__track" width="100" height="10" />
+                      <rect class="chart-series--inactive" width="8.6" height="10" />
+                    </svg>
+                    <span class="state-bars__value">17</span>
+                  </li>
+                </ul>
+              </div>
+            </section>
+            <section class="card" aria-labelledby="mobile-schools-title">
+              <div class="card-body">
+                <h2 class="card-title" id="mobile-schools-title">Por escuela</h2>
+                <ul class="school-totals">
+                  <li class="school-totals__item">
+                    <span class="school-marker school-marker--software-engineering"
+                      >Ingeniería del Software</span
+                    ><span class="school-totals__value">39</span>
+                  </li>
+                  <li class="school-totals__item">
+                    <span class="school-marker school-marker--cybersecurity">Ciberseguridad</span
+                    ><span class="school-totals__value">33</span>
+                  </li>
+                  <li class="school-totals__item">
+                    <span class="school-marker school-marker--intelligent-systems"
+                      >Sistemas Inteligentes</span
+                    ><span class="school-totals__value">32</span>
+                  </li>
+                  <li class="school-totals__item">
+                    <span class="school-marker school-marker--information-technology"
+                      >Tecnologías de Información</span
+                    ><span class="school-totals__value">57</span>
+                  </li>
+                  <li class="school-totals__item">
+                    <span class="school-marker school-marker--information-systems"
+                      >Sistemas de Información</span
+                    ><span class="school-totals__value">56</span>
+                  </li>
+                  <li class="school-totals__item">
+                    <span class="school-marker school-marker--computing-fundamentals"
+                      >Fundamentos de Computación</span
+                    ><span class="school-totals__value">50</span>
+                  </li>
+                  <li class="school-totals__item">
+                    <span class="school-marker school-marker--business-administration"
+                      >Administración de Negocios</span
+                    ><span class="school-totals__value">45</span>
+                  </li>
+                </ul>
+              </div>
+            </section>
+          </div>
+          <p class="demo-note">
+            <svg class="icon icon--sm" aria-hidden="true" focusable="false">
+              <use href="/img/icons.svg#i-info"></use>
+            </svg>
+            Vista estática de demostración: los datos son ficticios y las acciones no están
+            conectadas.
+          </p>
+        </main>
+      </div>
+
+      <!-- Barra inferior (< 768 px) -->
+      <nav class="app-bottomnav d-md-none" aria-label="Principal inferior">
+        <ul class="app-bottomnav__list">
+          <li>
+            <a class="app-bottomnav__link" href="/pages/home-rector.html"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-layout-dashboard"></use></svg></span
+              >Inicio</a
+            >
+          </li>
+          <li>
+            <a class="app-bottomnav__link" href="/pages/courses.html"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-book-open"></use></svg></span
+              >Cursos</a
+            >
+          </li>
+          <li>
+            <a class="app-bottomnav__link" href="/pages/report-production.html" aria-current="page"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-chart-column"></use></svg></span
+              >Reportes</a
+            >
+          </li>
+          <li>
+            <a class="app-bottomnav__link" href="/pages/notifications.html"
+              ><span class="app-bottomnav__icon"
+                ><svg class="icon" aria-hidden="true" focusable="false">
+                  <use href="/img/icons.svg#i-bell"></use></svg></span
+              >Avisos</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Panel de avisos (N-01, propuesta UX D-09) -->
+    <div
+      class="offcanvas offcanvas-end notification-panel"
+      id="notifications-panel"
+      tabindex="-1"
+      aria-labelledby="notifications-panel-title"
+    >
+      <div class="offcanvas-header">
+        <h2 class="offcanvas-title h3" id="notifications-panel-title">Avisos</h2>
+        <button
+          class="btn-close"
+          type="button"
+          data-bs-dismiss="offcanvas"
+          aria-label="Cerrar avisos"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="empty-state">
+          <span class="icon-circle icon-circle--lg"
+            ><svg class="icon" aria-hidden="true" focusable="false">
+              <use href="/img/icons.svg#i-bell"></use></svg
+          ></span>
+          <p class="empty-state__title">No tiene avisos nuevos</p>
+          <p class="empty-state__description">
+            Los avisos de envío y aprobación de cursos aparecerán aquí.
+          </p>
+        </div>
+        <p class="notification-panel__note">
+          <span class="tag tag--outline">Propuesta UX</span> La ERS define avisos por correo
+          (RF-036, RF-038) y notificación de escritorio (RF-037). Este panel solo los reúne dentro
+          de la aplicación; requiere validación.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

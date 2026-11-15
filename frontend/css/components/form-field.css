@@ -1,0 +1,49 @@
+/* Piezas de campo reutilizables: contraseña con botón de mostrar (A-01, U-03) y campo con candado
+   para valores calculados o bloqueados (Total de horas, código autogenerado). */
+.password-field,
+.locked-field {
+  position: relative;
+}
+
+.password-field .form-control,
+.locked-field .form-control {
+  padding-inline-end: var(--space-12);
+}
+
+.password-field__toggle,
+.locked-field > .icon {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: var(--space-1);
+  translate: 0 -50%;
+}
+
+.locked-field > .icon {
+  inset-inline-end: var(--space-3);
+  color: var(--color-text-secondary);
+  pointer-events: none;
+}
+
+/* Nota de campos obligatorios al inicio de cada formulario (HTML-12). */
+.required-note {
+  margin-block-end: var(--space-4);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-sm);
+}
+
+/* Resumen de errores con enlaces a cada campo (RF-030 CA2). */
+.error-summary__list {
+  margin: var(--space-2) 0 0;
+  padding-inline-start: var(--space-5);
+}
+
+.error-summary__list li + li {
+  margin-block-start: var(--space-1);
+}
+
+.error-summary__list a {
+  display: inline-block;
+  padding-block: var(--space-0-5);
+  color: var(--color-feedback-error);
+  font-weight: var(--font-weight-medium);
+}

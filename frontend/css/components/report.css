@@ -1,0 +1,126 @@
+/* Reportes (RP-01…RP-05, TB-06, MB-07): tamaño de gráficos SVG, series que no son estados del curso,
+   barras horizontales por estado, totales por escuela y diferencias del comparativo. */
+.report-chart {
+  max-inline-size: 56rem;
+}
+
+/* Series de reportes históricos (colores de chart/* del DS; PV-22). */
+.chart-series--created,
+.chart-series--year-b {
+  --series-color: var(--color-chart-review);
+
+  fill: var(--color-chart-review);
+}
+
+.chart-series--deactivated,
+.chart-series--year-a {
+  --series-color: var(--color-chart-draft);
+
+  fill: var(--color-chart-draft);
+}
+
+/* Alinea el botón con los campos cuando hay etiqueta encima. */
+@media (width >= 768px) {
+  .report-range__action {
+    padding-block-start: calc(var(--line-height-body-md) + var(--space-2));
+  }
+}
+
+/* ---------- Barras horizontales por estado (RP-02, MB-07) ---------- */
+.state-bars {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.state-bars__item {
+  display: grid;
+  grid-template-areas:
+    'label value'
+    'bar bar';
+  grid-template-columns: 1fr auto;
+  gap: var(--space-1) var(--space-3);
+  align-items: center;
+}
+
+.state-bars__label {
+  grid-area: label;
+  font-weight: var(--font-weight-medium);
+}
+
+.state-bars__value {
+  grid-area: value;
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.state-bars__bar {
+  grid-area: bar;
+  display: block;
+  inline-size: 100%;
+  block-size: 0.75rem;
+  overflow: hidden;
+  border-radius: var(--radius-full);
+}
+
+.state-bars__track {
+  fill: var(--color-bg-subtle);
+}
+
+@media (width >= 768px) {
+  .state-bars__item {
+    grid-template-areas: 'label bar value';
+    grid-template-columns: 9rem 1fr 2.5rem;
+  }
+
+  .state-bars__value {
+    text-align: end;
+  }
+
+  .state-bars__bar {
+    block-size: 1.25rem;
+    border-radius: var(--radius-xs);
+  }
+}
+
+/* ---------- Totales por escuela (MB-07) ---------- */
+.school-totals {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.school-totals__item {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-block: var(--space-3);
+  border-block-end: 1px solid var(--color-border-subtle);
+}
+
+.school-totals__item:last-child {
+  border-block-end: 0;
+}
+
+.school-totals__value {
+  font-weight: var(--font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Diferencia del comparativo: icono + texto con signo (no solo color) ---------- */
+.diff-value {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-weight: var(--font-weight-semibold);
+}
+
+.diff-value--up {
+  color: var(--color-feedback-success);
+}
+
+.diff-value--down {
+  color: var(--color-feedback-error);
+}

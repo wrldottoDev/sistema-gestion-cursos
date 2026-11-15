@@ -1,0 +1,93 @@
+/* Navegación entre catálogos (K-02…K-08): columna lateral ≥ 1200 px; fila desplazable en tablet y móvil. */
+.catalog-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+}
+
+.catalog-layout__content {
+  min-inline-size: 0;
+}
+
+.catalog-nav {
+  padding: var(--space-3);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-xl);
+  background: var(--color-bg-surface);
+  box-shadow: var(--shadow-1);
+}
+
+.catalog-nav__title {
+  margin: 0 0 var(--space-2);
+  padding-inline: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-label-overline);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-overline);
+  text-transform: uppercase;
+}
+
+.catalog-nav__list {
+  position: relative; /* contiene el texto visually-hidden de los contadores dentro de la fila desplazable */
+  display: flex;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+  list-style: none;
+}
+
+.catalog-nav__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-block-size: var(--size-control-sm);
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-body-md);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.catalog-nav__link > .icon {
+  color: var(--color-text-secondary);
+}
+
+.catalog-nav__link:hover {
+  background: var(--color-bg-subtle);
+  color: var(--color-text-primary);
+}
+
+.catalog-nav__link[aria-current='page'] {
+  background: var(--color-bg-brand-subtle);
+  color: var(--color-text-brand);
+  font-weight: var(--font-weight-semibold);
+}
+
+.catalog-nav__link[aria-current='page'] > .icon {
+  color: var(--color-text-brand);
+}
+
+.catalog-nav__count {
+  margin-inline-start: auto;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-regular);
+}
+
+@media (width >= 1200px) {
+  .catalog-layout {
+    grid-template-columns: var(--layout-sidebar-width) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .catalog-nav__list {
+    flex-direction: column;
+    overflow-x: visible;
+  }
+
+  .catalog-nav__link {
+    white-space: normal;
+  }
+}

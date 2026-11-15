@@ -1,0 +1,87 @@
+/* Estados de vista (DS 04 · Feedback): vacío, sin resultados, error de red, éxito, acceso denegado y carga.
+   También el contador de caracteres de los campos con límite (RF-022). */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-12) var(--space-4);
+  text-align: center;
+}
+
+.empty-state__title {
+  margin: var(--space-2) 0 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-heading-h4);
+  font-weight: var(--font-weight-semibold);
+}
+
+.empty-state__description {
+  max-inline-size: 28rem;
+  margin: 0 0 var(--space-2);
+  color: var(--color-text-secondary);
+}
+
+/* Fila de esqueleto de carga dentro de tablas (aria-busy en el contenedor). */
+.skeleton-row > td > .placeholder {
+  display: block;
+  block-size: 0.75rem;
+}
+
+/* ---------- Contador de caracteres: N/límite, sin maxlength (HTML-14) ---------- */
+.field-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.char-counter {
+  flex: none;
+  margin-block-start: var(--space-1);
+  margin-inline-start: auto;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.char-counter--warning {
+  color: var(--color-feedback-warning);
+}
+
+.char-counter--exceeded {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--color-feedback-error);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Par etiqueta–valor de solo lectura (detalle de curso, revisión). */
+.detail-list {
+  display: grid;
+  gap: var(--space-4) var(--space-6);
+  margin: 0;
+}
+
+.detail-list__label,
+.detail-list dt {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.detail-list dd {
+  margin: var(--space-1) 0 0;
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-body-lg);
+}
+
+@media (width >= 768px) {
+  .detail-list--2-cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .detail-list--3-cols {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

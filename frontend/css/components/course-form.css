@@ -1,0 +1,179 @@
+/* Formulario de curso por secciones (F-01…F-11): columna del stepper + tarjetas de sección,
+   cabecera de campo con acción de IA, palabras clave y filas de revisión (F-08). */
+.course-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: start;
+  /* Espacio para la barra de acciones fija: ningún campo queda oculto tras ella. */
+  padding-block-end: var(--space-20);
+}
+
+.course-form__sections {
+  display: grid;
+  gap: var(--space-6);
+  min-inline-size: 0;
+}
+
+.course-form__sections > .alert {
+  margin: 0;
+}
+
+.course-form__section-header {
+  margin-block-end: var(--space-5);
+}
+
+.course-form__section-title {
+  margin: 0;
+  font-size: var(--font-size-heading-h3);
+  line-height: var(--line-height-heading-h3);
+}
+
+.course-form__section-subtitle {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-secondary);
+}
+
+.course-form__grid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.course-form__field--full {
+  grid-column: 1 / -1;
+}
+
+/* Valor calculado (Total de horas, RN-16): <output> con aspecto de campo de solo lectura. */
+.course-form__output {
+  display: flex;
+  align-items: center;
+  border-color: var(--color-bg-subtle);
+  background-color: var(--color-bg-subtle);
+}
+
+/* Etiqueta + botón "Sugerir con Gemini" en la misma línea. */
+.course-form__field-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-block-end: var(--space-2);
+}
+
+.course-form__field-header > .form-label {
+  margin: 0;
+}
+
+/* Palabras clave: etiquetas individuales dentro del campo (RF-023 CA3). */
+.keyword-field {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  min-block-size: var(--size-control);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-surface);
+}
+
+.keyword-field:focus-within {
+  border-color: var(--color-border-focus);
+  box-shadow:
+    0 0 0 1px var(--color-border-focus),
+    0 0 0 4px var(--focus-ring-halo-color);
+}
+
+.keyword-field__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.keyword-field__tag {
+  padding-inline-end: var(--space-1);
+}
+
+.keyword-field__remove {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 1.5rem;
+  block-size: 1.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: inherit;
+}
+
+.keyword-field__remove:hover {
+  background: var(--color-bg-brand-soft);
+}
+
+.keyword-field__input {
+  flex: 1 1 10rem;
+  min-block-size: var(--size-control-sm);
+  border: 0;
+  outline: none;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-body-lg);
+}
+
+.keyword-field__input::placeholder {
+  color: var(--color-text-secondary);
+}
+
+/* Revisión antes de enviar (F-08): una fila por sección. */
+.review-checklist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.review-checklist__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-block: var(--space-3);
+  border-block-end: 1px solid var(--color-border-subtle);
+}
+
+.review-checklist__item:last-child {
+  border-block-end: 0;
+}
+
+.review-checklist__item > .icon {
+  color: var(--color-feedback-success);
+}
+
+.review-checklist__text {
+  flex: 1;
+  min-inline-size: 0;
+}
+
+.review-checklist__name {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+}
+
+.review-checklist__detail {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-sm);
+}
+
+@media (width >= 768px) {
+  .course-form__grid--2-cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 1200px) {
+  .course-form {
+    grid-template-columns: 17.5rem minmax(0, 1fr);
+  }
+}

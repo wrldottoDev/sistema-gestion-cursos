@@ -1,0 +1,163 @@
+/* Estado del curso: icono + texto, nunca solo color (DS-07, HTML-21).
+   draft → Borrador · in_development → En desarrollo · approved → Aprobado ·
+   in_production → En producción · inactive → Inactivo. */
+.status-badge {
+  --bs-badge-padding-x: var(--space-2);
+  --bs-badge-padding-y: var(--space-1);
+  --bs-badge-font-size: var(--font-size-body-sm);
+  --bs-badge-font-weight: var(--font-weight-medium);
+  --bs-badge-border-radius: var(--radius-full);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  line-height: var(--line-height-body-sm);
+  white-space: nowrap;
+}
+
+.status-badge .icon {
+  inline-size: 0.875rem;
+  block-size: 0.875rem;
+}
+
+.status-badge--draft {
+  background: var(--color-status-draft-bg);
+  color: var(--color-status-draft-fg);
+}
+
+.status-badge--in-development {
+  background: var(--color-status-review-bg);
+  color: var(--color-status-review-fg);
+}
+
+.status-badge--approved {
+  background: var(--color-status-approved-bg);
+  color: var(--color-status-approved-fg);
+}
+
+.status-badge--in-production {
+  background: var(--color-status-production-bg);
+  color: var(--color-status-production-fg);
+}
+
+.status-badge--inactive {
+  background: var(--color-status-inactive-bg);
+  color: var(--color-status-inactive-fg);
+}
+
+/* Etiquetas informativas (DS 04 · Badges, etiquetas y avatares). */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-muted);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-body-sm);
+  white-space: nowrap;
+}
+
+.tag .icon {
+  inline-size: 0.875rem;
+  block-size: 0.875rem;
+}
+
+.tag--info {
+  background: var(--color-bg-brand-subtle);
+  color: var(--color-text-brand);
+}
+
+.tag--success {
+  background: var(--color-feedback-success-bg);
+  color: var(--color-feedback-success);
+}
+
+.tag--warning {
+  background: var(--color-feedback-warning-bg);
+  color: var(--color-feedback-warning);
+}
+
+.tag--error {
+  background: var(--color-feedback-error-bg);
+  color: var(--color-feedback-error);
+}
+
+.tag--outline {
+  border-color: var(--color-border-default);
+  background: var(--color-bg-surface);
+  color: var(--color-text-secondary);
+}
+
+/* Marcador de escuela: punto con el color secundario oficial junto al nombre (DS-06). */
+.school-marker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.school-marker::before {
+  inline-size: 0.5rem;
+  block-size: 0.5rem;
+  flex: none;
+  border-radius: var(--radius-full);
+  background: var(--school-color, var(--color-brand-gray));
+  content: '';
+}
+
+.school-marker--software-engineering {
+  --school-color: var(--color-school-software-engineering);
+}
+
+.school-marker--cybersecurity {
+  --school-color: var(--color-school-cybersecurity);
+}
+
+.school-marker--intelligent-systems {
+  --school-color: var(--color-school-intelligent-systems);
+}
+
+.school-marker--information-technology {
+  --school-color: var(--color-school-information-technology);
+}
+
+.school-marker--information-systems {
+  --school-color: var(--color-school-information-systems);
+}
+
+.school-marker--computing-fundamentals {
+  --school-color: var(--color-school-computing-fundamentals);
+}
+
+.school-marker--business-administration {
+  --school-color: var(--color-school-business-administration);
+}
+
+/* Avatar con iniciales. */
+.avatar {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-brand-soft);
+  color: var(--color-text-brand);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+.avatar--sm {
+  inline-size: 2rem;
+  block-size: 2rem;
+  font-size: var(--font-size-body-sm);
+}
+
+.avatar--lg {
+  inline-size: 3.5rem;
+  block-size: 3.5rem;
+  font-size: var(--font-size-body-lg);
+}

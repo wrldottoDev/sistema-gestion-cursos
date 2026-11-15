@@ -1,0 +1,92 @@
+/* Importación CSV (M-01…M-03): pasos Seleccionar → Validar → Resultado y tarjetas de catálogo destino. */
+.import-steps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+  margin: 0 0 var(--space-6);
+  padding: 0;
+  color: var(--color-text-secondary);
+  list-style: none;
+}
+
+.import-steps__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.import-steps__item + .import-steps__item::before {
+  inline-size: var(--space-12);
+  block-size: 2px;
+  margin-inline-end: var(--space-2);
+  border-radius: var(--radius-full);
+  background: var(--color-border-default);
+  content: '';
+}
+
+.import-steps__marker {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-full);
+  background: var(--color-bg-surface);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+.import-steps__item--done {
+  color: var(--color-text-primary);
+}
+
+.import-steps__item--done .import-steps__marker {
+  border-color: var(--color-feedback-success);
+  background: var(--color-feedback-success);
+  color: var(--color-text-inverse);
+}
+
+.import-steps__item--done + .import-steps__item::before {
+  background: var(--color-feedback-success);
+}
+
+.import-steps__item--current {
+  color: var(--color-text-brand);
+  font-weight: var(--font-weight-semibold);
+}
+
+.import-steps__item--current .import-steps__marker {
+  border-color: var(--color-action-primary);
+  background: var(--color-action-primary);
+  color: var(--color-text-inverse);
+}
+
+@media (width < 768px) {
+  /* En móvil los pasos pueden partirse en dos líneas: sin conectores sueltos. */
+  .import-steps__item + .import-steps__item::before {
+    display: none;
+  }
+}
+
+/* Opción de radio presentada como tarjeta; la selección se refleja sin JavaScript con :has(). */
+.choice-card {
+  block-size: 100%;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-surface);
+}
+
+.choice-card:has(:checked) {
+  border-color: var(--color-action-primary);
+  background: var(--color-bg-brand-subtle);
+  box-shadow: 0 0 0 1px var(--color-action-primary);
+}
+
+.choice-card__help {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-body-sm);
+}

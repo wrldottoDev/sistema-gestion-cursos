@@ -322,9 +322,16 @@ El proyecto se encuentra en **planificación y especificación**, con la prepara
 | Definición de requerimientos | En elaboración |
 | Product Backlog (Epics y User Stories) | En preparación |
 | Estimación y priorización | En preparación |
-| Implementación | No iniciada |
+| Interfaz visual (HTML, CSS y Bootstrap 5.3, Iteración 2) | Implementada: 59 páginas estáticas con datos ficticios ([matriz de cobertura visual](docs/MATRIZ-COBERTURA-VISUAL.md)) |
+| Lógica JavaScript, API, backend y MongoDB | No iniciados |
 
-Ninguna de las funcionalidades descritas en este documento está implementada todavía.
+Ninguna de las funcionalidades descritas en este documento funciona todavía: la interfaz se ve, pero no valida, no guarda ni consulta datos.
+
+Para ver la interfaz, sirva la carpeta `frontend/` como raíz y abra `http://localhost:8080/`:
+
+```bash
+python3 -m http.server 8080 --directory frontend
+```
 
 ---
 
@@ -344,11 +351,13 @@ Los documentos del proyecto se enlazarán en esta sección conforme se elaboren.
 
 | Documento | Estado |
 |---|---|
-| ERS (Especificación de Requerimientos de Software) | Pendiente |
-| Documento de Diseño 1 | Pendiente |
-| Documento de Diseño 2 | Pendiente |
-| Casos de prueba | Pendiente |
+| [ERS (Especificación de Requerimientos de Software)](<docs/documento ERS v1.1.pdf>) | Vigente (v1.1) |
+| [Documento de Diseño 1](<docs/Documento Diseno Iteración 1.docx>) | Entregado |
+| [Documento de Diseño 2](<docs/Documento Diseno Iteración 2.pdf>) ([DOCX editable](<docs/Documento Diseno Iteración 2.docx>)) | Versión para entrega (15 nov 2026) |
+| [Matriz de cobertura visual](docs/MATRIZ-COBERTURA-VISUAL.md) | Vigente |
+| [Casos de prueba de la Iteración 1](<docs/Casos de prueba Iteración 1.pdf>) | Entregado |
 | Otros documentos | Pendiente |
+| [Estándares de ingeniería](docs/standards/README.md) y [guía de contribución](CONTRIBUTING.md) | Vigente (v1.0.0) |
 
 ---
 

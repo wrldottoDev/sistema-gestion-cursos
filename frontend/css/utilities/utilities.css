@@ -1,0 +1,12 @@
+/* Utilidades propias que Bootstrap no ofrece con los tokens del DS. Capa más alta. */
+.text-brand {
+  color: var(--color-text-brand);
+}
+
+.text-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.min-w-0 {
+  min-inline-size: 0;
+}

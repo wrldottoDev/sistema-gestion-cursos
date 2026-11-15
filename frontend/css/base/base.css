@@ -1,0 +1,73 @@
+/* Base sobre Bootstrap Reboot (no hay reset propio: CSS-04). Elementos HTML sin clases. */
+html {
+  scroll-padding-block: var(--space-20);
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--color-bg-canvas);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizelegibility;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0;
+}
+
+h1 {
+  font-size: var(--font-size-heading-h1);
+  line-height: var(--line-height-heading-h1);
+}
+
+h2 {
+  font-size: var(--font-size-heading-h2);
+  line-height: var(--line-height-heading-h2);
+}
+
+h3 {
+  font-size: var(--font-size-heading-h3);
+  line-height: var(--line-height-heading-h3);
+  font-weight: var(--font-weight-semibold);
+}
+
+h4 {
+  font-size: var(--font-size-heading-h4);
+  line-height: var(--line-height-heading-h4);
+  font-weight: var(--font-weight-semibold);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin-block-end: var(--space-2);
+}
+
+p {
+  margin-block-end: var(--space-3);
+}
+
+/* Foco visible: borde 2 px border/focus + halo brand/blue-light (handoff WCAG 2.4.7). */
+:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: 2px;
+}
+
+main:focus {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+    scroll-behavior: auto;
+  }
+}

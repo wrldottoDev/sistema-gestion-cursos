@@ -1,0 +1,8 @@
+# Prettier ya ignora lo listado en .gitignore y node_modules/.
+# Herramienta de Figma con código generado (no es parte de la aplicación).
+wireframes/
+# Markdown: tablas y prosa se mantienen a mano para evitar diffs de alineación.
+*.md
+
+# Distribuciones de terceros copiadas sin modificar (PV-04).
+frontend/vendor/

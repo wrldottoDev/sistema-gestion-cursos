@@ -1,0 +1,44 @@
+/* Único CSS enlazado por las páginas (CSS-01). Orden de capas fijo (CSS-02): lo de una capa posterior
+   gana a la anterior sin depender de la especificidad. Bootstrap 5.3 entra completo y sin modificar en vendor. */
+@layer vendor, tokens, base, layout, components, utilities;
+
+@import url('/vendor/bootstrap/css/bootstrap.min.css') layer(vendor);
+
+@import url('/css/tokens/primitives.css') layer(tokens);
+@import url('/css/tokens/semantic.css') layer(tokens);
+@import url('/css/tokens/typography.css') layer(tokens);
+@import url('/css/tokens/spacing.css') layer(tokens);
+@import url('/css/tokens/elevation.css') layer(tokens);
+@import url('/css/tokens/bootstrap-variables.css') layer(tokens);
+
+@import url('/css/base/fonts.css') layer(base);
+@import url('/css/base/base.css') layer(base);
+
+@import url('/css/layout/app-shell.css') layer(layout);
+@import url('/css/layout/auth-layout.css') layer(layout);
+
+@import url('/css/components/bootstrap-components.css') layer(components);
+@import url('/css/components/icon.css') layer(components);
+@import url('/css/components/status-badge.css') layer(components);
+@import url('/css/components/app-header.css') layer(components);
+@import url('/css/components/page-header.css') layer(components);
+@import url('/css/components/data-table.css') layer(components);
+@import url('/css/components/dashboard.css') layer(components);
+@import url('/css/components/feedback.css') layer(components);
+@import url('/css/components/form-field.css') layer(components);
+@import url('/css/components/course-form.css') layer(components);
+@import url('/css/components/stepper.css') layer(components);
+@import url('/css/components/form-action-bar.css') layer(components);
+@import url('/css/components/ai-suggestion.css') layer(components);
+@import url('/css/components/file-item.css') layer(components);
+@import url('/css/components/timeline.css') layer(components);
+@import url('/css/components/progress-meter.css') layer(components);
+@import url('/css/components/email-preview.css') layer(components);
+@import url('/css/components/catalog-nav.css') layer(components);
+@import url('/css/components/csv-import.css') layer(components);
+@import url('/css/components/course-detail.css') layer(components);
+@import url('/css/components/review-panel.css') layer(components);
+@import url('/css/components/report.css') layer(components);
+@import url('/css/components/filter-chips.css') layer(components);
+
+@import url('/css/utilities/utilities.css') layer(utilities);
